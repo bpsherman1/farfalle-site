@@ -5,30 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Farfalle</title>
 
-  <!-- Favicon links -->
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
- 
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
   <style>
     body {
-
-      cursor: url('path-to-image.png'), auto;
       margin: 0;
-      height: 100vh;
       background-color: #f8f8f2; /* off-white */
-      font-family: 'georgia', 'Arial Black', sans-serif;
-      font-weight: 700; /* bold */
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      font-family: 'Georgia', 'Arial Black', sans-serif;
+      font-weight: 700;
       color: #333;
       font-size: 5rem;
       user-select: none;
+      cursor: url('/bowtie-cursor.png') 16 16, auto;
     }
+
+    .section {
+      height: 100vh; /* full screen height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Optional: add visual contrast for each section */
+    #section1 { background-color: #f8f8f2; }
+    #section2 { background-color: #e0dfd5; }
+    #section3 { background-color: #d0cec7; }
   </style>
 </head>
 <body>
-  Farfalle
+  <div class="section" id="section1">Farfalle</div>
+  <div class="section" id="section2">About</div>
+  <div class="section" id="section3">Contact</div>
 </body>
 </html>
