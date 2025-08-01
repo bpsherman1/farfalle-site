@@ -6,10 +6,9 @@
   <title>Farfalle</title>
 
   <!-- Favicon -->
- <!-- Favicon links -->
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
   <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
- 
+
   <style>
     body {
       margin: 0;
@@ -20,24 +19,142 @@
       font-size: 5rem;
       user-select: none;
       cursor: url('/path-to-image.png') 16 16, auto;
+      overflow-x: hidden;
     }
 
-    .section {
-      height: 100vh; /* full screen height */
+    /* Container for p5 canvas, positioned absolutely at top */
+    #sketch-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0; /* behind other content */
+    }
+
+    /* Hide the Farfalle text because sketch draws it */
+    #section1 {
+      position: relative;
+      height: 100vh; /* full viewport height */
+      /* hide text, keep layout for scroll */
+      color: transparent;
+      user-select: none;
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: transparent; /* let canvas background show */
+      font-size: 5rem;
+      font-weight: 700;
     }
 
-    /* Optional: add visual contrast for each section */
-    #section1 { background-color: #f8f8f2; }
+    /* Other sections below the canvas */
+    .section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1; /* above canvas */
+    }
+
     #section2 { background-color: #e0dfd5; }
     #section3 { background-color: #d0cec7; }
   </style>
 </head>
 <body>
+  <!-- Container for p5.js canvas -->
+  <div id="sketch-container"></div>
+
   <div class="section" id="section1">Farfalle</div>
   <div class="section" id="section2">About</div>
   <div class="section" id="section3">Contact</div>
+
+  <!-- p5.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+
+  <script>
+    let farfalleImg;
+    let icons = [];
+    const iconCount = 15;
+    let customFont;
+
+    function preload() {
+      farfalleImg = loadImage('assets/farfalle.png');
+      customFont = loadFont('fonts/the.otf');
+    }
+
+    function setup() {
+      let canvas = createCanvas(windowWidth, windowHeight);
+      canvas.parent('sketch-container');
+
+      textAlign(CENTER, CENTER);
+      textSize(80);
+      textStyle(BOLD);
+      textFont(customFont);
+
+      for (let i = 0; i < iconCount; i++) {
+        let x = i * (width / iconCount) - random(50);
+        let y = random(height);
+        let speed = random(0.2, 1.0);
+        icons.push({ x, y, speed });
+      }
+    }
+
+    function draw() {
+      background('#f8f8f2'); // match your off-white background
+
+      fill(0);
+      textFont(customFont);
+      text('Farfalle', width / 2, height / 2);
+
+      for (let icon of icons) {
+        let imgWidth = 50;
+        let imgHeight = (farfalleImg.height / farfalleImg.width) * imgWidth;
+
+        // Dynamic shadow offset
+        let shadowMaxOffset = 120;
+        let shadowMinOffset = 5;
+        let shadowOffset = map(icon.x, 0, width, shadowMaxOffset, shadowMinOffset);
+        shadowOffset = constrain(shadowOffset, shadowMinOffset, shadowMaxOffset);
+
+        // Dynamic horizontal scale for shadow width
+        let maxScaleX = 2.0;
+        let minScaleX = 1.0;
+        let scaleX = map(icon.x, 0, width, maxScaleX, minScaleX);
+        scaleX = constrain(scaleX, minScaleX, maxScaleX);
+
+        // Dynamic shadow alpha for fading effect
+        let shadowAlphaMin = 30;
+        let shadowAlphaMax = 100;
+        let shadowAlpha = map(icon.x, 0, width, shadowAlphaMin, shadowAlphaMax);
+        shadowAlpha = constrain(shadowAlpha, shadowAlphaMin, shadowAlphaMax);
+
+        // Draw scaled, fading shadow
+        push();
+        tint(0, shadowAlpha);
+        translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
+        scale(scaleX, 1);
+        image(farfalleImg, 0, 0, imgWidth, imgHeight);
+        pop();
+
+        // Draw main icon
+        noTint();
+        image(farfalleImg, icon.x, icon.y, imgWidth, imgHeight);
+
+        icon.x += icon.speed;
+
+        if (icon.x > width) {
+          icon.x = -imgWidth;
+          icon.y = random(height);
+          icon.speed = random(0.2, 1.0);
+        }
+      }
+    }
+
+    function windowResized() {
+      resizeCanvas(windowWidth, windowHeight);
+    }
+  </script>
 </body>
 </html>
+
