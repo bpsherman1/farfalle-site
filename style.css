@@ -6,21 +6,30 @@ body {
   padding: 50px;
 }
 
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0; /* default: no padding on large screens */
+}
+
+/* Menu Button Styles */
 #menu-button {
   position: fixed;
   top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10000; /* ensure on top */
+  right: 20px;
+  z-index: 10000; /* ensure it’s on top */
   cursor: pointer;
   width: 36px;
   height: 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  font-size: 0; /* prevent font-size inheritance messing bar height */
-  background-color: rgba(255, 255, 255, 0.8); /* temporary for visibility */
+  background-color: rgba(255, 255, 255, 0.9); /* subtle white background */
   border-radius: 4px;
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 #menu-button .bar {
@@ -29,22 +38,21 @@ body {
   background-color: black;
   border-radius: 2px;
   transition: 0.3s;
-  font-size: initial; /* reset font-size inside bars if needed */
 }
 
 #dropdown {
   display: none;
   flex-direction: column;
   position: absolute;
-  top: 36px;
+  top: 36px; /* just below the menu button */
   right: 0;
   background-color: white;
   border: 1px solid #ccc;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 8px 0;
   min-width: 140px;
-  z-index: 9999;
-  font-size: 1.2rem; /* make dropdown links readable */
+  z-index: 10001;
+  font-size: 1.2rem;
 }
 
 #dropdown a {
@@ -59,16 +67,8 @@ body {
   background-color: #f0f0f0;
 }
 
+/* Show dropdown menu on hover of the button */
 #menu-button:hover #dropdown {
   display: flex;
 }
-
-.section {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 0; /* default: no padding on large screens */
-}
-
 
