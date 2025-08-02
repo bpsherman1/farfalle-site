@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,70 +60,23 @@
         box-sizing: border-box;
       }
     }
-
-    /* Menu button styles */
-    #menu-button {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-      cursor: pointer;
-    }
-
-    #menu-button .bar {
-      width: 28px;
-      height: 3px;
-      background-color: black;
-      margin: 6px 0;
-      transition: 0.3s;
-    }
-
-    #dropdown {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 38px;
-      right: 0;
-      background-color: white;
-      border: 1px solid #ccc;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 8px 0;
-      min-width: 120px;
-      z-index: 99;
-    }
-
-    #dropdown a {
-      text-decoration: none;
-      color: black;
-      padding: 8px 16px;
-      font-size: 1rem;
-      text-align: right;
-      display: block;
-    }
-
-    #dropdown a:hover {
-      background-color: #f0f0f0;
-    }
-
-    #menu-button:hover #dropdown {
-      display: flex;
-    }
   </style>
 </head>
 <body>
   <div id="sketch-container"></div>
 
   <!-- Menu Button -->
-  <div id="menu-button">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div id="dropdown">
-      <a href="#section1">Home</a>
-      <a href="#section2">About</a>
-      <a href="#section3">Contact</a>
-    </div>
+<div id="menu-button">
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div class="bar"></div>
+  <div id="dropdown">
+    <a href="#section1">Home</a>
+    <a href="#section2">About</a>
+    <a href="#section3">Contact</a>
   </div>
+</div>
+
 
   <div class="section" id="section1"><div class="section-content">Farfalle</div></div>
   <div class="section" id="section2"><div class="section-content">Fuckin Herb</div></div>
