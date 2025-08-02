@@ -13,62 +13,45 @@ body {
   align-items: center;
   padding: 0 0; /* default: no padding on large screens */
 }
-
-/* Menu Button Styles */
-#menu-button {
+#menu-container {
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 10000; /* ensure it’s on top */
-  cursor: pointer;
-  width: 36px;
-  height: 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.9); /* subtle white background */
-  border-radius: 4px;
-  padding: 4px;
-  box-sizing: border-box;
+  z-index: 10001; /* on top of sketch */
 }
 
-#menu-button .bar {
-  width: 100%;
-  height: 4px;
-  background-color: black;
-  border-radius: 2px;
-  transition: 0.3s;
+#menu-button {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
 
 #dropdown {
   display: none;
-  flex-direction: column;
   position: absolute;
-  top: 36px; /* just below the menu button */
+  top: 45px;
   right: 0;
   background-color: white;
   border: 1px solid #ccc;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 8px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  flex-direction: column;
   min-width: 140px;
-  z-index: 10001;
-  font-size: 1.2rem;
 }
 
 #dropdown a {
-  text-decoration: none;
-  color: black;
-  padding: 8px 16px;
+  padding: 10px;
   text-align: right;
   display: block;
+  text-decoration: none;
+  color: black;
 }
 
 #dropdown a:hover {
   background-color: #f0f0f0;
 }
 
-/* Show dropdown menu on hover of the button */
-#menu-button:hover #dropdown {
+/* Show dropdown when hovering over container */
+#menu-container:hover #dropdown {
   display: flex;
 }
 
