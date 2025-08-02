@@ -76,6 +76,8 @@
     let customFont;
     let speedMultiplier = 1.0;
     let scrollTimeout;
+    let lastScrollTop = 0;
+    let direction = 1;
 
     function preload() {
       farfalleImg = loadImage('assets/farfalle.png');
@@ -143,11 +145,15 @@
         noTint();
         image(farfalleImg, icon.x, icon.y, imgWidth, imgHeight);
 
-        // Move icon
-        icon.x += icon.speed * speedMultiplier;
+        // Move icon with direction
+        icon.x += direction * icon.speed * speedMultiplier;
 
-        if (icon.x > width) {
+        if (direction === 1 && icon.x > width) {
           icon.x = -imgWidth;
+          icon.y = random(height);
+          icon.speed = random(0.2, 1.0);
+        } else if (direction === -1 && icon.x < -imgWidth) {
+          icon.x = width;
           icon.y = random(height);
           icon.speed = random(0.2, 1.0);
         }
@@ -158,15 +164,25 @@
       resizeCanvas(windowWidth, windowHeight);
     }
 
-    // Scroll detection
+    // Scroll detection with direction
     window.addEventListener('scroll', () => {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        direction = 1; // scrolling down
+      } else if (scrollTop < lastScrollTop) {
+        direction = -1; // scrolling up
+      }
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+
       speedMultiplier = 4.0; // increase speed while scrolling
 
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         speedMultiplier = 1.0; // reset to normal after 150ms of no scroll
       }, 150);
-    });
+    }, { passive: true });
   </script>
 </body>
 </html>
