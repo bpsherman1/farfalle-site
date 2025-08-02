@@ -6,57 +6,31 @@
   <title>Farfalle</title>
 
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="manifest" href="/images/site.webmanifest">
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 
   <style>
-    body {
+    html, body {
       margin: 0;
-      background-color: #f8f8f2; /* off-white */
+      padding: 0;
+      overflow-x: hidden;
+      background-color: #f8f8f2;
       font-family: 'Georgia', 'Arial Black', sans-serif;
       font-weight: 700;
       color: #333;
       font-size: 5rem;
       user-select: none;
       cursor: url('/path-to-image.png') 16 16, auto;
-      overflow-x: hidden;
     }
 
-    #sketch-container {
+    canvas {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-    }
-
-    #section1 {
-      position: relative;
-      height: 100vh;
-      color: transparent;
-      user-select: none;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: transparent;
-      font-size: 5rem;
-      font-weight: 700;
-    }
-
-    .section-content {
-      width: 100%;
-      text-align: center;
-    }
-
-    @media (max-width: 768px) {
-      .section-content {
-        padding: 0 1rem;
-        box-sizing: border-box;
-      }
+      z-index: -1;
     }
 
     .section {
@@ -64,106 +38,92 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
-      z-index: 1;
+      padding-left: 5vw; /* margin on phones */
+      text-align: center;
     }
 
+    #section1 { background-color: #f8f8f2; }
     #section2 { background-color: #e0dfd5; }
     #section3 { background-color: #d0cec7; }
   </style>
 </head>
 <body>
-  <div id="sketch-container"></div>
+  <div class="section" id="section1">Farfalle</div>
+  <div class="section" id="section2">About</div>
+  <div class="section" id="section3">Contact</div>
 
-  <div class="section" id="section1"><div class="section-content">Farfalle</div></div>
-  <div class="section" id="section2"><div class="section-content">Fuckin Herb</div></div>
-  <div class="section" id="section3"><div class="section-content">Go fuck yourself</div></div>
-
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+  <!-- Load p5.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
 
   <script>
     let farfalleImg;
-    let icons = [];
-    const iconCount = 15;
-    let customFont;
+    let farfalles = [];
+    let baseSpeed = 0.3;
+    let speedMultiplier = 1;
+    let lastScroll = 0;
 
     function preload() {
-      farfalleImg = loadImage('assets/farfalle.png');
-      customFont = loadFont('fonts/the.otf');
+      farfalleImg = loadImage("images/farfalle.png"); // Adjust path if needed
     }
 
     function setup() {
-      let canvas = createCanvas(windowWidth, windowHeight);
-      canvas.parent('sketch-container');
-
-      textAlign(CENTER, CENTER);
-      textSize(80);
-      textStyle(BOLD);
-      textFont(customFont);
-
-      for (let i = 0; i < iconCount; i++) {
-        let x = i * (width / iconCount) - random(50);
+      createCanvas(windowWidth, windowHeight);
+      for (let i = 0; i < 40; i++) {
         let y = random(height);
-        let speed = random(0.2, 1.0);
-        icons.push({ x, y, speed });
-      }
-    }
-
-    function draw() {
-      background('#f8f8f2');
-
-      // Dynamic color based on vertical mouse position
-      let topColor = color(0); // black
-      let bottomColor = color('#f4d35e'); // yellow
-      let fadeAmt = constrain(mouseY / height, 0, 1);
-      let fadedColor = lerpColor(topColor, bottomColor, fadeAmt);
-
-      fill(fadedColor);
-      textFont(customFont);
-      text('Farfalle', width / 2, height / 2);
-
-      for (let icon of icons) {
-        let imgWidth = 50;
-        let imgHeight = (farfalleImg.height / farfalleImg.width) * imgWidth;
-
-        let shadowMaxOffset = 120;
-        let shadowMinOffset = 5;
-        let shadowOffset = map(icon.x, 0, width, shadowMaxOffset, shadowMinOffset);
-        shadowOffset = constrain(shadowOffset, shadowMinOffset, shadowMaxOffset);
-
-        let maxScaleX = 2.0;
-        let minScaleX = 1.0;
-        let scaleX = map(icon.x, 0, width, maxScaleX, minScaleX);
-        scaleX = constrain(scaleX, minScaleX, maxScaleX);
-
-        let shadowAlphaMin = 30;
-        let shadowAlphaMax = 100;
-        let shadowAlpha = map(icon.x, 0, width, shadowAlphaMin, shadowAlphaMax);
-        shadowAlpha = constrain(shadowAlpha, shadowAlphaMin, shadowAlphaMax);
-
-        push();
-        tint(0, shadowAlpha);
-        translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
-        scale(scaleX, 1);
-        image(farfalleImg, 0, 0, imgWidth, imgHeight);
-        pop();
-
-        noTint();
-        image(farfalleImg, icon.x, icon.y, imgWidth, imgHeight);
-
-        icon.x += icon.speed;
-
-        if (icon.x > width) {
-          icon.x = -imgWidth;
-          icon.y = random(height);
-          icon.speed = random(0.2, 1.0);
-        }
+        let x = random(width);
+        let speed = random(0.1, 0.6);
+        farfalles.push({ x, y, speed, size: 20 });
       }
     }
 
     function windowResized() {
       resizeCanvas(windowWidth, windowHeight);
     }
+
+    function draw() {
+      clear();
+      for (let f of farfalles) {
+        // Calculate how far across the screen it is (0 = left, 1 = right)
+        let progress = f.x / width;
+
+        // Shadow properties
+        let shadowDistance = lerp(40, 10, progress);
+        let shadowWidth = lerp(40, 20, progress);
+        let shadowAlpha = lerp(100, 0, progress);
+
+        // Draw shadow
+        tint(0, 0, 0, shadowAlpha);
+        image(farfalleImg, f.x - shadowDistance, f.y, shadowWidth, 20);
+
+        // Draw actual farfalle
+        tint(255);
+        image(farfalleImg, f.x, f.y, 20, 20);
+
+        // Move with speed and multiplier
+        f.x += f.speed * speedMultiplier;
+
+        // Wrap around
+        if (f.x > width + 40) {
+          f.x = -40;
+          f.y = random(height);
+          f.speed = random(0.1, 0.6);
+        }
+      }
+
+      // Ease speed multiplier back to 1 when not scrolling
+      speedMultiplier += (1 - speedMultiplier) * 0.02;
+    }
+
+    // Detect scroll speed
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      let currentScrollY = window.scrollY;
+      let delta = abs(currentScrollY - lastScrollY);
+      lastScrollY = currentScrollY;
+
+      // Scale scroll delta into a speed multiplier (1 to ~3)
+      speedMultiplier = 1 + constrain(delta / 30, 0, 2);
+    });
   </script>
 </body>
 </html>
