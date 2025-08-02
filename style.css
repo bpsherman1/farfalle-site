@@ -6,15 +6,7 @@ body {
   color: #333;
   text-align: center;
   padding: 50px;
-}
 
-.section {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 0; /* default: no padding on large screens */
-}
 #menu-button {
   position: fixed;
   top: 20px;
@@ -69,3 +61,16 @@ body {
 
 
 }
+
+
+  
+}
+
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0; /* default: no padding on large screens */
+}
+
