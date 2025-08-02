@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +7,10 @@
 
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
 
   <style>
     body {
@@ -23,7 +21,8 @@
       color: #333;
       font-size: 5rem;
       user-select: none;
-      cursor: url('/path-to-image.png') 16 16, auto;
+      /* Temporarily remove custom cursor to avoid confusion */
+      /* cursor: url('/path-to-image.png') 16 16, auto; */
       overflow-x: hidden;
     }
 
@@ -61,76 +60,80 @@
       }
     }
 
-#menu-button {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000; /* Make sure it’s above everything */
-  cursor: pointer;
-  width: 36px;      /* slightly bigger clickable area */
-  height: 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+    /* Menu Button CSS */
+    #menu-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10000; /* extra high to be above everything */
+      cursor: pointer;
+      width: 36px;
+      height: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: rgba(255, 0, 0, 0.4); /* RED BACKGROUND FOR TESTING, remove later */
+      border-radius: 4px;
+      padding: 4px;
+      box-sizing: border-box;
+    }
 
-#menu-button .bar {
-  width: 100%;
-  height: 4px;      /* a bit thicker for visibility */
-  background-color: black;
-  border-radius: 2px;
-  transition: 0.3s;
-}
+    #menu-button .bar {
+      width: 100%;
+      height: 4px;
+      background-color: black;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
 
-#dropdown {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 36px;       /* just below the button */
-  right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  padding: 8px 0;
-  min-width: 140px;
-  z-index: 9999;
-}
+    #dropdown {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 36px; /* below the menu button */
+      right: 0;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 8px 0;
+      min-width: 140px;
+      z-index: 10001;
+      font-size: 1.2rem;
+    }
 
-#dropdown a {
-  text-decoration: none;
-  color: black;
-  padding: 8px 16px;
-  font-size: 1.2rem;  /* easier to read */
-  text-align: right;
-  display: block;
-}
+    #dropdown a {
+      text-decoration: none;
+      color: black;
+      padding: 8px 16px;
+      text-align: right;
+      display: block;
+    }
 
-#dropdown a:hover {
-  background-color: #f0f0f0;
-}
+    #dropdown a:hover {
+      background-color: #f0f0f0;
+    }
 
-#menu-button:hover #dropdown {
-  display: flex;
-}
+    /* Show dropdown on hover */
+    #menu-button:hover #dropdown {
+      display: flex;
+    }
 
-    
   </style>
 </head>
 <body>
   <div id="sketch-container"></div>
 
   <!-- Menu Button -->
-<div id="menu-button">
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div id="dropdown">
-    <a href="#section1">Home</a>
-    <a href="#section2">About</a>
-    <a href="#section3">Contact</a>
+  <div id="menu-button">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div id="dropdown">
+      <a href="#section1">Home</a>
+      <a href="#section2">About</a>
+      <a href="#section3">Contact</a>
+    </div>
   </div>
-</div>
-
 
   <div class="section" id="section1"><div class="section-content">Farfalle</div></div>
   <div class="section" id="section2"><div class="section-content">Fuckin Herb</div></div>
@@ -255,4 +258,5 @@
   </script>
 </body>
 </html>
+
 
