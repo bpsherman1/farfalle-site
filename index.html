@@ -68,15 +68,23 @@
       padding-bottom: 20px; /* extends hover area to prevent flicker */
     }
 
-    #menu-button {
-      cursor: pointer;
-      display: inline-block;
-    }
+#menu-button {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  padding: 0;
+}
 
-    #menu-button img {
-      width: 40px;
-      height: auto;
-      display: block;
+#menu-button img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
     }
 
     #dropdown-menu {
