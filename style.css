@@ -69,4 +69,13 @@ body {
   overflow: hidden;
 }
 
+.slide-image {
+  max-width: 80%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+}
 
