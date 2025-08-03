@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +36,9 @@
       width: 100vw;
       height: 100vh;
       z-index: 0;
+
+
+      
     }
 
     .section {
@@ -58,97 +65,28 @@
         box-sizing: border-box;
       }
     }
-
-    /* Menu styles */
-    #menu-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 2;
-      padding-bottom: 20px; /* extends hover area to prevent flicker */
-    }
-
-#menu-button {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  padding: 0;
-}
-
-#menu-button img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-    
-
-    #dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: white;
-      border: 1px solid #ccc;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-      z-index: 3;
-      border-radius: 5px;
-    }
-
-    #dropdown-menu a {
-      display: block;
-      padding: 10px 16px;
-      color: #333;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    #dropdown-menu a:hover {
-      background-color: #f4d35e;
-    }
-
-    /* Keep dropdown visible on hover */
-    #menu-container:hover #dropdown-menu {
-      display: block;
-    }
   </style>
 </head>
 <body>
-
-  <!-- MENU HTML -->
-<div id="menu-container">
-  <div id="menu-button">
-    <img src="images/farfalle.png" alt="Menu Icon" />
-  </div>
- <div id="dropdown-menu">
-  <a href="#about">About</a>
-  <a href="#projects">Projects</a>
-  <a href="#contact">Contact</a>
-</div>
-
-</div>
-
-
-  <!-- SKETCH CONTAINER -->
   <div id="sketch-container"></div>
 
-  <!-- PAGE CONTENT -->
+
+  
+
   <div class="section" id="section1"><div class="section-content">Farfalle</div></div>
 
-  <div class="section" id="section2">
-    <div class="section-content">
-      <img src="/images/farfallepainting.png" style="max-width: 70%; max-height: 70vh; object-fit: contain;" alt="Farfalle Painting">
-    </div>
+<div class="section" id="section2">
+  <div class="section-content">
+    <img src="/images/farfallepainting.png" style="max-width: 70%; max-height: 70vh; object-fit: contain;" alt="Farfalle Painting">
   </div>
+</div>
 
+ 
+  
   <div class="section" id="section3"><div class="section-content">Go fuck yourself</div></div>
 
-  <!-- P5 SCRIPT -->
   <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+
   <script>
     let farfalleImg;
     let icons = [];
@@ -184,6 +122,7 @@
     function draw() {
       background('#f8f8f2');
 
+      // Text color fade based on vertical mouse position
       let topColor = color(0);
       let bottomColor = color('#f4d35e');
       let fadeAmt = constrain(mouseY / height, 0, 1);
@@ -243,27 +182,35 @@
       resizeCanvas(windowWidth, windowHeight);
     }
 
+    // Scroll detection with direction
     window.addEventListener('scroll', () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
       if (scrollTop > lastScrollTop) {
-        direction = 1;
+        direction = 1; // scrolling down
       } else if (scrollTop < lastScrollTop) {
-        direction = -1;
+        direction = -1; // scrolling up
       }
 
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 
-      speedMultiplier = 4.0;
+      speedMultiplier = 4.0; // increase speed while scrolling
 
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        speedMultiplier = 1.0;
+        speedMultiplier = 1.0; // reset to normal after 150ms of no scroll
       }, 150);
     }, { passive: true });
-  </script>
-</body>
-</html>
 
+
+ 
+    
+  </script>
+
+ 
+  
+</body>
+
+</html>
 
 
