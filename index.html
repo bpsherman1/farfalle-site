@@ -171,22 +171,24 @@ function preload() {
   customFont = loadFont('fonts/the.otf');
 }
 
-    function setup() {
-      let canvas = createCanvas(windowWidth, windowHeight);
-      canvas.parent('sketch-container');
+   
+function setup() {
+  let canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent('sketch-container');
 
-      textAlign(CENTER, CENTER);
-      textSize(80);
-      textStyle(BOLD);
-      textFont(customFont);
+  textAlign(CENTER, CENTER);
+  textSize(80);
+  textStyle(BOLD);
+  textFont(customFont);
 
-      for (let i = 0; i < iconCount; i++) {
-        let x = i * (width / iconCount) - random(50);
-        let y = random(height);
-        let speed = random(0.2, 1.0);
-        icons.push({ x, y, speed });
-      }
-    }
+  for (let i = 0; i < iconCount; i++) {
+    let x = i * (width / iconCount) - random(50);
+    let y = random(height);
+    let speed = random(0.2, 1.0);
+    let imgIndex = floor(random(images.length)); // Randomly select an image
+    icons.push({ x, y, speed, imgIndex }); // Store which image to use
+  }
+}
 
     function draw() {
       background('#f8f8f2');
