@@ -149,9 +149,10 @@ hahaha you are a herb- <!DOCTYPE html>
 
   <!-- P5 SCRIPT -->
  <!-- Replace your entire P5 SCRIPT section with this: -->
+<!-- Replace your entire P5 SCRIPT section with this: -->
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 <script>
-    let foodImages = []; // Array to hold all food images
+    let foodImages = []; // Array to hold ALL images (farfalle + foods)
     let icons = [];
     const iconCount = 15;
     let customFont;
@@ -161,10 +162,10 @@ hahaha you are a herb- <!DOCTYPE html>
     let direction = 1;
 
     function preload() {
-        // Load all food images from the /images/ directory
+        // Load ALL images (farfalle first, then the food images)
+        foodImages.push(loadImage('assets/farfalle.png')); // Keep original farfalle
         foodImages.push(loadImage('/images/garlic.png'));
         foodImages.push(loadImage('/images/pom.png'));
-      
         foodImages.push(loadImage('/images/basil.png'));
         foodImages.push(loadImage('/images/pizza.png'));
         customFont = loadFont('fonts/the.otf');
@@ -183,7 +184,7 @@ hahaha you are a herb- <!DOCTYPE html>
             let x = i * (width / iconCount) - random(50);
             let y = random(height);
             let speed = random(0.2, 1.0);
-            let imgIndex = floor(random(foodImages.length)); // Randomly select a food image
+            let imgIndex = floor(random(foodImages.length)); // Randomly select from ALL images
             icons.push({ x, y, speed, imgIndex });
         }
     }
@@ -201,7 +202,7 @@ hahaha you are a herb- <!DOCTYPE html>
         text('The Food Gallery', width / 2, height / 2);
 
         for (let icon of icons) {
-            let currentImg = foodImages[icon.imgIndex]; // Get the randomly assigned food image
+            let currentImg = foodImages[icon.imgIndex]; // Get the randomly assigned image
             let imgWidth = 50;
             let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
@@ -239,12 +240,12 @@ hahaha you are a herb- <!DOCTYPE html>
                 icon.x = -imgWidth;
                 icon.y = random(height);
                 icon.speed = random(0.2, 1.0);
-                icon.imgIndex = floor(random(foodImages.length)); // Assign new random food image
+                icon.imgIndex = floor(random(foodImages.length)); // Randomly select from ALL images
             } else if (direction === -1 && icon.x < -imgWidth) {
                 icon.x = width;
                 icon.y = random(height);
                 icon.speed = random(0.2, 1.0);
-                icon.imgIndex = floor(random(foodImages.length)); // Assign new random food image
+                icon.imgIndex = floor(random(foodImages.length)); // Randomly select from ALL images
             }
         }
     }
