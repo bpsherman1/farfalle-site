@@ -74,6 +74,18 @@
       display: block;
     }
 
+#menu-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: block;
+  transition: filter 0.2s ease; /* Add smooth transition */
+}
+
+#menu-icon:hover {
+  filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%); /* Yellow color filter */
+}
+    
     /* Updated dropdown styles */
     #dropdown-menu {
       display: none;
@@ -107,19 +119,32 @@
     #menu-container:hover #dropdown-menu {
       display: block;
     }
+#home-link {
+  display: block; /* Make the link behave like the image container */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Update the hover effect to apply to the link instead */
+#home-link:hover #menu-icon {
+  filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+}
+
+    
   </style>
 </head>
 <body>
 
   <!-- MENU HTML -->
-  <div id="menu-container">
+<div id="menu-container">
+  <a href="/" id="home-link">
     <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
-    <div id="dropdown-menu">
-      <a href="#section1">Top</a>
-      <a href="#section2">Image</a>
-      <a href="#section3">Bottom</a>
-    </div>
+  </a>
+  <div id="dropdown-menu">
+    <a href="#section1">Top</a>
+    <a href="#section2">Image</a>
+    <a href="#section3">Bottom</a>
   </div>
+</div>
 
   <!-- SKETCH CONTAINER -->
   <div id="sketch-container"></div>
