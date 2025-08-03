@@ -1,1 +1,102 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Recipes | The Food Gallery</title>
+  <!-- Copy the same <style> section from your index.html -->
+  <style>
+     #menu-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+      padding-bottom: 20px; /* ← this extends hover area downward */
+    }
+
+    #home-link {
+      display: block;
+      text-decoration: none;
+    }
+
+    #menu-icon {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: block;
+      transition: filter 0.2s ease;
+    }
+
+    #home-link:hover #menu-icon {
+      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+    }
+
+    /* Updated dropdown styles */
+    #dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      z-index: 3;
+    }
+
+    /* Updated link styles */
+    #dropdown-menu a {
+      display: block;
+      padding: 10px 0;
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
+    }
+
+    #dropdown-menu a:hover {
+      background-color: transparent;
+      color: #c72a2a;
+    }
+
+    /* Keep dropdown visible on hover */
+    #menu-container:hover #dropdown-menu {
+      display: block;
+    }
+    /* Paste all your existing CSS here */
+  </style>
+</head>
+<body>
+  <!-- Copy your menu structure from index.html -->
+
+
+  <!-- MENU HTML -->
+  <div id="menu-container">
+    <a href="/" id="home-link">
+      <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
+    </a>
+   <div id="dropdown-menu">
+  <a href="meat.html">Meat</a>
+  <a href="entrees.html">Entrees</a>
+  <a href="pizza.html">Pizza</a>
+  <a href="sauces.html">Sauces</a>
+</div>
+  </div>
+
+
+  <!-- Page-specific content -->
+  <div class="section" id="section1">
+    <div class="section-content">
+      <h1>Pizza Recipes</h1>
+      <!-- Add your pizza recipes content here -->
+    </div>
+  </div>
+
+  <!-- Copy your P5 script from index.html -->
+  <script>
+    // Paste your existing P5 script here
+  </script>
+</body>
+</html>
