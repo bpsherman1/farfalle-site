@@ -148,9 +148,10 @@ hahaha you are a herb- <!DOCTYPE html>
   <div class="section" id="section3"><div class="section-content"></div></div>
 
   <!-- P5 SCRIPT -->
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
-  <script>
-    let farfalleImg;
+ <!-- Replace your entire P5 SCRIPT section with this: -->
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+<script>
+    let foodImages = []; // Array to hold all food images
     let icons = [];
     const iconCount = 15;
     let customFont;
@@ -160,108 +161,116 @@ hahaha you are a herb- <!DOCTYPE html>
     let direction = 1;
 
     function preload() {
-      farfalleImg = loadImage('assets/farfalle.png');
-      customFont = loadFont('fonts/the.otf');
+        // Load all food images from the /images/ directory
+        foodImages.push(loadImage('/images/garlic.png'));
+        foodImages.push(loadImage('/images/pom.png'));
+        foodImages.push(loadImage('/images/basil.png'));
+        foodImages.push(loadImage('/images/pizza.png'));
+        customFont = loadFont('fonts/the.otf');
     }
 
     function setup() {
-      let canvas = createCanvas(windowWidth, windowHeight);
-      canvas.parent('sketch-container');
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.parent('sketch-container');
 
-      textAlign(CENTER, CENTER);
-      textSize(80);
-      textStyle(BOLD);
-      textFont(customFont);
+        textAlign(CENTER, CENTER);
+        textSize(80);
+        textStyle(BOLD);
+        textFont(customFont);
 
-      for (let i = 0; i < iconCount; i++) {
-        let x = i * (width / iconCount) - random(50);
-        let y = random(height);
-        let speed = random(0.2, 1.0);
-        icons.push({ x, y, speed });
-      }
+        for (let i = 0; i < iconCount; i++) {
+            let x = i * (width / iconCount) - random(50);
+            let y = random(height);
+            let speed = random(0.2, 1.0);
+            let imgIndex = floor(random(foodImages.length)); // Randomly select a food image
+            icons.push({ x, y, speed, imgIndex });
+        }
     }
 
     function draw() {
-      background('#f8f8f2');
+        background('#f8f8f2');
 
-      let topColor = color(0);
-      let bottomColor = color('#c72a2a');
-      let fadeAmt = constrain(mouseY / height, 0, 1);
-      let fadedColor = lerpColor(topColor, bottomColor, fadeAmt);
+        let topColor = color(0);
+        let bottomColor = color('#c72a2a');
+        let fadeAmt = constrain(mouseY / height, 0, 1);
+        let fadedColor = lerpColor(topColor, bottomColor, fadeAmt);
 
-      fill(fadedColor);
-      textFont(customFont);
-      text('The Food Gallery', width / 2, height / 2);
+        fill(fadedColor);
+        textFont(customFont);
+        text('The Food Gallery', width / 2, height / 2);
 
-      for (let icon of icons) {
-        let imgWidth = 50;
-        let imgHeight = (farfalleImg.height / farfalleImg.width) * imgWidth;
+        for (let icon of icons) {
+            let currentImg = foodImages[icon.imgIndex]; // Get the randomly assigned food image
+            let imgWidth = 50;
+            let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
-        let shadowMaxOffset = 120;
-        let shadowMinOffset = 5;
-        let shadowOffset = map(icon.x, 0, width, shadowMaxOffset, shadowMinOffset);
-        shadowOffset = constrain(shadowOffset, shadowMinOffset, shadowMaxOffset);
+            let shadowMaxOffset = 120;
+            let shadowMinOffset = 5;
+            let shadowOffset = map(icon.x, 0, width, shadowMaxOffset, shadowMinOffset);
+            shadowOffset = constrain(shadowOffset, shadowMinOffset, shadowMaxOffset);
 
-        let maxScaleX = 2.0;
-        let minScaleX = 1.0;
-        let scaleX = map(icon.x, 0, width, maxScaleX, minScaleX);
-        scaleX = constrain(scaleX, minScaleX, maxScaleX);
+            let maxScaleX = 2.0;
+            let minScaleX = 1.0;
+            let scaleX = map(icon.x, 0, width, maxScaleX, minScaleX);
+            scaleX = constrain(scaleX, minScaleX, maxScaleX);
 
-        let shadowAlphaMin = 30;
-        let shadowAlphaMax = 100;
-        let shadowAlpha = map(icon.x, 0, width, shadowAlphaMin, shadowAlphaMax);
-        shadowAlpha = constrain(shadowAlpha, shadowAlphaMin, shadowAlphaMax);
+            let shadowAlphaMin = 30;
+            let shadowAlphaMax = 100;
+            let shadowAlpha = map(icon.x, 0, width, shadowAlphaMin, shadowAlphaMax);
+            shadowAlpha = constrain(shadowAlpha, shadowAlphaMin, shadowAlphaMax);
 
-        // Shadow image
-        push();
-        tint(0, shadowAlpha);
-        translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
-        scale(scaleX, 1);
-        image(farfalleImg, 0, 0, imgWidth, imgHeight);
-        pop();
+            // Shadow image
+            push();
+            tint(0, shadowAlpha);
+            translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
+            scale(scaleX, 1);
+            image(currentImg, 0, 0, imgWidth, imgHeight);
+            pop();
 
-        // Actual image
-        noTint();
-        image(farfalleImg, icon.x, icon.y, imgWidth, imgHeight);
+            // Actual image
+            noTint();
+            image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
-        // Move icon with direction
-        icon.x += direction * icon.speed * speedMultiplier;
+            // Move icon with direction
+            icon.x += direction * icon.speed * speedMultiplier;
 
-        if (direction === 1 && icon.x > width) {
-          icon.x = -imgWidth;
-          icon.y = random(height);
-          icon.speed = random(0.2, 1.0);
-        } else if (direction === -1 && icon.x < -imgWidth) {
-          icon.x = width;
-          icon.y = random(height);
-          icon.speed = random(0.2, 1.0);
+            if (direction === 1 && icon.x > width) {
+                icon.x = -imgWidth;
+                icon.y = random(height);
+                icon.speed = random(0.2, 1.0);
+                icon.imgIndex = floor(random(foodImages.length)); // Assign new random food image
+            } else if (direction === -1 && icon.x < -imgWidth) {
+                icon.x = width;
+                icon.y = random(height);
+                icon.speed = random(0.2, 1.0);
+                icon.imgIndex = floor(random(foodImages.length)); // Assign new random food image
+            }
         }
-      }
     }
 
     function windowResized() {
-      resizeCanvas(windowWidth, windowHeight);
+        resizeCanvas(windowWidth, windowHeight);
     }
 
     window.addEventListener('scroll', () => {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > lastScrollTop) {
-        direction = 1;
-      } else if (scrollTop < lastScrollTop) {
-        direction = -1;
-      }
+        if (scrollTop > lastScrollTop) {
+            direction = 1;
+        } else if (scrollTop < lastScrollTop) {
+            direction = -1;
+        }
 
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 
-      speedMultiplier = 4.0;
+        speedMultiplier = 4.0;
 
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        speedMultiplier = 1.0;
-      }, 150);
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            speedMultiplier = 1.0;
+        }, 150);
     }, { passive: true });
-  </script>
+</script>
 
 </body>
 </html>
