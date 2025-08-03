@@ -278,13 +278,15 @@
 </div>
 
   <!-- P5 SCRIPT -->
-  <script>
+  <!-- P5 SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+<script>
     let foodImages = [];
     let icons = [];
     const iconCount = 15;
     let customFont;
     let speedMultiplier = 1.0;
-    let baseSpeed = 1.0; // New base speed variable
+    let baseSpeed = 1.0;
     let scrollTimeout;
     let lastScrollTop = 0;
     let direction = 1;
@@ -303,7 +305,7 @@
         canvas.parent('sketch-container');
 
         // Detect mobile and adjust base speed
-        baseSpeed = isMobile() ? 2.5 : 1.0; // 2.5x faster on mobile
+        baseSpeed = isMobile() ? 2.5 : 1.0;
 
         textAlign(CENTER, CENTER);
         textSize(80);
@@ -313,7 +315,7 @@
         for (let i = 0; i < iconCount; i++) {
             let x = i * (width / iconCount) - random(50);
             let y = random(height);
-            let speed = random(0.2, 1.0) * baseSpeed; // Apply base speed multiplier
+            let speed = random(0.2, 1.0) * baseSpeed;
             let imgIndex = floor(random(foodImages.length));
             icons.push({ x, y, speed, imgIndex });
         }
@@ -338,9 +340,7 @@
         text('The Food Gallery', width / 2, height / 2);
 
         for (let icon of icons) {
-
-        for (let icon of icons) {
-            let currentImg = foodImages[icon.imgIndex]; // Get the randomly assigned image
+            let currentImg = foodImages[icon.imgIndex];
             let imgWidth = 50;
             let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
@@ -378,17 +378,18 @@
                 icon.x = -imgWidth;
                 icon.y = random(height);
                 icon.speed = random(0.2, 1.0);
-                icon.imgIndex = floor(random(foodImages.length)); // Randomly select from ALL images
+                icon.imgIndex = floor(random(foodImages.length));
             } else if (direction === -1 && icon.x < -imgWidth) {
                 icon.x = width;
                 icon.y = random(height);
                 icon.speed = random(0.2, 1.0);
-                icon.imgIndex = floor(random(foodImages.length)); // Randomly select from ALL images
+                icon.imgIndex = floor(random(foodImages.length));
             }
         }
     }
 
     function windowResized() {
+        baseSpeed = isMobile() ? 2.5 : 1.0;
         resizeCanvas(windowWidth, windowHeight);
     }
 
@@ -410,16 +411,7 @@
             speedMultiplier = 1.0;
         }, 150);
     }, { passive: true });
-
-         }
-    }
-
-    function windowResized() {
-        // Re-check mobile status when window is resized
-        baseSpeed = isMobile() ? 2.5 : 1.0;
-        resizeCanvas(windowWidth, windowHeight);
-    }
-  </script>
+</script>
 
 </body>
 </html>
