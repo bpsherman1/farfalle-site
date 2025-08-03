@@ -159,10 +159,17 @@ hahaha you are a herb- <!DOCTYPE html>
     let lastScrollTop = 0;
     let direction = 1;
 
-    function preload() {
-      farfalleImg = loadImage('assets/farfalle.png');
-      customFont = loadFont('fonts/the.otf');
-    }
+    let images = []; // Array to hold all our images
+
+function preload() {
+  // Load all images into the array
+  images.push(loadImage('assets/farfalle.png'));
+  images.push(loadImage('assets/garlic.png'));
+  images.push(loadImage('assets/basil.png'));
+  images.push(loadImage('assets/pizza.png'));
+  images.push(loadImage('assets/pom.png'));
+  customFont = loadFont('fonts/the.otf');
+}
 
     function setup() {
       let canvas = createCanvas(windowWidth, windowHeight);
