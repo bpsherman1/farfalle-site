@@ -13,6 +13,7 @@ body {
   align-items: center;
   padding: 0 0; /* default: no padding on large screens */
 }
+
 #menu-container {
   position: fixed;
   top: 20px;
@@ -54,6 +55,7 @@ body {
 #menu-container:hover #dropdown {
   display: flex;
 }
+
 #section2 {
   background-color: #e0dfd5; /* Optional background color */
   display: flex;
@@ -64,18 +66,18 @@ body {
 }
 
 .section-content {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
 }
 
 .slide-image {
-  max-width: 80%;
-  max-height: 80vh;
-  width: auto;
+  width: 50vw;         /* 50% of viewport width */
   height: auto;
   display: block;
-  margin: 0 auto;
   object-fit: contain;
 }
+
 
