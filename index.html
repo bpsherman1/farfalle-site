@@ -59,68 +59,78 @@
       }
     }
 
-    /* Menu Styles */
-    #menu-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 2;
-    }
+#menu-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  font-size: 1rem;
+  padding-bottom: 20px; /* ← this extends hover area downward */
+}
 
-    #menu-button {
-      background-color: #f4d35e;
-      border: none;
-      padding: 10px 16px;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-    }
 
-    #dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: white;
-      border: 1px solid #ccc;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-      z-index: 3;
-      border-radius: 5px;
-    }
+/* Button */
+#menu-button {
+  background-color: #f4d35e;
+  border: none;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
 
-    #dropdown-menu a {
-      display: block;
-      padding: 10px 16px;
-      color: #333;
-      text-decoration: none;
-      white-space: nowrap;
-    }
+/* Dropdown */
+#dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+  z-index: 3;
+  border-radius: 5px;
+}
 
-    #dropdown-menu a:hover {
-      background-color: #f4d35e;
-    }
+/* Links */
+#dropdown-menu a {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+}
 
-    #menu-container:hover #dropdown-menu {
-      display: block;
+#dropdown-menu a:hover {
+  background-color: #f4d35e;
+}
+
+/* Keep dropdown visible on hover */
+#menu-container:hover #dropdown-menu {
+  display: block;
+}
+
+
     }
   </style>
 </head>
 <body>
 
-  <!-- Menu -->
-  <div id="menu-container">
-    <button id="menu-button">Menu</button>
-    <div id="dropdown-menu">
-      <a href="#section1">Top</a>
-      <a href="#section2">Image</a>
-      <a href="#section3">Bottom</a>
-    </div>
+  <!-- MENU HTML -->
+ <div id="menu-container">
+  <button id="menu-button">Menu</button>
+  <div id="dropdown-menu">
+    <a href="#section1">Top</a>
+    <a href="#section2">Image</a>
+    <a href="#section3">Bottom</a>
   </div>
+</div>
 
-  <!-- Sketch Container -->
+
+  <!-- SKETCH CONTAINER -->
   <div id="sketch-container"></div>
 
-  <!-- Page Content -->
+  <!-- PAGE CONTENT -->
   <div class="section" id="section1"><div class="section-content">Farfalle</div></div>
 
   <div class="section" id="section2">
@@ -131,7 +141,7 @@
 
   <div class="section" id="section3"><div class="section-content">Go fuck yourself</div></div>
 
-  <!-- P5 Script -->
+  <!-- P5 SCRIPT -->
   <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
   <script>
     let farfalleImg;
