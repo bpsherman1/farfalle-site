@@ -54,4 +54,19 @@ body {
 #menu-container:hover #dropdown {
   display: flex;
 }
+#section2 {
+  background-color: #e0dfd5; /* Optional background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.section-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 
