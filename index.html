@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+now i want to take this site and turn it into an old sit but updated, but i want to use this layout as the core structure of the site, first im trying to change the name of the site from farfalle to the food gallery but when im doing it its not changing the website- heres the html, is something wrong- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -134,7 +134,20 @@
   </div>
 
   <!-- SKETCH CONTAINER -->
-  <!-- P5 SCRIPT --></script>
+  <div id="sketch-container"></div>
+
+  <!-- PAGE CONTENT -->
+  <div class="section" id="section1"><div class="section-content">The Food Gallery</div></div>
+
+  <div class="section" id="section2">
+    <div class="section-content">
+      <img src="/images/farfallepainting.png" style="max-width: 70%; max-height: 70vh; object-fit: contain;" alt="Farfalle Painting">
+    </div>
+  </div>
+
+  <div class="section" id="section3"><div class="section-content"></div></div>
+
+  <!-- P5 SCRIPT -->
   <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
   <script>
     let farfalleImg;
@@ -178,7 +191,7 @@
 
       fill(fadedColor);
       textFont(customFont);
-      text('The Food Gallery', width / 2, height / 2); // THIS IS THE LINE THAT NEEDED TO CHANGE
+      text('Farfalle', width / 2, height / 2);
 
       for (let icon of icons) {
         let imgWidth = 50;
@@ -248,7 +261,6 @@
         speedMultiplier = 1.0;
       }, 150);
     }, { passive: true });
-    
   </script>
 
 </body>
