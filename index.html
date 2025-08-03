@@ -1,4 +1,4 @@
-hahaha you are a herb- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -52,10 +52,25 @@ hahaha you are a herb- <!DOCTYPE html>
       text-align: center;
     }
 
+    /* New style for the about text */
+    .about-text {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      text-align: left;
+      font-weight: normal;
+    }
+
     @media (max-width: 768px) {
       .section-content {
         padding: 0 1rem;
         box-sizing: border-box;
+      }
+      .about-text {
+        font-size: 1rem;
+        padding: 1rem;
       }
     }
 
@@ -142,17 +157,23 @@ hahaha you are a herb- <!DOCTYPE html>
 
   <div class="section" id="section2">
     <div class="section-content">
-      <img src="/images/farfallepainting.png" style="max-width: 70%; max-height: 70vh; object-fit: contain;" alt="Farfalle Painting">
+      <div class="about-text">
+        <p>The Food Gallery was originally a project I created during my sophomore year at UW–Madison. It was for a coding and art class, where our final project was to take the HTML and CSS we had learned throughout the semester and build any kind of website.</p>
+        
+        <p>I came up with the idea to create an online visual recipe book called The Food Gallery. All the food and icons are hand-illustrated, and all the recipes are either mine or from my family.</p>
+        
+        <p>A year or so later, I decided to come back to this project and redesign it completely. I'm still using the same illustrations from the original site, but the HTML and CSS are brand new.</p>
+        
+        <p>I hope you like my illustrations and enjoy my recipes. Thanks for stopping by!</p>
+      </div>
     </div>
   </div>
 
   <div class="section" id="section3"><div class="section-content"></div></div>
 
   <!-- P5 SCRIPT -->
- <!-- Replace your entire P5 SCRIPT section with this: -->
-<!-- Replace your entire P5 SCRIPT section with this: -->
-<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
-<script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+  <script>
     let foodImages = []; // Array to hold ALL images (farfalle + foods)
     let icons = [];
     const iconCount = 15;
@@ -273,7 +294,7 @@ hahaha you are a herb- <!DOCTYPE html>
             speedMultiplier = 1.0;
         }, 150);
     }, { passive: true });
-</script>
+  </script>
 
 </body>
 </html>
