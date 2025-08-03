@@ -132,6 +132,31 @@
     #menu-container:hover #dropdown-menu {
       display: block;
     }
+    <style>
+    /* Add these new styles to your existing CSS */
+    #section3 {
+      position: relative; /* Needed for absolute positioning of pizza */
+    }
+    
+    .table-background {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .pizza-foreground {
+      position: absolute;
+      width: 33.33%; /* 1/3 of screen width */
+      left: 5%; /* Adjust this to move pizza left/right */
+      bottom: 10%; /* Adjust this to move pizza up/down */
+      max-width: 50vh; /* Limits maximum size */
+      z-index: 2; /* Ensures pizza appears above table */
+      transition: transform 0.3s ease; /* For hover effect */
+    }
+    
+    .pizza-foreground:hover {
+      transform: scale(1.05); /* Slight zoom on hover */
+    }
   </style>
 </head>
 <body>
@@ -169,8 +194,12 @@
     </div>
   </div>
 
-  <div class="section" id="section3">
-    <img src="/images/table.png" style="width: 100%; height: 100%; object-fit: cover;" alt="Table Setting">
+   <div class="section" id="section3">
+    <!-- Table background -->
+    <img src="/images/table.png" class="table-background" alt="Table Setting">
+    
+    <!-- Pizza foreground -->
+    <img src="/images/pizza.png" class="pizza-foreground" alt="Pizza">
   </div>
 
   <!-- P5 SCRIPT -->
