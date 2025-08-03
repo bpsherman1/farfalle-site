@@ -1,82 +1,21 @@
-now nothing shows up, heres the full html, what wrong - <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Farfalle</title>
+ok this is all the code i have in my html to make this menu button, i want you to take the code a replace the physical botton for the menu with just an icon called d.png which is in a local folder named images -   #menu-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  font-size: 1rem;
+  padding-bottom: 20px; /* ← this extends hover area downward */
+}
 
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-
-  <style>
-    body {
-      margin: 0;
-      background-color: #f8f8f2;
-      font-family: 'Georgia', 'Arial Black', sans-serif;
-      font-weight: 700;
-      color: #333;
-      font-size: 5rem;
-      user-select: none;
-      cursor: url('/path-to-image.png') 16 16, auto;
-      overflow-x: hidden;
-    }
-
-    #sketch-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-    }
-
-    .section {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    #section1 { background-color: transparent; color: transparent; }
-    #section2 { background-color: #e0dfd5; }
-    #section3 { background-color: #d0cec7; }
-
-    .section-content {
-      width: 100%;
-      text-align: center;
-    }
-
-    @media (max-width: 768px) {
-      .section-content {
-        padding: 0 1rem;
-        box-sizing: border-box;
-      }
-    }
 
 #menu-button {
-  background: none;
+  background-color: #f4d35e;
   border: none;
-  padding: 0;
+  padding: 10px 16px;
+  font-weight: bold;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;    /* control icon size */
-  height: 40px;
+  border-radius: 5px;
 }
-
-#menu-button img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 
 /* Dropdown */
 #dropdown-menu {
@@ -115,148 +54,12 @@ now nothing shows up, heres the full html, what wrong - <!DOCTYPE html>
 
   <!-- MENU HTML -->
   <div id="menu-container">
-    <div id="menu-button">
-      <img src="images/d.png" alt="Menu Icon" />
-    </div>
+    <button id="menu-button">Menu</button>
     <div id="dropdown-menu">
       <a href="#section1">Top</a>
       <a href="#section2">Image</a>
       <a href="#section3">Bottom</a>
     </div>
   </div>
-
-
-  <!-- SKETCH CONTAINER -->
-  <div id="sketch-container"></div>
-
-  <!-- PAGE CONTENT -->
-  <div class="section" id="section1"><div class="section-content">Farfalle</div></div>
-
-  <div class="section" id="section2">
-    <div class="section-content">
-      <img src="/images/farfallepainting.png" style="max-width: 70%; max-height: 70vh; object-fit: contain;" alt="Farfalle Painting">
-    </div>
-  </div>
-
-  <div class="section" id="section3"><div class="section-content">Go fuck yourself</div></div>
-
-  <!-- P5 SCRIPT -->
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
-  <script>
-    let farfalleImg;
-    let icons = [];
-    const iconCount = 15;
-    let customFont;
-    let speedMultiplier = 1.0;
-    let scrollTimeout;
-    let lastScrollTop = 0;
-    let direction = 1;
-
-    function preload() {
-      farfalleImg = loadImage('assets/farfalle.png');
-      customFont = loadFont('fonts/the.otf');
-    }
-
-    function setup() {
-      let canvas = createCanvas(windowWidth, windowHeight);
-      canvas.parent('sketch-container');
-
-      textAlign(CENTER, CENTER);
-      textSize(80);
-      textStyle(BOLD);
-      textFont(customFont);
-
-      for (let i = 0; i < iconCount; i++) {
-        let x = i * (width / iconCount) - random(50);
-        let y = random(height);
-        let speed = random(0.2, 1.0);
-        icons.push({ x, y, speed });
-      }
-    }
-
-    function draw() {
-      background('#f8f8f2');
-
-      let topColor = color(0);
-      let bottomColor = color('#f4d35e');
-      let fadeAmt = constrain(mouseY / height, 0, 1);
-      let fadedColor = lerpColor(topColor, bottomColor, fadeAmt);
-
-      fill(fadedColor);
-      textFont(customFont);
-      text('Farfalle', width / 2, height / 2);
-
-      for (let icon of icons) {
-        let imgWidth = 50;
-        let imgHeight = (farfalleImg.height / farfalleImg.width) * imgWidth;
-
-        let shadowMaxOffset = 120;
-        let shadowMinOffset = 5;
-        let shadowOffset = map(icon.x, 0, width, shadowMaxOffset, shadowMinOffset);
-        shadowOffset = constrain(shadowOffset, shadowMinOffset, shadowMaxOffset);
-
-        let maxScaleX = 2.0;
-        let minScaleX = 1.0;
-        let scaleX = map(icon.x, 0, width, maxScaleX, minScaleX);
-        scaleX = constrain(scaleX, minScaleX, maxScaleX);
-
-        let shadowAlphaMin = 30;
-        let shadowAlphaMax = 100;
-        let shadowAlpha = map(icon.x, 0, width, shadowAlphaMin, shadowAlphaMax);
-        shadowAlpha = constrain(shadowAlpha, shadowAlphaMin, shadowAlphaMax);
-
-        // Shadow image
-        push();
-        tint(0, shadowAlpha);
-        translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
-        scale(scaleX, 1);
-        image(farfalleImg, 0, 0, imgWidth, imgHeight);
-        pop();
-
-        // Actual image
-        noTint();
-        image(farfalleImg, icon.x, icon.y, imgWidth, imgHeight);
-
-        // Move icon with direction
-        icon.x += direction * icon.speed * speedMultiplier;
-
-        if (direction === 1 && icon.x > width) {
-          icon.x = -imgWidth;
-          icon.y = random(height);
-          icon.speed = random(0.2, 1.0);
-        } else if (direction === -1 && icon.x < -imgWidth) {
-          icon.x = width;
-          icon.y = random(height);
-          icon.speed = random(0.2, 1.0);
-        }
-      }
-    }
-
-    function windowResized() {
-      resizeCanvas(windowWidth, windowHeight);
-    }
-
-    window.addEventListener('scroll', () => {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (scrollTop > lastScrollTop) {
-        direction = 1;
-      } else if (scrollTop < lastScrollTop) {
-        direction = -1;
-      }
-
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-
-      speedMultiplier = 4.0;
-
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        speedMultiplier = 1.0;
-      }, 150);
-    }, { passive: true });
-  </script>
-
-</body>
-</html>
 
 
