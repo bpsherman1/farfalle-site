@@ -59,63 +59,69 @@
       }
     }
 
-    /* Menu styles */
-    #menu-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 2;
-      padding-bottom: 20px; /* extends hover area to prevent flicker */
-    }
+ #menu-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  font-size: 1rem;
+  padding-bottom: 20px; /* ← this extends hover area downward */
+}
 
-    #menu-button {
-      cursor: pointer;
-      display: inline-block;
-    }
 
-    #menu-button img {
-      width: 40px;
-      height: auto;
-      display: block;
-    }
 
-    #dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: white;
-      border: 1px solid #ccc;
-      box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-      z-index: 3;
-      border-radius: 5px;
-    }
+/* Button */
+#menu-button {
+  background-color: #f4d35e;
+  border: none;
+  padding: 10px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
 
-    #dropdown-menu a {
-      display: block;
-      padding: 10px 16px;
-      color: #333;
-      text-decoration: none;
-      white-space: nowrap;
-    }
+/* Dropdown */
+#dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+  z-index: 3;
+  border-radius: 5px;
+}
 
-    #dropdown-menu a:hover {
-      background-color: #f4d35e;
-    }
+/* Links */
+#dropdown-menu a {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+}
 
-    /* Keep dropdown visible on hover */
-    #menu-container:hover #dropdown-menu {
-      display: block;
+#dropdown-menu a:hover {
+  background-color: #f4d35e;
+}
+
+/* Keep dropdown visible on hover */
+#menu-container:hover #dropdown-menu {
+  display: block;
+}
+
+
     }
   </style>
 </head>
 <body>
 
   <!-- MENU HTML -->
-  <div id="menu-container">
-    <div id="menu-button">
-      <img src="images/farfalle.png" alt="Menu" />
-    </div>
+  <div 
+  <img src="images/farfalle.png" alt="Menu" />
+</div>
+
     <div id="dropdown-menu">
       <a href="#section1">Top</a>
       <a href="#section2">Image</a>
@@ -252,6 +258,7 @@
       }, 150);
     }, { passive: true });
   </script>
+
 </body>
 </html>
 
