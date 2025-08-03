@@ -59,71 +59,67 @@
       }
     }
 
-#menu-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 2;
-  font-size: 1rem;
-  padding-bottom: 20px; /* ← this extends hover area downward */
-}
+    #menu-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+      padding-bottom: 20px; /* ← this extends hover area downward */
+    }
 
+    #menu-icon {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: block;
+    }
 
-/* Button */
-#menu-icon {
-  width: 40px; /* Adjust to match your image dimensions */
-  height: 40px; /* Adjust to match your image dimensions */
-  cursor: pointer;
-  display: block; /* Ensure it behaves like the button did */
-}
+    /* Updated dropdown styles */
+    #dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: transparent; /* Changed from white to transparent */
+      border: none; /* Removed the border */
+      box-shadow: none; /* Removed the shadow */
+      z-index: 3;
+    }
 
-/* Dropdown */
-#dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-  z-index: 3;
-  border-radius: 5px;
-}
+    /* Updated link styles */
+    #dropdown-menu a {
+      display: block;
+      padding: 10px 0; /* Removed horizontal padding */
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
+    }
 
-/* Links */
-#dropdown-menu a {
-  display: block;
-  padding: 10px 16px;
-  color: #333;
-  text-decoration: none;
-  white-space: nowrap;
-}
+    #dropdown-menu a:hover {
+      background-color: transparent; /* Removed the background */
+      color: #f4d35e; /* Changed hover effect to just color change */
+    }
 
-#dropdown-menu a:hover {
-  background-color: #f4d35e;
-}
-
-/* Keep dropdown visible on hover */
-#menu-container:hover #dropdown-menu {
-  display: block;
-}
-
-
+    /* Keep dropdown visible on hover */
+    #menu-container:hover #dropdown-menu {
+      display: block;
     }
   </style>
 </head>
 <body>
 
   <!-- MENU HTML -->
-<div id="menu-container">
-  <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
-  <div id="dropdown-menu">
-    <a href="#section1">Top</a>
-    <a href="#section2">Image</a>
-    <a href="#section3">Bottom</a>
+  <div id="menu-container">
+    <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
+    <div id="dropdown-menu">
+      <a href="#section1">Top</a>
+      <a href="#section2">Image</a>
+      <a href="#section3">Bottom</a>
+    </div>
   </div>
-</div>
-
 
   <!-- SKETCH CONTAINER -->
   <div id="sketch-container"></div>
