@@ -59,16 +59,13 @@
       }
     }
 
- #menu-container {
+#menu-container {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 2;
   font-size: 1rem;
-  padding-bottom: 20px; /* ← this extends hover area downward */
 }
-
-
 
 /* Button */
 #menu-button {
@@ -118,16 +115,15 @@
 <body>
 
   <!-- MENU HTML -->
-  <div 
-  <img src="images/farfalle.png" alt="Menu" />
+ <div id="menu-container">
+  <button id="menu-button">Menu</button>
+  <div id="dropdown-menu">
+    <a href="#section1">Top</a>
+    <a href="#section2">Image</a>
+    <a href="#section3">Bottom</a>
+  </div>
 </div>
 
-    <div id="dropdown-menu">
-      <a href="#section1">Top</a>
-      <a href="#section2">Image</a>
-      <a href="#section3">Bottom</a>
-    </div>
-  </div>
 
   <!-- SKETCH CONTAINER -->
   <div id="sketch-container"></div>
