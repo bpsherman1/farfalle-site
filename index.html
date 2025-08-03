@@ -67,41 +67,39 @@
       padding-bottom: 20px; /* ← this extends hover area downward */
     }
 
+    #home-link {
+      display: block;
+      text-decoration: none;
+    }
+
     #menu-icon {
       width: 40px;
       height: 40px;
       cursor: pointer;
       display: block;
+      transition: filter 0.2s ease;
     }
 
-#menu-icon {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: block;
-  transition: filter 0.2s ease; /* Add smooth transition */
-}
+    #home-link:hover #menu-icon {
+      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+    }
 
-#menu-icon:hover {
-  filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%); /* Yellow color filter */
-}
-    
     /* Updated dropdown styles */
     #dropdown-menu {
       display: none;
       position: absolute;
       top: 100%;
       right: 0;
-      background-color: transparent; /* Changed from white to transparent */
-      border: none; /* Removed the border */
-      box-shadow: none; /* Removed the shadow */
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
       z-index: 3;
     }
 
     /* Updated link styles */
     #dropdown-menu a {
       display: block;
-      padding: 10px 0; /* Removed horizontal padding */
+      padding: 10px 0;
       color: #333;
       text-decoration: none;
       white-space: nowrap;
@@ -111,40 +109,29 @@
     }
 
     #dropdown-menu a:hover {
-      background-color: transparent; /* Removed the background */
-      color: #f4d35e; /* Changed hover effect to just color change */
+      background-color: transparent;
+      color: #f4d35e;
     }
 
     /* Keep dropdown visible on hover */
     #menu-container:hover #dropdown-menu {
       display: block;
     }
-#home-link {
-  display: block; /* Make the link behave like the image container */
-  text-decoration: none; /* Remove underline */
-}
-
-/* Update the hover effect to apply to the link instead */
-#home-link:hover #menu-icon {
-  filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
-}
-
-    
   </style>
 </head>
 <body>
 
   <!-- MENU HTML -->
-<div id="menu-container">
-  <a href="/" id="home-link">
-    <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
-  </a>
-  <div id="dropdown-menu">
-    <a href="#section1">Top</a>
-    <a href="#section2">Image</a>
-    <a href="#section3">Bottom</a>
+  <div id="menu-container">
+    <a href="/" id="home-link">
+      <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
+    </a>
+    <div id="dropdown-menu">
+      <a href="#section1">Top</a>
+      <a href="#section2">Image</a>
+      <a href="#section3">Bottom</a>
+    </div>
   </div>
-</div>
 
   <!-- SKETCH CONTAINER -->
   <div id="sketch-container"></div>
