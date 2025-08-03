@@ -157,6 +157,30 @@
     .pizza-foreground:hover {
       transform: scale(1.05); /* Slight zoom on hover */
     }
+
+.signature-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.signature {
+  max-width: 200px; /* Adjust this to control signature size */
+  height: auto;
+  opacity: 0.9; /* Slightly transparent for subtle effect */
+  transition: opacity 0.3s ease;
+}
+
+.signature:hover {
+  opacity: 1; /* Full opacity on hover */
+}
+
+@media (max-width: 768px) {
+  .signature {
+    max-width: 150px; /* Smaller on mobile */
+  }
+}
+
+    
   </style>
 </head>
 <body>
