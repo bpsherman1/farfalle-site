@@ -14,17 +14,17 @@ body {
   padding: 0 0; /* default: no padding on large screens */
 }
 
-.section2-content {
+#section2 {
+  background-color: #e0dfd5; /* Optional background color */
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  position: relative;
+  z-index: 1;
 }
 
-.slide2-image {
-  width: 50vw;
-  height: 50vh;
-  object-fit: contain;
-  display: block;
+.section-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
