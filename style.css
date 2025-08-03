@@ -14,4 +14,17 @@ body {
   padding: 0 0; /* default: no padding on large screens */
 }
 
+.section-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+}
+.slide-image {
+  width: 50vw;         /* 50% of viewport width */
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
 
