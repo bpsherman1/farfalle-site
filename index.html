@@ -190,63 +190,33 @@ function setup() {
   }
 }
 
-    function draw() {
-      background('#f8f8f2');
+   function draw() {
+  background('#f8f8f2');
+  
+  // ... (keep your existing color fade code for "The Food Gallery" text)
 
-      let topColor = color(0);
-      let bottomColor = color('#c72a2a');
-      let fadeAmt = constrain(mouseY / height, 0, 1);
-      let fadedColor = lerpColor(topColor, bottomColor, fadeAmt);
+  for (let icon of icons) {
+    let currentImg = images[icon.imgIndex]; // Get the correct image
+    let imgWidth = 50;
+    let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
-      fill(fadedColor);
-      textFont(customFont);
-      text('The Food Gallery', width / 2, height / 2);
+    // ... (keep all your existing shadow and positioning math)
 
-      for (let icon of icons) {
-        let imgWidth = 50;
-        let imgHeight = (farfalleImg.height / farfalleImg.width) * imgWidth;
+    // Shadow image
+    push();
+    tint(0, shadowAlpha);
+    translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
+    scale(scaleX, 1);
+    image(currentImg, 0, 0, imgWidth, imgHeight);
+    pop();
 
-        let shadowMaxOffset = 120;
-        let shadowMinOffset = 5;
-        let shadowOffset = map(icon.x, 0, width, shadowMaxOffset, shadowMinOffset);
-        shadowOffset = constrain(shadowOffset, shadowMinOffset, shadowMaxOffset);
+    // Actual image
+    noTint();
+    image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
-        let maxScaleX = 2.0;
-        let minScaleX = 1.0;
-        let scaleX = map(icon.x, 0, width, maxScaleX, minScaleX);
-        scaleX = constrain(scaleX, minScaleX, maxScaleX);
-
-        let shadowAlphaMin = 30;
-        let shadowAlphaMax = 100;
-        let shadowAlpha = map(icon.x, 0, width, shadowAlphaMin, shadowAlphaMax);
-        shadowAlpha = constrain(shadowAlpha, shadowAlphaMin, shadowAlphaMax);
-
-        // Shadow image
-        push();
-        tint(0, shadowAlpha);
-        translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
-        scale(scaleX, 1);
-        image(farfalleImg, 0, 0, imgWidth, imgHeight);
-        pop();
-
-        // Actual image
-        noTint();
-        image(farfalleImg, icon.x, icon.y, imgWidth, imgHeight);
-
-        // Move icon with direction
-        icon.x += direction * icon.speed * speedMultiplier;
-
-        if (direction === 1 && icon.x > width) {
-          icon.x = -imgWidth;
-          icon.y = random(height);
-          icon.speed = random(0.2, 1.0);
-        } else if (direction === -1 && icon.x < -imgWidth) {
-          icon.x = width;
-          icon.y = random(height);
-          icon.speed = random(0.2, 1.0);
-        }
-      }
-    }
+    // ... (keep your existing movement logic)
+  }
+}
 
     function windowResized() {
       resizeCanvas(windowWidth, windowHeight);
