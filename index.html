@@ -1,15 +1,130 @@
-<!DOCTYPE html>
+ok that just made both pizza really small, on the computer i want it to be a little smaller than the height of the screen and set off on the left, on the pnone i want it to be take about about 2/3rd the width- heres me code idk what went wrong, give it back with fixes- <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- [Previous head content remains exactly the same until the pizza styles] -->
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Food Gallery</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+
   <style>
-    /* [All your previous styles remain the same until the pizza styles] */
+    body {
+      margin: 0;
+      background-color: #f8f8f2;
+      font-family: 'Georgia', 'Arial Black', sans-serif;
+      font-weight: 700;
+      color: #333;
+      font-size: 5rem;
+      user-select: none;
+      cursor: url('/path-to-image.png') 16 16, auto;
+      overflow-x: hidden;
+    }
+
+    #sketch-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+    }
+
+    .section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    #section1 { background-color: transparent; color: transparent; }
+    #section2 { background-color: #e0dfd5; }
+    #section3 { background-color: #d0cec7; }
+
+    .section-content {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* New style for the about text */
+    .about-text {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      text-align: left;
+      font-weight: normal;
+    }
+
+    #menu-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+      padding-bottom: 20px; /* ← this extends hover area downward */
+    }
+
+    #home-link {
+      display: block;
+      text-decoration: none;
+    }
+
+    #menu-icon {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: block;
+      transition: filter 0.2s ease;
+    }
+
+    #home-link:hover #menu-icon {
+      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+    }
+
+    /* Updated dropdown styles */
+    #dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      z-index: 3;
+    }
+
+    /* Updated link styles */
+    #dropdown-menu a {
+      display: block;
+      padding: 10px 0;
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
+    }
+
+    #dropdown-menu a:hover {
+      background-color: transparent;
+      color: #c72a2a;
+    }
+
+    /* Keep dropdown visible on hover */
+    #menu-container:hover #dropdown-menu {
+      display: block;
+    }
 
     /* Section 3 styles */
     #section3 {
       position: relative;
-      overflow: hidden; /* Prevents any overflow from large pizza */
     }
     
     .table-background {
@@ -18,49 +133,288 @@
       object-fit: cover;
     }
     
-    /* Desktop pizza styles */
-    .pizza-foreground {
-      position: absolute;
-      height: 80vh; /* 80% of viewport height */
-      width: auto; /* Maintain aspect ratio */
-      left: 5%;
-      bottom: 10%;
-      z-index: 2;
-      transition: transform 0.3s ease;
-      max-height: 90vh; /* Prevent being taller than screen */
-    }
-    
-    /* Mobile pizza styles */
-    @media (max-width: 768px) {
-      .pizza-foreground {
-        height: auto; /* Switch to width control on mobile */
-        width: 66vw; /* 2/3 of viewport width */
-        max-width: none;
-        left: 5%;
-        bottom: 15%; /* Slightly higher on mobile */
-      }
-    }
+   .pizza-foreground {
+  position: absolute;
+  width: 33vw; /* Use viewport width units for responsive sizing */
+  max-width: 300px; /* Maximum size on desktop */
+  min-width: 150px; /* Minimum size on mobile */
+  left: 5%;
+  bottom: 10%;
+  z-index: 2;
+  transition: transform 0.3s ease;
+  height: auto; /* Maintain aspect ratio */
+}
+
+@media (max-width: 768px) {
+  .pizza-foreground {
+    width: 50vw; /* Larger relative size on mobile */
+    max-width: none; /* Remove max-width restriction on mobile */
+    min-width: 200px; /* Larger minimum size on mobile */
+    left: 10%; /* Adjust positioning for mobile */
+  }
+}
     
     .pizza-foreground:hover {
       transform: scale(1.05);
     }
 
-    /* Pizza link container */
+    .signature-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .signature {
+      max-width: 200px;
+      height: auto;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .signature:hover {
+      opacity: 1;
+    }
+
+    .signature-link {
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .signature-link:hover .signature {
+      filter: brightness(0) saturate(70%) invert(15%) sepia(90%) saturate(2500%) hue-rotate(350deg) brightness(90%) contrast(100%);
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
     .pizza-link {
       position: absolute;
+      width: 33.33%;
+      left: 5%;
+      bottom: 10%;
       z-index: 2;
       transition: transform 0.3s ease;
     }
 
-    /* [Rest of your styles remain exactly the same] */
+    .pizza-link:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .section-content {
+        padding: 0 1rem;
+        box-sizing: border-box;
+      }
+      .about-text {
+        font-size: 1rem;
+        padding: 1rem;
+      }
+      .signature {
+        max-width: 150px;
+      }
+      #sketch-container {
+        font-size: 3rem;
+      }
+      .section-content {
+        padding: 0 20px;
+        box-sizing: border-box;
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- [All your HTML remains exactly the same] -->
+
+  <!-- MENU HTML -->
+  <div id="menu-container">
+    <a href="/" id="home-link">
+      <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
+    </a>
+    <div id="dropdown-menu">
+      <a href="meat.html">Meat</a>
+      <a href="entrees.html">Entrees</a>
+      <a href="pizza.html">Pizza</a>
+      <a href="sauce.html">Sauces</a>
+    </div>
+  </div>
+
+  <!-- SKETCH CONTAINER -->
+  <div id="sketch-container"></div>
+
+  <!-- PAGE CONTENT -->
+  <div class="section" id="section1"><div class="section-content">The Food Gallery</div></div>
+
+  <div class="section" id="section2">
+    <div class="section-content">
+      <div class="about-text">
+        <p>The Food Gallery was originally a project I created during my sophomore year at UW–Madison. It was for a coding and art class, where our final project was to take the HTML and CSS we had learned throughout the semester and build any kind of website.</p>
+        
+        <p>I came up with the idea to create an online visual recipe book called The Food Gallery. All the food and icons are hand-illustrated, and all the recipes are either mine or from my family.</p>
+        
+        <p>A year or so later, I decided to come back to this project and redesign it completely. I'm still using the same illustrations from the original site, but the HTML and CSS are brand new.</p>
+        
+        <p>I hope you like my illustrations and enjoy my recipes. Thanks for stopping by!</p>
+        
+        <div class="signature-container">
+          <a href="https://bpsherman.myportfolio.com/home" target="_blank" class="signature-link">
+            <img src="/images/sig.png" alt="Signature" class="signature">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div class="section" id="section3">
+  <img src="/images/table.png" class="table-background" alt="Table Setting">
+  <div class="pizza-container">
+    <a href="pizza.html" class="pizza-link">
+      <img src="/images/pizza.png" class="pizza-foreground" alt="Pizza">
+    </a>
+  </div>
+</div>
 
   <!-- P5 SCRIPT -->
-  <!-- [Your existing P5 script remains exactly the same] -->
-</body>
-</html>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+  <script>
+    let foodImages = [];
+    let icons = [];
+    const iconCount = 15;
+    let customFont;
+    let speedMultiplier = 1.0;
+    let baseSpeed = 1.0;
+    let scrollTimeout;
+    let lastScrollTop = 0;
+    let direction = 1;
+
+    function preload() {
+        foodImages.push(loadImage('assets/farfalle.png'));
+        foodImages.push(loadImage('/images/garlic.png'));
+        foodImages.push(loadImage('/images/pom.png'));
+        foodImages.push(loadImage('/images/basil.png'));
+        foodImages.push(loadImage('/images/pizza.png'));
+        customFont = loadFont('fonts/the.otf');
+    }
+
+    function setup() {
+        // Mobile performance optimization
+        if (isMobile()) {
+            frameRate(45);
+            baseSpeed = 2.0;
+        } else {
+            frameRate(60);
+            baseSpeed = 1.0;
+        }
+
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.parent('sketch-container');
+        textAlign(CENTER, CENTER);
+        textFont(customFont);
+        
+        for (let i = 0; i < iconCount; i++) {
+            let x = i * (width / iconCount) - random(50);
+            let y = random(height);
+            let speed = random(0.2, 1.0) * baseSpeed;
+            let imgIndex = floor(random(foodImages.length));
+            icons.push({ x, y, speed, imgIndex });
+        }
+    }
+
+    function isMobile() {
+        return window.matchMedia("(max-width: 768px)").matches || 
+               window.innerWidth < 768;
+    }
+   
+    function draw() {
+        background('#f8f8f2');
+
+        let topColor = color(0);
+        let bottomColor = color('#c72a2a');
+        let fadeAmt = constrain(mouseY / height, 0, 1);
+        let fadedColor = lerpColor(topColor, bottomColor, fadeAmt);
+
+        fill(fadedColor);
+        textFont(customFont);
+        textStyle(BOLD);
+        
+        if (isMobile()) {
+            textSize(50);
+            text("The Food", width / 2, height / 2 - 40);
+            text("Gallery", width / 2, height / 2 + 40);
+        } else {
+            textSize(80);
+            text("The Food Gallery", width / 2, height / 2);
+        }
+
+        for (let icon of icons) {
+            let currentImg = foodImages[icon.imgIndex];
+            let imgWidth = 50;
+            let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
+
+            let shadowMaxOffset = 120;
+            let shadowMinOffset = 5;
+            let shadowOffset = map(icon.x, 0, width, shadowMaxOffset, shadowMinOffset);
+            shadowOffset = constrain(shadowOffset, shadowMinOffset, shadowMaxOffset);
+
+            let maxScaleX = 2.0;
+            let minScaleX = 1.0;
+            let scaleX = map(icon.x, 0, width, maxScaleX, minScaleX);
+            scaleX = constrain(scaleX, minScaleX, maxScaleX);
+
+            let shadowAlphaMin = 30;
+            let shadowAlphaMax = 100;
+            let shadowAlpha = map(icon.x, 0, width, shadowAlphaMin, shadowAlphaMax);
+            shadowAlpha = constrain(shadowAlpha, shadowAlphaMin, shadowAlphaMax);
+
+            // Shadow image
+            push();
+            tint(0, shadowAlpha);
+            translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
+            scale(scaleX, 1);
+            image(currentImg, 0, 0, imgWidth, imgHeight);
+            pop();
+
+            // Actual image
+            noTint();
+            image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
+
+            icon.x += direction * icon.speed * speedMultiplier * baseSpeed;
+
+            if (direction === 1 && icon.x > width) {
+                icon.x = -imgWidth;
+                icon.y = random(height);
+                icon.speed = random(0.2, 1.0);
+                icon.imgIndex = floor(random(foodImages.length));
+            } else if (direction === -1 && icon.x < -imgWidth) {
+                icon.x = width;
+                icon.y = random(height);
+                icon.speed = random(0.2, 1.0);
+                icon.imgIndex = floor(random(foodImages.length));
+            }
+        }
+    }
+
+    function windowResized() {
+        baseSpeed = isMobile() ? 2.5 : 1.0;
+        resizeCanvas(windowWidth, windowHeight);
+    }
+
+    window.addEventListener('scroll', () => {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+            direction = 1;
+        } else if (scrollTop < lastScrollTop) {
+            direction = -1;
+        }
+
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+
+        speedMultiplier = 4.0;
+
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            speedMultiplier = 1.0;
+        }, 150);
+    }, { passive: true });
+  </script>
 </body>
 </html>
