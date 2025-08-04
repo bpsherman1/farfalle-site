@@ -29,7 +29,7 @@
     
     #section1 {
       background-color: #f0e6d2;
-      flex-direction: column; /* Changed to column layout */
+      flex-direction: column;
     }
     
     #section2 {
@@ -48,13 +48,13 @@
       width: 100%;
       max-width: 1400px;
       margin: 0 auto;
-      gap: 40px; /* Increased gap between images */
+      gap: 40px;
     }
     
     .food-image {
-      height: 80vh; /* Increased from 70vh */
+      height: 80vh;
       width: auto;
-      max-width: 45%; /* Increased from 40% */
+      max-width: 45%;
       object-fit: contain;
     }
     
@@ -62,18 +62,21 @@
       text-align: center;
       padding: 0 40px;
       max-width: 800px;
-      margin: 0 auto 40px; /* Added bottom margin */
+      margin: 0 auto 40px;
     }
     
     /* Text Styles */
-    h1 {
+    h1, h2 {
       font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+    
+    h1 {
       font-size: 3.5rem;
       margin-bottom: 1.5rem;
     }
     
     h2 {
-      font-family: 'Playfair Display', serif;
       font-size: 3rem;
       margin-bottom: 1.5rem;
     }
@@ -96,6 +99,104 @@
       font-size: 1.3rem;
       margin: 0 auto 1.5rem;
     }
+    
+    .ingredients {
+      background-color: rgba(255,255,255,0.3);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: left;
+    }
+    
+    .ingredients ul {
+      padding-left: 20px;
+    }
+    
+    .ingredients li {
+      margin-bottom: 8px;
+      list-style-type: none;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .ingredients li:before {
+      content: "•";
+      color: #c72a2a;
+      position: absolute;
+      left: 0;
+      font-size: 1.5em;
+      line-height: 1;
+    }
+    
+    .instructions {
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .instructions p {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .instructions p:before {
+      content: "➤";
+      color: #8b5a2b;
+      position: absolute;
+      left: 0;
+    }
+
+    /* Menu Styles */
+    #menu-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    #home-link {
+      display: block;
+    }
+
+    #menu-icon {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+
+    #dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: rgba(248, 248, 242, 0.95);
+      border-radius: 4px;
+      padding: 10px 0;
+      min-width: 150px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    #dropdown-menu a {
+      display: block;
+      padding: 8px 20px;
+      color: #333;
+      text-decoration: none;
+      font-size: 1.1rem;
+      text-align: right;
+      transition: color 0.2s ease;
+      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+    }
+
+    #dropdown-menu a:hover {
+      color: #c72a2a;
+    }
+
+    #menu-container:hover #dropdown-menu {
+      display: block;
+    }
 
     /* Mobile Styles */
     @media (max-width: 768px) {
@@ -106,21 +207,20 @@
       
       .image-container {
         flex-direction: column;
-        gap: 10px; /* Reduced gap */
+        gap: 10px;
       }
       
       .food-image {
         height: auto;
-        max-height: 50vh; /* Larger images on mobile */
+        max-height: 50vh;
         max-width: 100%;
         margin: 10px 0 !important;
       }
       
-      /* Move RS.png up into section1 */
       #section1 .food-image.right-image {
-        order: 1; /* Moves below text */
+        order: 1;
         margin-top: 20px !important;
-        max-height: 60vh; /* Even larger */
+        max-height: 60vh;
       }
       
       .recipe-content {
@@ -135,6 +235,10 @@
       h2 {
         font-size: 2.2rem;
       }
+      
+      .ingredients, .instructions {
+        padding: 15px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -143,13 +247,34 @@
       }
       
       #section1 .food-image.right-image {
-        max-height: 65vh; /* Largest on small phones */
+        max-height: 65vh;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- First Section - Now with RS.png below text on mobile -->
+  <!-- Fixed Menu -->
+  <div id="menu-container">
+    <a href="/" id="home-link">
+      <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
+    </a>
+    <div id="dropdown-menu">
+      <a href="meat.html">Meat</a>
+      <a href="entrees.html">Entrees</a>
+      <a href="pizza.html">Pizza</a>
+      <a href="sauce.html">Sauce</a>
+    </div>
+  </div>
+
+  <!-- First Section with Images and Text -->
   <div class="section" id="section1">
     <div class="recipe-content">
       <h1>Sauces</h1>
@@ -161,7 +286,63 @@
     </div>
   </div>
 
-  <!-- [Rest of your sections remain unchanged] -->
+  <!-- Second Section - Pesto Sauce -->
+  <div class="section" id="section2">
+    <div class="recipe-content">
+      <h2 class="pesto-header">PESTO</h2>
+      
+      <div class="ingredients">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>2 cups basil leaves</li>
+          <li>3 cloves of garlic</li>
+          <li>½ cup pecorino romano cheese</li>
+          <li>½ cup toasted pine nuts</li>
+          <li>½ cup extra virgin olive oil</li>
+          <li>½ teaspoon salt</li>
+        </ul>
+      </div>
+      
+      <div class="instructions">
+        <h3>Instructions</h3>
+        <p>Wash basil in cool water</p>
+        <p>Shake off water and lay each leaf to dry on paper towels</p>
+        <p>When basil dries (after an hour or so) throw into food processor</p>
+        <p>Preheat oven to 350°F</p>
+        <p>Add however much olive oil (2 tbsp - ½ cup) to the processor and mix until the basil is all chopped</p>
+        <p>Throw pine nuts into oven on a baking sheet</p>
+        <p>Watch the nuts for about 10 minutes and make sure they don't burn</p>
+        <p>After they are lightly toasted throw them with everything else into the processor</p>
+        <p>Mix for a few minutes until everything's distributed</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Third Section - Marinara Sauce -->
+  <div class="section" id="section3">
+    <div class="recipe-content">
+      <h2 class="marinara-header">Marinara</h2>
+      
+      <div class="ingredients">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>2 cups crushed tomatoes</li>
+          <li>2 cloves of garlic</li>
+          <li>2 tbsp extra virgin olive oil</li>
+          <li>Basil leaves</li>
+          <li>Pinch of salt</li>
+          <li>Pinch of pepper</li>
+        </ul>
+      </div>
+      
+      <div class="instructions">
+        <h3>Instructions</h3>
+        <p>Heat up olive oil and garlic in a pan</p>
+        <p>Throw in your tomatoes and simmer on low heat</p>
+        <p>Add garlic, salt, pepper, basil, and any herb</p>
+        <p>Simmer and stir for about 30 minutes till the sauce thickens</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
-
