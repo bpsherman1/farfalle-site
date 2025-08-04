@@ -133,15 +133,26 @@
       object-fit: cover;
     }
     
-    .pizza-foreground {
-      position: absolute;
-      width: 190%;
-      left: -75%;
-      bottom: 5%;
-      max-width: 500vh;
-      z-index: 2;
-      transition: transform 0.3s ease;
-    }
+   .pizza-foreground {
+  position: absolute;
+  width: 33vw; /* Use viewport width units for responsive sizing */
+  max-width: 300px; /* Maximum size on desktop */
+  min-width: 150px; /* Minimum size on mobile */
+  left: 5%;
+  bottom: 10%;
+  z-index: 2;
+  transition: transform 0.3s ease;
+  height: auto; /* Maintain aspect ratio */
+}
+
+@media (max-width: 768px) {
+  .pizza-foreground {
+    width: 50vw; /* Larger relative size on mobile */
+    max-width: none; /* Remove max-width restriction on mobile */
+    min-width: 200px; /* Larger minimum size on mobile */
+    left: 10%; /* Adjust positioning for mobile */
+  }
+}
     
     .pizza-foreground:hover {
       transform: scale(1.05);
@@ -251,12 +262,15 @@
     </div>
   </div>
 
-  <div class="section" id="section3">
-    <img src="/images/table.png" class="table-background" alt="Table Setting">
+
+<div class="section" id="section3">
+  <img src="/images/table.png" class="table-background" alt="Table Setting">
+  <div class="pizza-container">
     <a href="pizza.html" class="pizza-link">
       <img src="/images/pizza.png" class="pizza-foreground" alt="Pizza">
     </a>
   </div>
+</div>
 
   <!-- P5 SCRIPT -->
   <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
