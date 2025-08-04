@@ -12,6 +12,7 @@
       min-height: 100vh;
       font-family: 'Georgia', serif;
       color: #5c4d3c;
+      overflow-x: hidden;
     }
     
     /* Section Styles */
@@ -52,13 +53,26 @@
       width: auto;
       max-width: 60%;
       object-fit: contain;
-      transition: transform 0.3s ease;
+      transform: translateX(-100vw); /* Start off-screen left */
+      opacity: 0; /* Start invisible */
+      transition: transform 1s ease-out, opacity 1s ease;
+    }
+    
+    .food-image.loaded {
+      transform: translateX(0); /* Slide to normal position */
+      opacity: 1; /* Fade in */
     }
     
     .recipe-content {
       flex: 0 1 600px;
       text-align: center;
       padding: 0 40px;
+      opacity: 0; /* Start invisible */
+      transition: opacity 1s ease 0.5s; /* Delay the text fade */
+    }
+    
+    .recipe-content.loaded {
+      opacity: 1;
     }
     
     /* Text Styles */
@@ -137,7 +151,7 @@
       display: block;
     }
 
-    /* Mobile Styles */
+    /* Mobile Styles - Larger Pizza */
     @media (max-width: 768px) {
       .section {
         height: auto;
@@ -152,8 +166,9 @@
       
       .food-image {
         height: auto;
-        max-height: 40vh;
-        max-width: 90%;
+        max-height: 50vh; /* Larger than before */
+        max-width: 100%; /* Full width on mobile */
+        width: auto;
       }
       
       .recipe-content {
@@ -162,21 +177,21 @@
       }
       
       h1 {
-        font-size: 2.2rem;
+        font-size: 2.5rem; /* Slightly larger */
       }
       
       h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
     }
 
     @media (max-width: 480px) {
       h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
       
       .food-image {
-        max-height: 30vh;
+        max-height: 60vh; /* Even larger on very small screens */
       }
     }
   </style>
@@ -198,7 +213,7 @@
   <!-- First Section with Pizza Image and Text -->
   <div class="section" id="section1">
     <div class="image-container">
-      <img src="images2/pizza.png" alt="Delicious Pizza" class="food-image">
+      <img src="images2/pizza.gif" alt="Delicious Pizza" class="food-image">
       <div class="recipe-content">
         <h1>Pizza</h1>
         <p>Experience our authentic pizza made with the finest ingredients and traditional techniques.</p>
@@ -225,10 +240,24 @@
   </div>
 
   <script>
-    // Debug script to verify image paths
     document.addEventListener('DOMContentLoaded', function() {
+      // Trigger animations after page loads
+      setTimeout(function() {
+        const pizzaImage = document.querySelector('.food-image');
+        const recipeContent = document.querySelector('.recipe-content');
+        
+        pizzaImage.classList.add('loaded');
+        recipeContent.classList.add('loaded');
+      }, 100);
+      
+      // Debug script to verify image paths
       const img = document.querySelector('.food-image');
-      console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
+      img.onload = function() {
+        console.log('Pizza image loaded successfully');
+      };
+      img.onerror = function() {
+        console.error('Failed to load pizza image');
+      };
     });
   </script>
 </body>
