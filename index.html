@@ -169,26 +169,58 @@
       transform: scale(1.05); /* Slight zoom on hover */
     }
 
-.signature-container {
-  text-align: center;
-  margin-top: 2rem;
-}
+    .signature-container {
+      text-align: center;
+      margin-top: 2rem;
+    }
 
-.signature {
-  max-width: 200px; /* Adjust this to control signature size */
-  height: auto;
-  opacity: 0.9; /* Slightly transparent for subtle effect */
-  transition: opacity 0.3s ease;
-}
+    .signature {
+      max-width: 200px; /* Adjust this to control signature size */
+      height: auto;
+      opacity: 0.9; /* Slightly transparent for subtle effect */
+      transition: opacity 0.3s ease;
+    }
 
-.signature:hover {
-  opacity: 1; /* Full opacity on hover */
-}
+    .signature:hover {
+      opacity: 1; /* Full opacity on hover */
+    }
 
-@media (max-width: 768px) {
-  .signature {
-    max-width: 150px; /* Smaller on mobile */
-  }
+    .signature-link {
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .signature-link:hover .signature {
+      filter: brightness(0) saturate(70%) invert(15%) sepia(90%) saturate(2500%) hue-rotate(350deg) brightness(90%) contrast(100%);
+      opacity: 1;
+      transform: scale(1.05); /* Optional slight zoom on hover */
+    }
+
+    .pizza-link {
+      position: absolute;
+      width: 33.33%;
+      left: 5%;
+      bottom: 10%;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+
+    .pizza-link:hover {
+      transform: scale(1.05);
+    }
+
+    .pizza-foreground {
+      width: 190%;
+      height: auto;
+      max-width: 500vh;
+    }
+
+    @media (max-width: 768px) {
+      .signature {
+        max-width: 150px; /* Smaller on mobile */
+      }
+    }
+</style>
 }
 .signature-container {
   text-align: center;
