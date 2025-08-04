@@ -260,8 +260,8 @@
   </div>
 
   <!-- P5 SCRIPT -->
- <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
-  <script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+<script>
     let foodImages = [];
     let icons = [];
     const iconCount = 15;
@@ -299,30 +299,31 @@
         textAlign(CENTER, CENTER);
         textFont(customFont);
         
-      for (let i = 0; i < iconCount; i++) {
-    let x = i * (width / iconCount) - random(50);
-    let y = random(height);
-    let speed = random(0.2, 1.0) * baseSpeed;
-    let imgIndex = floor(random(foodImages.length));
-    
-    // Add random size multiplier (between 0.7 and 1.3 of original size)
-    let sizeMultiplier = random(0.7, 1.3);
-    
-    icons.push({ 
-        x, 
-        y, 
-        speed, 
-        imgIndex,
-        sizeMultiplier // Store the size multiplier with each icon
-    });
-}
+        for (let i = 0; i < iconCount; i++) {
+            let x = i * (width / iconCount) - random(50);
+            let y = random(height);
+            let speed = random(0.2, 1.0) * baseSpeed;
+            let imgIndex = floor(random(foodImages.length));
+            
+            // Add random size multiplier (between 0.7 and 1.3 of original size)
+            let sizeMultiplier = random(0.7, 1.3);
+            
+            icons.push({ 
+                x, 
+                y, 
+                speed, 
+                imgIndex,
+                sizeMultiplier
+            });
+        }
+    } // THIS WAS THE MISSING BRACE
+
     function isMobile() {
         return window.matchMedia("(max-width: 768px)").matches || 
                window.innerWidth < 768;
     }
    
     function draw() {
-        // NEW: Skip rendering if not in first section
         if (!sketchRunning) return;
 
         background('#f8f8f2');
@@ -347,8 +348,12 @@
 
         for (let icon of icons) {
             let currentImg = foodImages[icon.imgIndex];
-            let imgWidth = 50;
-            let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
+            let baseWidth = 50;
+            let baseHeight = (currentImg.height / currentImg.width) * baseWidth;
+            
+            // Apply size multiplier
+            let imgWidth = baseWidth * icon.sizeMultiplier;
+            let imgHeight = baseHeight * icon.sizeMultiplier;
 
             let shadowMaxOffset = 120;
             let shadowMinOffset = 5;
@@ -370,14 +375,12 @@
             tint(0, shadowAlpha);
             translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
             scale(scaleX, 1);
-            image(currentImg, 0, 0, scaledWidth, scaledHeight);
+            image(currentImg, 0, 0, imgWidth, imgHeight);
             pop();
 
             // Actual image
             noTint();
-            let scaledWidth = imgWidth * icon.sizeMultiplier;
-let scaledHeight = imgHeight * icon.sizeMultiplier;
-image(currentImg, icon.x, icon.y, scaledWidth, scaledHeight);
+            image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
             icon.x += direction * icon.speed * speedMultiplier * baseSpeed;
 
@@ -386,17 +389,18 @@ image(currentImg, icon.x, icon.y, scaledWidth, scaledHeight);
                 icon.y = random(height);
                 icon.speed = random(0.2, 1.0);
                 icon.imgIndex = floor(random(foodImages.length));
+                icon.sizeMultiplier = random(0.7, 1.3);
             } else if (direction === -1 && icon.x < -imgWidth) {
                 icon.x = width;
                 icon.y = random(height);
                 icon.speed = random(0.2, 1.0);
                 icon.imgIndex = floor(random(foodImages.length));
+                icon.sizeMultiplier = random(0.7, 1.3);
             }
         }
     }
 
     function windowResized() {
-        // NEW: Update first section height on resize
         firstSectionHeight = window.innerHeight;
         baseSpeed = isMobile() ? 2.5 : 1.0;
         resizeCanvas(windowWidth, windowHeight);
@@ -405,10 +409,9 @@ image(currentImg, icon.x, icon.y, scaledWidth, scaledHeight);
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // NEW: Toggle sketch running state
         sketchRunning = scrollTop < firstSectionHeight * 0.9;
         if (!sketchRunning) {
-            clear(); // Clear canvas when not running
+            clear();
         }
 
         if (scrollTop > lastScrollTop) {
@@ -425,8 +428,4 @@ image(currentImg, icon.x, icon.y, scaledWidth, scaledHeight);
             speedMultiplier = 1.0;
         }, 150);
     }, { passive: true });
-  </script>
-</body>
-</html>
-</body>
-</html>
+</script>
