@@ -342,17 +342,9 @@
                window.innerWidth < 768;
     }
 
-     function draw() {
+   
+    function draw() {
         background('#f8f8f2');
-
-        // Mobile-responsive text
-        let textSizeMobile = isMobile() ? 60 : 80;
-        textSize(textSizeMobile);
-        
-        let displayText = "The Food Gallery";
-        if (isMobile() && textWidth(displayText) > width * 0.9) {
-            textSize(50); // Auto-adjust if still too wide
-        }
 
         let topColor = color(0);
         let bottomColor = color('#c72a2a');
@@ -360,8 +352,19 @@
         let fadedColor = lerpColor(topColor, bottomColor, fadeAmt);
 
         fill(fadedColor);
+        textFont(customFont);
         textStyle(BOLD);
-        text(displayText, width / 2, height / 2);
+        
+        if (isMobile()) {
+            // Two-line version for mobile
+            textSize(50); // Smaller size for two lines
+            text("The Food", width / 2, height / 2 - 40); // First line (raised)
+            text("Gallery", width / 2, height / 2 + 40);  // Second line (lowered)
+        } else {
+            // Original one-line version for desktop
+            textSize(80);
+            text("The Food Gallery", width / 2, height / 2);
+        }
 
         for (let icon of icons) {
             let currentImg = foodImages[icon.imgIndex];
