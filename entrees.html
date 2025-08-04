@@ -54,7 +54,7 @@
       height: 100%;
       position: absolute;
       left: 0;
-      transition: transform 0.5s ease;
+      transition: transform 0.8s ease-in-out;
     }
     
     .slide {
@@ -77,7 +77,9 @@
       text-align: center;
       padding: 0 40px;
       max-width: 800px;
-      margin: 0 auto;
+      margin: 20px auto 0;
+      position: relative;
+      z-index: 2;
     }
     
     h1 {
@@ -96,12 +98,12 @@
       margin: 0 auto 1.5rem;
     }
 
-    /* Menu Styles */
+    /* Menu Styles - UNCHANGED */
     #menu-container {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 2;
+      z-index: 100;
       padding-bottom: 20px;
     }
 
@@ -127,15 +129,14 @@
       position: absolute;
       top: 100%;
       right: 0;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
-      z-index: 3;
+      background-color: rgba(248, 248, 242, 0.9);
+      border-radius: 4px;
+      z-index: 101;
     }
   
     #dropdown-menu a {
       display: block;
-      padding: 10px 0;
+      padding: 10px 20px;
       color: #333;
       text-decoration: none;
       white-space: nowrap;
@@ -160,7 +161,7 @@
       .section {
         height: auto;
         min-height: 100vh;
-        padding: 60px 20px;
+        padding: 80px 20px 60px;
       }
       
       .slideshow-container {
@@ -192,7 +193,7 @@
   </style>
 </head>
 <body>
-  <!-- MENU HTML -->
+  <!-- MENU HTML - UNCHANGED -->
   <div id="menu-container">
     <a href="/" id="home-link">
       <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
@@ -218,56 +219,109 @@
         <div class="slide">
           <img src="images2/CP.png" alt="Chicken Parmesan" class="slide-image">
         </div>
+        <!-- Clone first image for seamless loop -->
+        <div class="slide">
+          <img src="images2/MBR.png" alt="Meatball Roll" class="slide-image">
+        </div>
       </div>
     </div>
     <div class="recipe-content">
       <h1>Entrees</h1>
-      <p>Discover our rotating selection of delicious entree options, featuring both classic and contemporary dishes.</p>
+      <p>Discover our rotating selection of delicious entree options.</p>
     </div>
   </div>
 
-  <!-- Second Section -->
+  <!-- Other Sections -->
   <div class="section" id="section2">
     <div class="recipe-content">
       <h2>Featured Entrees</h2>
-      <p>Our chefs prepare each entree with care, using only the freshest ingredients and traditional techniques.</p>
+      <p>Our chefs prepare each entree with care.</p>
     </div>
   </div>
 
-  <!-- Third Section -->
   <div class="section" id="section3">
     <div class="recipe-content">
       <h2>Weekly Specials</h2>
-      <p>Check back regularly for our seasonal specials and limited-time offerings that showcase the best flavors of each season.</p>
+      <p>Seasonal specials showcasing the best flavors.</p>
     </div>
   </div>
 
   <script>
-    // Slideshow functionality
     document.addEventListener('DOMContentLoaded', function() {
       const track = document.querySelector('.slideshow-track');
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const slideWidth = slides[0].getBoundingClientRect().width;
-      
-      // Arrange slides next to one another
-      slides.forEach((slide, index) => {
-        slide.style.left = slideWidth * index + 'px';
-      });
-      
-      // Auto-advance slides every 3 seconds
+      const slides = document.querySelectorAll('.slide');
+      const slideCount = slides.length;
       let currentIndex = 0;
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-      }, 3000);
-    });
+      let slideWidth = 0;
+      let isTransitioning = false;
+      let pauseTimer;
+      let slideTimer;
 
-    // Debug script to verify image paths
-    document.addEventListener('DOMContentLoaded', function() {
-      const images = document.querySelectorAll('.slide-image');
-      images.forEach(img => {
-        console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
+      // Initialize slideshow
+      function initSlideshow() {
+        slideWidth = slides[0].getBoundingClientRect().width;
+        
+        // Position slides horizontally
+        slides.forEach((slide, index) => {
+          slide.style.left = `${slideWidth * index}px`;
+        });
+        
+        // Start the slideshow
+        startSlideShow();
+      }
+
+      // Handle slide transition
+      function goToNextSlide() {
+        if (isTransitioning) return;
+        
+        isTransitioning = true;
+        currentIndex++;
+        
+        // Smooth transition to next slide
+        track.style.transition = 'transform 0.8s ease-in-out';
+        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+        
+        // Check if we need to reset position for infinite loop
+        if (currentIndex === slideCount - 1) {
+          clearTimeout(pauseTimer);
+          pauseTimer = setTimeout(() => {
+            track.style.transition = 'none';
+            currentIndex = 0;
+            track.style.transform = 'translateX(0)';
+            setTimeout(() => {
+              track.style.transition = 'transform 0.8s ease-in-out';
+              isTransitioning = false;
+              startSlideShow(); // Restart the cycle
+            }, 20);
+          }, 4000); // Pause for 4 seconds at the end
+        } else {
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 800);
+        }
+      }
+
+      // Start the slideshow with pauses
+      function startSlideShow() {
+        clearTimeout(slideTimer);
+        slideTimer = setTimeout(() => {
+          goToNextSlide();
+          // Continue the cycle after moving
+          if (currentIndex < slideCount - 2) {
+            startSlideShow();
+          }
+        }, 4000); // 4 second pause between slides
+      }
+
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transition = 'none';
+        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
       });
+
+      // Start the slideshow
+      initSlideshow();
     });
   </script>
 </body>
