@@ -254,22 +254,34 @@
       }
       
       /* Position RS image below text */
-      #section1 .food-image.right-image {
+       #section1 .food-image.right-image {
         position: absolute;
-        top: calc(35vh + 220px); /* 35vh image + 100px top + 120px text height */
+        top: calc(35vh + 270px); /* Added 50px to original 220px */
         left: 50%;
         transform: translateX(-50%);
         width: 90%;
-        max-width: 90%;
-        height: auto;
         max-height: 45vh;
         margin: 0 !important;
       }
       
-      /* Adjust sections below */
+      /* Adjust section spacing below */
       #section2, #section3 {
-        padding-top: calc(35vh + 45vh + 250px); /* Account for section1 height */
+        padding-top: calc(35vh + 45vh + 300px); /* Added 50px */
       }
+    }
+
+    @media (max-width: 480px) {
+      /* [Previous small phone styles remain the same until RS image] */
+      
+      #section1 .food-image.right-image {
+        top: calc(30vh + 250px); /* Added 50px to original 200px */
+        max-height: 40vh;
+      }
+      
+      #section2, #section3 {
+        padding-top: calc(30vh + 40vh + 270px); /* Added 50px */
+      }
+    }
       
       /* Adjust text sizes */
       h1 {
