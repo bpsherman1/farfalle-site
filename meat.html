@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizza | The Food Gallery</title>
+  <title>Entrees | The Food Gallery</title>
   <style>
     /* Base Styles */
     body {
@@ -12,6 +12,7 @@
       min-height: 100vh;
       font-family: 'Georgia', serif;
       color: #5c4d3c;
+      overflow-x: hidden;
     }
     
     /* Section Styles */
@@ -27,6 +28,7 @@
     
     #section1 {
       background-color: #f0e6d2;
+      flex-direction: column;
     }
     
     #section2 {
@@ -37,31 +39,49 @@
       background-color: #e0d9c1;
     }
 
-    /* Image Layout */
-    .image-container {
+    /* Slideshow Container */
+    .slideshow-container {
+      width: 100%;
+      max-width: 1400px;
+      height: 70vh;
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    
+    .slideshow-track {
+      display: flex;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      transition: transform 0.8s ease-in-out;
+    }
+    
+    .slide {
+      min-width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
     }
     
-    .food-image {
-      height: 70vh;
+    .slide-image {
+      height: 100%;
       width: auto;
-      max-width: 60%;
+      max-width: 40%;
       object-fit: contain;
-      transition: transform 0.3s ease;
-    }
-    
-    .recipe-content {
-      flex: 0 1 600px;
-      text-align: center;
-      padding: 0 40px;
     }
     
     /* Text Styles */
+    .recipe-content {
+      text-align: center;
+      padding: 0 40px;
+      max-width: 800px;
+      margin: 20px auto 0;
+      position: relative;
+      z-index: 2;
+    }
+    
     h1 {
       font-size: 3.5rem;
       margin-bottom: 1.5rem;
@@ -78,12 +98,12 @@
       margin: 0 auto 1.5rem;
     }
 
-    /* Menu Styles */
+    /* Menu Styles - UNCHANGED */
     #menu-container {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 2;
+      z-index: 100;
       padding-bottom: 20px;
     }
 
@@ -109,15 +129,14 @@
       position: absolute;
       top: 100%;
       right: 0;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
-      z-index: 3;
+      background-color: rgba(248, 248, 242, 0.9);
+      border-radius: 4px;
+      z-index: 101;
     }
   
     #dropdown-menu a {
       display: block;
-      padding: 10px 0;
+      padding: 10px 20px;
       color: #333;
       text-decoration: none;
       white-space: nowrap;
@@ -142,23 +161,15 @@
       .section {
         height: auto;
         min-height: 100vh;
-        padding: 60px 20px;
+        padding: 80px 20px 60px;
       }
       
-      .image-container {
-        flex-direction: column;
-        gap: 30px;
+      .slideshow-container {
+        height: 50vh;
       }
       
-      .food-image {
-        height: auto;
-        max-height: 40vh;
-        max-width: 90%;
-      }
-      
-      .recipe-content {
-        flex: 1;
-        padding: 0 20px;
+      .slide-image {
+        max-width: 80%;
       }
       
       h1 {
@@ -175,14 +186,14 @@
         font-size: 1.8rem;
       }
       
-      .food-image {
-        max-height: 30vh;
+      .slideshow-container {
+        height: 40vh;
       }
     }
   </style>
 </head>
 <body>
-  <!-- MENU HTML -->
+  <!-- MENU HTML - UNCHANGED -->
   <div id="menu-container">
     <a href="/" id="home-link">
       <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
@@ -195,40 +206,113 @@
     </div>
   </div>
 
-  <!-- First Section with Pizza Image and Text -->
+  <!-- First Section with Slideshow -->
   <div class="section" id="section1">
-    <div class="image-container">
-      <img src="images2/pizza.gif" alt="Delicious Pizza" class="food-image">
-      <div class="recipe-content">
-        <h1>Pizza</h1>
-        <p>Experience our authentic pizza made with the finest ingredients and traditional techniques.</p>
+    <div class="slideshow-container" id="entreesSlideshow">
+      <div class="slideshow-track">
+        <div class="slide">
+          <img src="images2/MBR.png" alt="Meatball Roll" class="slide-image">
+        </div>
+        <div class="slide">
+          <img src="images2/CR.png" alt="Chicken Roll" class="slide-image">
+        </div>
+        <div class="slide">
+          <img src="images2/CP.png" alt="Chicken Parmesan" class="slide-image">
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- Second Section - Pizza Info -->
-  <div class="section" id="section2">
     <div class="recipe-content">
-      <h2>Our Signature Pizza</h2>
-      <p>Hand-tossed dough, homemade sauce, and premium toppings create our perfect pizza.</p>
-      <p>Available with classic or whole wheat dough, and a variety of toppings to choose from.</p>
+      <h1>Entrees</h1>
+      <p>Discover our rotating selection of delicious entree options.</p>
     </div>
   </div>
 
-  <!-- Third Section - Specials -->
+  <!-- Other Sections -->
+  <div class="section" id="section2">
+    <div class="recipe-content">
+      <h2>Featured Entrees</h2>
+      <p>Our chefs prepare each entree with care.</p>
+    </div>
+  </div>
+
   <div class="section" id="section3">
     <div class="recipe-content">
-      <h2>Weekly Pizza Specials</h2>
-      <p>Try our rotating selection of specialty pizzas featuring seasonal ingredients.</p>
-      <p>Ask about our current special when you order!</p>
+      <h2>Weekly Specials</h2>
+      <p>Seasonal specials showcasing the best flavors.</p>
     </div>
   </div>
 
   <script>
-    // Debug script to verify image paths
     document.addEventListener('DOMContentLoaded', function() {
-      const img = document.querySelector('.food-image');
-      console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
+      const track = document.querySelector('.slideshow-track');
+      const slides = document.querySelectorAll('.slide');
+      const slideCount = slides.length;
+      let currentIndex = 0;
+      let slideWidth = 0;
+      let isTransitioning = false;
+      let slideInterval;
+
+      // Initialize slideshow
+      function initSlideshow() {
+        slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
+        
+        // Position slides horizontally
+        slides.forEach((slide, index) => {
+          slide.style.left = `${slideWidth * index}px`;
+        });
+        
+        // Clone first slide and append to end for seamless looping
+        const firstSlide = slides[0].cloneNode(true);
+        track.appendChild(firstSlide);
+        
+        // Start the slideshow
+        startSlideShow();
+      }
+
+      // Handle slide transition
+      function goToNextSlide() {
+        if (isTransitioning) return;
+        
+        isTransitioning = true;
+        currentIndex++;
+        
+        // Smooth transition to next slide
+        track.style.transition = 'transform 0.8s ease-in-out';
+        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+        
+        // Check if we need to reset position for infinite loop
+        if (currentIndex === slideCount) {
+          setTimeout(() => {
+            track.style.transition = 'none';
+            currentIndex = 0;
+            track.style.transform = 'translateX(0)';
+            setTimeout(() => {
+              track.style.transition = 'transform 0.8s ease-in-out';
+              isTransitioning = false;
+            }, 20);
+          }, 800);
+        } else {
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 800);
+        }
+      }
+
+      // Start the slideshow with automatic transitions
+      function startSlideShow() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(goToNextSlide, 3000); // 3 second interval
+      }
+
+      // Handle window resize
+      window.addEventListener('resize', function() {
+        slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
+        track.style.transition = 'none';
+        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+      });
+
+      // Start the slideshow
+      initSlideshow();
     });
   </script>
 </body>
