@@ -63,6 +63,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
     }
     
     .slide-image {
@@ -70,32 +71,7 @@
       width: auto;
       max-width: 40%;
       object-fit: contain;
-    }
-    
-    /* Text Styles */
-    .recipe-content {
-      text-align: center;
-      padding: 0 40px;
-      max-width: 800px;
-      margin: 20px auto 0;
-      position: relative;
-      z-index: 2;
-    }
-    
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    p {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      margin: 0 auto 1.5rem;
+      transition: transform 0.3s ease;
     }
 
     /* Menu Styles - UNCHANGED */
@@ -156,7 +132,7 @@
       display: block;
     }
 
-    /* Mobile Styles */
+    /* Mobile Styles with Peeking Effect */
     @media (max-width: 768px) {
       .section {
         height: auto;
@@ -166,10 +142,26 @@
       
       .slideshow-container {
         height: 50vh;
+        overflow: visible;
+      }
+      
+      .slideshow-track {
+        gap: 10px;
+      }
+      
+      .slide {
+        min-width: calc(80% - 10px);
+        transform: scale(0.9);
+        transition: transform 0.8s ease;
       }
       
       .slide-image {
-        max-width: 80%;
+        max-width: 100%;
+      }
+      
+      /* Center slide (active) */
+      .slide.active {
+        transform: scale(1);
       }
       
       h1 {
@@ -188,6 +180,10 @@
       
       .slideshow-container {
         height: 40vh;
+      }
+      
+      .slide {
+        min-width: calc(70% - 10px);
       }
     }
   </style>
@@ -251,19 +247,31 @@
       let slideWidth = 0;
       let isTransitioning = false;
       let slideInterval;
+      const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
       // Initialize slideshow
       function initSlideshow() {
         slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
         
-        // Position slides horizontally
-        slides.forEach((slide, index) => {
-          slide.style.left = `${slideWidth * index}px`;
-        });
-        
-        // Clone first slide and append to end for seamless looping
-        const firstSlide = slides[0].cloneNode(true);
-        track.appendChild(firstSlide);
+        if (isMobile) {
+          // Mobile layout with peeking effect
+          const slideWidthMobile = slideWidth * 0.8; // 80% width for mobile
+          slides.forEach((slide, index) => {
+            slide.style.left = `${(slideWidthMobile + 10) * index}px`;
+          });
+          
+          // Add active class to first slide
+          slides[0].classList.add('active');
+        } else {
+          // Desktop layout
+          slides.forEach((slide, index) => {
+            slide.style.left = `${slideWidth * index}px`;
+          });
+          
+          // Clone first slide and append to end for seamless looping
+          const firstSlide = slides[0].cloneNode(true);
+          track.appendChild(firstSlide);
+        }
         
         // Start the slideshow
         startSlideShow();
@@ -276,39 +284,72 @@
         isTransitioning = true;
         currentIndex++;
         
-        // Smooth transition to next slide
-        track.style.transition = 'transform 0.8s ease-in-out';
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-        
-        // Check if we need to reset position for infinite loop
-        if (currentIndex === slideCount) {
-          setTimeout(() => {
-            track.style.transition = 'none';
-            currentIndex = 0;
-            track.style.transform = 'translateX(0)';
+        if (isMobile) {
+          // Mobile transition with peeking effect
+          slides.forEach(slide => slide.classList.remove('active'));
+          
+          const activeIndex = currentIndex % slideCount;
+          slides[activeIndex].classList.add('active');
+          
+          track.style.transition = 'transform 0.8s ease-in-out';
+          track.style.transform = `translateX(-${(slideWidth * 0.8 + 10) * currentIndex}px)`;
+          
+          if (currentIndex >= slideCount) {
             setTimeout(() => {
-              track.style.transition = 'transform 0.8s ease-in-out';
+              track.style.transition = 'none';
+              currentIndex = 0;
+              track.style.transform = 'translateX(0)';
+              setTimeout(() => {
+                track.style.transition = 'transform 0.8s ease-in-out';
+                slides[0].classList.add('active');
+                isTransitioning = false;
+              }, 20);
+            }, 800);
+          } else {
+            setTimeout(() => {
               isTransitioning = false;
-            }, 20);
-          }, 800);
+            }, 800);
+          }
         } else {
-          setTimeout(() => {
-            isTransitioning = false;
-          }, 800);
+          // Desktop transition
+          track.style.transition = 'transform 0.8s ease-in-out';
+          track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+          
+          if (currentIndex === slideCount) {
+            setTimeout(() => {
+              track.style.transition = 'none';
+              currentIndex = 0;
+              track.style.transform = 'translateX(0)';
+              setTimeout(() => {
+                track.style.transition = 'transform 0.8s ease-in-out';
+                isTransitioning = false;
+              }, 20);
+            }, 800);
+          } else {
+            setTimeout(() => {
+              isTransitioning = false;
+            }, 800);
+          }
         }
       }
 
       // Start the slideshow with automatic transitions
       function startSlideShow() {
         clearInterval(slideInterval);
-        slideInterval = setInterval(goToNextSlide, 3000); // 3 second interval
+        slideInterval = setInterval(goToNextSlide, 4000); // 4 second interval
       }
 
       // Handle window resize
       window.addEventListener('resize', function() {
         slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
-        track.style.transition = 'none';
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+        if (isMobile) {
+          const slideWidthMobile = slideWidth * 0.8;
+          track.style.transition = 'none';
+          track.style.transform = `translateX(-${(slideWidthMobile + 10) * currentIndex}px)`;
+        } else {
+          track.style.transition = 'none';
+          track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+        }
       });
 
       // Start the slideshow
