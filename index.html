@@ -312,16 +312,20 @@
     }
 
     function setup() {
+        // Mobile performance optimization
+        if (isMobile()) {
+            frameRate(45);
+            baseSpeed = 2.0; // Slightly slower than 2.5 for better smoothness
+        } else {
+            frameRate(60);
+            baseSpeed = 1.0;
+        }
+
         let canvas = createCanvas(windowWidth, windowHeight);
         canvas.parent('sketch-container');
-
-        // Detect mobile and adjust base speed
-        baseSpeed = isMobile() ? 2.5 : 1.0;
-
         textAlign(CENTER, CENTER);
-        textSize(80);
-        textStyle(BOLD);
         textFont(customFont);
+        
 
         for (let i = 0; i < iconCount; i++) {
             let x = i * (width / iconCount) - random(50);
@@ -338,8 +342,17 @@
                window.innerWidth < 768;
     }
 
-    function draw() {
+     function draw() {
         background('#f8f8f2');
+
+        // Mobile-responsive text
+        let textSizeMobile = isMobile() ? 60 : 80;
+        textSize(textSizeMobile);
+        
+        let displayText = "The Food Gallery";
+        if (isMobile() && textWidth(displayText) > width * 0.9) {
+            textSize(50); // Auto-adjust if still too wide
+        }
 
         let topColor = color(0);
         let bottomColor = color('#c72a2a');
@@ -347,8 +360,8 @@
         let fadedColor = lerpColor(topColor, bottomColor, fadeAmt);
 
         fill(fadedColor);
-        textFont(customFont);
-        text('The Food Gallery', width / 2, height / 2);
+        textStyle(BOLD);
+        text(displayText, width / 2, height / 2);
 
         for (let icon of icons) {
             let currentImg = foodImages[icon.imgIndex];
