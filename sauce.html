@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sauces | The Food Gallery</title>
+  <!-- Font Imports -->
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@700&family=DM+Serif+Display&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
   <style>
     /* Base Styles */
     body {
@@ -76,26 +78,38 @@
     h1 {
       font-size: 3.5rem;
       margin-bottom: 1.5rem;
+      font-family: 'Cormorant Garamond', serif;
     }
     
-    h2 {
-      font-size: 7rem; /* Larger header size */
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-    }
-    
+    /* PESTO Header - Alegreya SC */
     .pesto-header {
-      color: #3a7a22; /* Darker green color for pesto */
+      font-family: 'Alegreya SC', serif;
+      color: #3a7a22;
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
     }
     
-    .redsauce-header {
-      color: #d62c2c; /* Vibrant red color for red sauce */
+    /* MARINARA Header - Cormorant Garamond (more elegant than DM Serif) */
+    .marinara-header {
+      font-family: 'Cormorant Garamond', serif;
+      color: #c72a2a;
+      font-size: 3.5rem;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: 0.5px;
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
     
     h3 {
       font-size: 1.8rem;
       margin: 2rem 0 1rem;
       color: #a67c52;
+      font-family: 'Cormorant Garamond', serif;
     }
     
     p {
@@ -236,6 +250,10 @@
         font-size: 2.5rem;
       }
       
+      .pesto-header, .marinara-header {
+        font-size: 2.5rem;
+      }
+      
       .ingredients, .instructions {
         padding: 15px;
       }
@@ -255,19 +273,14 @@
         font-size: 2rem;
       }
       
+      .pesto-header, .marinara-header {
+        font-size: 2rem;
+      }
+      
       .food-image.right-image {
         max-height: 45vh;
       }
-    
-    <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@700&display=swap" rel="stylesheet">
-<style>
-.pesto-header {
-  font-family: 'Alegreya SC', serif;
-  color: #3a7a22;
-  font-size: 3.5rem;
-  letter-spacing: 1px;
-}
-
+    }
   </style>
 </head>
 <body>
@@ -328,10 +341,10 @@
     </div>
   </div>
 
-  <!-- Third Section - Red Sauce -->
+  <!-- Third Section - Marinara Sauce -->
   <div class="section" id="section3">
     <div class="recipe-content">
-      <h2 class="redsauce-header">Marinara</h2>
+      <h2 class="marinara-header">Marinara</h2>
       
       <div class="ingredients">
         <h3>Ingredients</h3>
