@@ -3,33 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meat Recipes | The Food Gallery</title>
+  <title>Entrees | The Food Gallery</title>
   <style>
-    /* ADDED BACKGROUND COLORS */
+    /* Base Styles */
     body {
-      background-color: #f9f5f0; /* Warm off-white background */
+      background-color: #f9f5f0;
       margin: 0;
       min-height: 100vh;
       font-family: 'Georgia', serif;
+      color: #5c4d3c;
+      overflow-x: hidden;
     }
     
+    /* Section Styles */
     .section {
-      background-color: #f8f8f2; /* Slightly different shade */
       height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    #section1 {
+      background-color: #f0e6d2;
+      flex-direction: column;
+    }
+    
+    #section2 {
+      background-color: #e8e0c9;
+    }
+    
+    #section3 {
+      background-color: #e0d9c1;
+    }
+
+    /* Slideshow Container */
+    .slideshow-container {
+      width: 100%;
+      max-width: 1400px;
+      height: 70vh;
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    
+    .slideshow-track {
+      display: flex;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      transition: transform 0.5s ease;
+    }
+    
+    .slide {
+      min-width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     
-    #section1 {
-      background-color: #f0e6d2; /* Warm beige */
+    .slide-image {
+      height: 100%;
+      width: auto;
+      max-width: 40%;
+      object-fit: contain;
     }
     
-    #section2 {
-      background-color: #e8e0c9; /* Slightly darker beige */
+    /* Text Styles */
+    .recipe-content {
+      text-align: center;
+      padding: 0 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin: 0 auto 1.5rem;
     }
 
-    /* EXISTING MENU STYLES */
+    /* Menu Styles */
     #menu-container {
       position: fixed;
       top: 20px;
@@ -65,22 +132,19 @@
       box-shadow: none;
       z-index: 3;
     }
-
-     #dropdown-menu a {
-  display: block;
-  padding: 10px 0;
-  color: #333;
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: 1.2rem;
-  text-align: right;
-  transition: color 0.2s ease;
-  font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; /* Added this line */
-  font-weight: 500; /* Adjust if needed */
-}
-
- @import url('https://fonts.googleapis.com/css2?family=Futura&display=swap');
-
+  
+    #dropdown-menu a {
+      display: block;
+      padding: 10px 0;
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
+      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+      font-weight: 500;
+    }
 
     #dropdown-menu a:hover {
       background-color: transparent;
@@ -90,16 +154,40 @@
     #menu-container:hover #dropdown-menu {
       display: block;
     }
-    
-    /* Additional content styling */
-    .section-content {
-      text-align: center;
-      padding: 2rem;
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .section {
+        height: auto;
+        min-height: 100vh;
+        padding: 60px 20px;
+      }
+      
+      .slideshow-container {
+        height: 50vh;
+      }
+      
+      .slide-image {
+        max-width: 80%;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
     }
-    
-    h1 {
-      color: #5c4d3c; /* Earthy brown for headings */
-      font-size: 3rem;
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .slideshow-container {
+        height: 40vh;
+      }
     }
   </style>
 </head>
@@ -117,16 +205,70 @@
     </div>
   </div>
 
-  <!-- Page-specific content -->
+  <!-- First Section with Slideshow -->
   <div class="section" id="section1">
-    <div class="section-content">
+    <div class="slideshow-container" id="entreesSlideshow">
+      <div class="slideshow-track">
+        <div class="slide">
+          <img src="images2/MBR.png" alt="Meatball Roll" class="slide-image">
+        </div>
+        <div class="slide">
+          <img src="images2/CR.png" alt="Chicken Roll" class="slide-image">
+        </div>
+        <div class="slide">
+          <img src="images2/CP.png" alt="Chicken Parmesan" class="slide-image">
+        </div>
+      </div>
+    </div>
+    <div class="recipe-content">
       <h1>Entrees</h1>
-      <!-- Add your meat recipes content here -->
+      <p>Discover our rotating selection of delicious entree options, featuring both classic and contemporary dishes.</p>
+    </div>
+  </div>
+
+  <!-- Second Section -->
+  <div class="section" id="section2">
+    <div class="recipe-content">
+      <h2>Featured Entrees</h2>
+      <p>Our chefs prepare each entree with care, using only the freshest ingredients and traditional techniques.</p>
+    </div>
+  </div>
+
+  <!-- Third Section -->
+  <div class="section" id="section3">
+    <div class="recipe-content">
+      <h2>Weekly Specials</h2>
+      <p>Check back regularly for our seasonal specials and limited-time offerings that showcase the best flavors of each season.</p>
     </div>
   </div>
 
   <script>
-    // Your existing P5 script here
+    // Slideshow functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const track = document.querySelector('.slideshow-track');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      
+      // Arrange slides next to one another
+      slides.forEach((slide, index) => {
+        slide.style.left = slideWidth * index + 'px';
+      });
+      
+      // Auto-advance slides every 3 seconds
+      let currentIndex = 0;
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+      }, 3000);
+    });
+
+    // Debug script to verify image paths
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = document.querySelectorAll('.slide-image');
+      images.forEach(img => {
+        console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
+      });
+    });
   </script>
 </body>
 </html>
