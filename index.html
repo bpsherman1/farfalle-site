@@ -1,4 +1,4 @@
-ok that just made both pizza really small, on the computer i want it to be a little smaller than the height of the screen and set off on the left, on the pnone i want it to be take about about 2/3rd the width- heres me code idk what went wrong, give it back with fixes- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -45,7 +45,10 @@ ok that just made both pizza really small, on the computer i want it to be a lit
 
     #section1 { background-color: transparent; color: transparent; }
     #section2 { background-color: #e0dfd5; }
-    #section3 { background-color: #d0cec7; }
+    #section3 { 
+      background-color: #d0cec7;
+      overflow: hidden; /* Added to prevent overflow */
+    }
 
     .section-content {
       width: 100%;
@@ -68,7 +71,7 @@ ok that just made both pizza really small, on the computer i want it to be a lit
       top: 20px;
       right: 20px;
       z-index: 2;
-      padding-bottom: 20px; /* ← this extends hover area downward */
+      padding-bottom: 20px;
     }
 
     #home-link {
@@ -117,42 +120,58 @@ ok that just made both pizza really small, on the computer i want it to be a lit
       color: #c72a2a;
     }
 
-    /* Keep dropdown visible on hover */
     #menu-container:hover #dropdown-menu {
       display: block;
     }
 
-    /* Section 3 styles */
-    #section3 {
-      position: relative;
-    }
-    
+    /* Table and pizza styles */
     .table-background {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
     
-   .pizza-foreground {
-  position: absolute;
-  width: 33vw; /* Use viewport width units for responsive sizing */
-  max-width: 300px; /* Maximum size on desktop */
-  min-width: 150px; /* Minimum size on mobile */
-  left: 5%;
-  bottom: 10%;
-  z-index: 2;
-  transition: transform 0.3s ease;
-  height: auto; /* Maintain aspect ratio */
-}
-
-@media (max-width: 768px) {
-  .pizza-foreground {
-    width: 50vw; /* Larger relative size on mobile */
-    max-width: none; /* Remove max-width restriction on mobile */
-    min-width: 200px; /* Larger minimum size on mobile */
-    left: 10%; /* Adjust positioning for mobile */
-  }
-}
+    /* Desktop pizza size */
+    .pizza-foreground {
+      position: absolute;
+      height: 80vh; /* 80% of viewport height */
+      width: auto; /* Maintain aspect ratio */
+      left: 5%;
+      bottom: 10%;
+      z-index: 2;
+      transition: transform 0.3s ease;
+      max-height: 90vh; /* Prevent being taller than screen */
+    }
+    
+    /* Mobile pizza size */
+    @media (max-width: 768px) {
+      .pizza-foreground {
+        height: auto;
+        width: 66vw; /* 2/3 of viewport width */
+        left: 5%;
+        bottom: 15%;
+      }
+      
+      .section-content {
+        padding: 0 1rem;
+        box-sizing: border-box;
+      }
+      .about-text {
+        font-size: 1rem;
+        padding: 1rem;
+      }
+      .signature {
+        max-width: 150px;
+      }
+      #sketch-container {
+        font-size: 3rem;
+      }
+      .section-content {
+        padding: 0 20px;
+        box-sizing: border-box;
+        width: 100%;
+      }
+    }
     
     .pizza-foreground:hover {
       transform: scale(1.05);
@@ -187,37 +206,8 @@ ok that just made both pizza really small, on the computer i want it to be a lit
 
     .pizza-link {
       position: absolute;
-      width: 33.33%;
-      left: 5%;
-      bottom: 10%;
       z-index: 2;
       transition: transform 0.3s ease;
-    }
-
-    .pizza-link:hover {
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 768px) {
-      .section-content {
-        padding: 0 1rem;
-        box-sizing: border-box;
-      }
-      .about-text {
-        font-size: 1rem;
-        padding: 1rem;
-      }
-      .signature {
-        max-width: 150px;
-      }
-      #sketch-container {
-        font-size: 3rem;
-      }
-      .section-content {
-        padding: 0 20px;
-        box-sizing: border-box;
-        width: 100%;
-      }
     }
   </style>
 </head>
@@ -262,15 +252,12 @@ ok that just made both pizza really small, on the computer i want it to be a lit
     </div>
   </div>
 
-
-<div class="section" id="section3">
-  <img src="/images/table.png" class="table-background" alt="Table Setting">
-  <div class="pizza-container">
+  <div class="section" id="section3">
+    <img src="/images/table.png" class="table-background" alt="Table Setting">
     <a href="pizza.html" class="pizza-link">
       <img src="/images/pizza.png" class="pizza-foreground" alt="Pizza">
     </a>
   </div>
-</div>
 
   <!-- P5 SCRIPT -->
   <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
@@ -295,7 +282,6 @@ ok that just made both pizza really small, on the computer i want it to be a lit
     }
 
     function setup() {
-        // Mobile performance optimization
         if (isMobile()) {
             frameRate(45);
             baseSpeed = 2.0;
@@ -416,5 +402,7 @@ ok that just made both pizza really small, on the computer i want it to be a lit
         }, 150);
     }, { passive: true });
   </script>
+</body>
+</html>
 </body>
 </html>
