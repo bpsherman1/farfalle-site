@@ -5,31 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meat Recipes | The Food Gallery</title>
   <style>
-    /* ADDED BACKGROUND COLORS */
+    /* Base Styles */
     body {
-      background-color: #f9f5f0; /* Warm off-white background */
+      background-color: #f9f5f0;
       margin: 0;
       min-height: 100vh;
       font-family: 'Georgia', serif;
+      color: #5c4d3c;
     }
     
+    /* Section Styles */
     .section {
-      background-color: #f8f8f2; /* Slightly different shade */
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      padding: 20px;
+      box-sizing: border-box;
     }
     
     #section1 {
-      background-color: #f0e6d2; /* Warm beige */
+      background-color: #f0e6d2;
     }
     
     #section2 {
-      background-color: #e8e0c9; /* Slightly darker beige */
+      background-color: #e8e0c9;
+    }
+    
+    #section3 {
+      background-color: #e0d9c1;
     }
 
-    /* EXISTING MENU STYLES */
+    /* Image Layout */
+    .image-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 40px;
+    }
+    
+    .food-image {
+      max-height: 60vh;
+      width: auto;
+      max-width: 35%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    
+    .food-image:hover {
+      transform: scale(1.05);
+    }
+    
+    .left-image {
+      order: 1;
+    }
+    
+    .recipe-content {
+      order: 2;
+      flex: 1;
+      text-align: center;
+      padding: 0 20px;
+    }
+    
+    .right-image {
+      order: 3;
+    }
+    
+    /* Text Styles */
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Menu Styles */
     #menu-container {
       position: fixed;
       top: 20px;
@@ -65,20 +129,19 @@
       box-shadow: none;
       z-index: 3;
     }
-
   
-#dropdown-menu a {
-  display: block;
-  padding: 10px 0;
-  color: #333;
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: 1.2rem;
-  text-align: right;
-  transition: color 0.2s ease;
-  font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; /* Added this line */
-  font-weight: 500; /* Adjust if needed */
-}
+    #dropdown-menu a {
+      display: block;
+      padding: 10px 0;
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
+      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+      font-weight: 500;
+    }
 
     #dropdown-menu a:hover {
       background-color: transparent;
@@ -88,19 +151,61 @@
     #menu-container:hover #dropdown-menu {
       display: block;
     }
-    
-    /* Additional content styling */
-    .section-content {
-      text-align: center;
-      padding: 2rem;
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .section {
+        height: auto;
+        min-height: 100vh;
+        padding: 60px 20px;
+      }
+      
+      .image-container {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      .food-image {
+        max-height: 40vh;
+        max-width: 80%;
+      }
+      
+      .left-image {
+        order: 1;
+      }
+      
+      .recipe-content {
+        order: 2;
+      }
+      
+      .right-image {
+        order: 3;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      #menu-container {
+        top: 15px;
+        right: 15px;
+      }
     }
-    
-    h1 {
-      color: #5c4d3c; /* Earthy brown for headings */
-      font-size: 3rem;
+
+    /* Very small mobile devices */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .food-image {
+        max-height: 30vh;
+      }
     }
-@import url('https://fonts.googleapis.com/css2?family=Futura&display=swap');
-    
   </style>
 </head>
 <body>
@@ -117,16 +222,34 @@
     </div>
   </div>
 
-  <!-- Page-specific content -->
+  <!-- First Section with Images and Text -->
   <div class="section" id="section1">
-    <div class="section-content">
-      <h1>Meat Recipes</h1>
-      <!-- Add your meat recipes content here -->
+    <div class="image-container">
+      <img src="/images2/MB.png" alt="Meatball Recipe" class="food-image left-image">
+      <div class="recipe-content">
+        <h1>Meat Recipes</h1>
+        <p>Discover our collection of hearty meat dishes, featuring classic recipes with modern twists that will satisfy any carnivorous craving.</p>
+      </div>
+      <img src="/images2/cutlet.png" alt="Cutlet Recipe" class="food-image right-image">
     </div>
   </div>
 
-  <script>
-    // Your existing P5 script here
-  </script>
+  <!-- Second Section - Meatballs -->
+  <div class="section" id="section2">
+    <div class="recipe-content">
+      <h2>Grandma's Meatballs</h2>
+      <p>Juicy, tender meatballs simmered in a rich tomato sauce - a family recipe passed down for generations.</p>
+      <p>Ingredients: Ground beef, breadcrumbs, eggs, parmesan, garlic, herbs</p>
+    </div>
+  </div>
+
+  <!-- Third Section - Cutlets -->
+  <div class="section" id="section3">
+    <div class="recipe-content">
+      <h2>Crispy Chicken Cutlets</h2>
+      <p>Perfectly golden and crunchy on the outside, tender and juicy on the inside - our signature cutlets never disappoint.</p>
+      <p>Ingredients: Chicken breast, flour, eggs, breadcrumbs, spices</p>
+    </div>
+  </div>
 </body>
 </html>
