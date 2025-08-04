@@ -38,7 +38,7 @@
       background-color: #e0d9c1;
     }
 
-    /* Image Layout with Animation */
+    /* Image Layout */
     .image-container {
       display: flex;
       justify-content: center;
@@ -46,7 +46,6 @@
       width: 100%;
       max-width: 1400px;
       margin: 0 auto;
-      perspective: 1000px; /* For 3D effect */
     }
     
     .food-image {
@@ -54,44 +53,25 @@
       width: auto;
       max-width: 60%;
       object-fit: contain;
-      transform: translateX(-100vw) rotateY(0deg); /* Start off-screen left */
-      opacity: 0;
-      transform-style: preserve-3d;
-      transition: 
-        transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        opacity 1s ease;
-      animation: spin 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      transform: translateX(-100vw); /* Start off-screen left */
+      opacity: 0; /* Start invisible */
+      transition: transform 1s ease-out, opacity 1s ease;
     }
     
-    @keyframes spin {
-      0% {
-        transform: translateX(-100vw) rotateY(0deg);
-        opacity: 0;
-      }
-      30% {
-        opacity: 0.5;
-      }
-      100% {
-        transform: translateX(0) rotateY(720deg); /* Two full spins */
-        opacity: 1;
-      }
+    .food-image.loaded {
+      transform: translateX(0); /* Slide to normal position */
+      opacity: 1; /* Fade in */
     }
     
     .recipe-content {
       flex: 0 1 600px;
       text-align: center;
       padding: 0 40px;
-      opacity: 0;
-      transition: opacity 1s ease 1s; /* Delay to appear after pizza */
+      opacity: 0; /* Start invisible */
+      transition: opacity 1s ease 0.5s; /* Delay the text fade */
     }
     
-    .loaded .food-image {
-      animation: none; /* Prevent animation replay */
-      transform: translateX(0) rotateY(0deg);
-      opacity: 1;
-    }
-    
-    .loaded .recipe-content {
+    .recipe-content.loaded {
       opacity: 1;
     }
     
@@ -121,6 +101,56 @@
       padding-bottom: 20px;
     }
 
+    #home-link {
+      display: block;
+      text-decoration: none;
+    }
+
+    #menu-icon {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: block;
+      transition: filter 0.2s ease;
+    }
+
+    #home-link:hover #menu-icon {
+      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+    }
+
+    #dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      z-index: 3;
+    }
+  
+    #dropdown-menu a {
+      display: block;
+      padding: 10px 0;
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
+      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+      font-weight: 500;
+    }
+
+    #dropdown-menu a:hover {
+      background-color: transparent;
+      color: #c72a2a;
+    }
+
+    #menu-container:hover #dropdown-menu {
+      display: block;
+    }
+
     /* Mobile Styles - Larger Pizza */
     @media (max-width: 768px) {
       .section {
@@ -131,22 +161,37 @@
       
       .image-container {
         flex-direction: column;
+        gap: 30px;
       }
       
       .food-image {
         height: auto;
-        max-height: 60vh; /* Larger on mobile */
-        max-width: 100%;
+        max-height: 50vh; /* Larger than before */
+        max-width: 100%; /* Full width on mobile */
+        width: auto;
+      }
+      
+      .recipe-content {
+        flex: 1;
+        padding: 0 20px;
       }
       
       h1 {
-        font-size: 2.5rem;
+        font-size: 2.5rem; /* Slightly larger */
+      }
+      
+      h2 {
+        font-size: 2rem;
       }
     }
 
     @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
       .food-image {
-        max-height: 70vh; /* Even larger on small phones */
+        max-height: 60vh; /* Even larger on very small screens */
       }
     }
   </style>
@@ -165,43 +210,54 @@
     </div>
   </div>
 
-  <!-- First Section with Animated Pizza -->
+  <!-- First Section with Pizza Image and Text -->
   <div class="section" id="section1">
     <div class="image-container">
-      <img src="images2/pizza.gif" alt="Spinning Pizza" class="food-image">
+      <img src="images2/pizza.png" alt="Delicious Pizza" class="food-image">
       <div class="recipe-content">
         <h1>Pizza</h1>
-        <p>Watch our pizza spin into view! Made with the finest ingredients.</p>
+        <p>Experience our authentic pizza made with the finest ingredients and traditional techniques.</p>
       </div>
     </div>
   </div>
 
-  <!-- Other sections remain the same -->
+  <!-- Second Section - Pizza Info -->
   <div class="section" id="section2">
     <div class="recipe-content">
       <h2>Our Signature Pizza</h2>
-      <p>Hand-tossed dough and homemade sauce create perfection.</p>
+      <p>Hand-tossed dough, homemade sauce, and premium toppings create our perfect pizza.</p>
+      <p>Available with classic or whole wheat dough, and a variety of toppings to choose from.</p>
     </div>
   </div>
 
+  <!-- Third Section - Specials -->
   <div class="section" id="section3">
     <div class="recipe-content">
-      <h2>Weekly Specials</h2>
-      <p>Try our rotating selection of specialty pizzas.</p>
+      <h2>Weekly Pizza Specials</h2>
+      <p>Try our rotating selection of specialty pizzas featuring seasonal ingredients.</p>
+      <p>Ask about our current special when you order!</p>
     </div>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Add loaded class after short delay
+      // Trigger animations after page loads
       setTimeout(function() {
-        document.getElementById('section1').classList.add('loaded');
+        const pizzaImage = document.querySelector('.food-image');
+        const recipeContent = document.querySelector('.recipe-content');
+        
+        pizzaImage.classList.add('loaded');
+        recipeContent.classList.add('loaded');
       }, 100);
       
-      // Prevent animation on back button navigation
-      if (performance.navigation.type === 2) {
-        document.getElementById('section1').classList.add('loaded');
-      }
+      // Debug script to verify image paths
+      const img = document.querySelector('.food-image');
+      img.onload = function() {
+        console.log('Pizza image loaded successfully');
+      };
+      img.onerror = function() {
+        console.error('Failed to load pizza image');
+      };
     });
   </script>
 </body>
