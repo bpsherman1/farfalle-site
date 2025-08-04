@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -217,59 +218,100 @@
     /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
-        padding: 100px 20px 60px;
+        padding: 80px 20px;
+        min-height: 100vh;
+        position: relative;
+        display: block;
       }
       
-      .image-container {
-        flex-direction: column;
-        gap: 30px;
+      /* Remove flex container */
+      #section1 .image-container {
+        display: block;
       }
       
-      .food-image {
-        height: auto;
-        max-height: 40vh;
+      /* Position pesto image at top */
+      #section1 .food-image.left-image {
+        position: absolute;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
         max-width: 90%;
+        height: auto;
+        max-height: 35vh;
         margin: 0 !important;
-        transform: none !important;
       }
       
-      .food-image.right-image {
-        max-height: 50vh;
+      /* Position text in middle */
+      #section1 .recipe-content {
+        position: absolute;
+        top: calc(35vh + 100px);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        padding: 0;
+        margin: 0;
       }
       
-      .recipe-content {
-        padding: 0 20px;
+      /* Position RS image below text */
+      #section1 .food-image.right-image {
+        position: absolute;
+        top: calc(35vh + 220px); /* 35vh image + 100px top + 120px text height */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 90%;
+        height: auto;
+        max-height: 45vh;
+        margin: 0 !important;
       }
       
+      /* Adjust sections below */
+      #section2, #section3 {
+        padding-top: calc(35vh + 45vh + 250px); /* Account for section1 height */
+      }
+      
+      /* Adjust text sizes */
       h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        margin-bottom: 0.8rem;
+      }
+      
+      p {
+        margin-bottom: 0.8rem;
       }
       
       h2 {
-        font-size: 2.5rem;
-      }
-      
-      .ingredients, .instructions {
-        padding: 15px;
-      }
-      
-      #menu-icon {
-        width: 35px;
-        height: 35px;
+        font-size: 2.2rem;
       }
     }
 
     @media (max-width: 480px) {
+      /* Tighter spacing for small phones */
+      #section1 .food-image.left-image {
+        top: 70px;
+        max-height: 30vh;
+      }
+      
+      #section1 .recipe-content {
+        top: calc(30vh + 90px);
+      }
+      
+      #section1 .food-image.right-image {
+        top: calc(30vh + 200px);
+        max-height: 40vh;
+      }
+      
+      #section2, #section3 {
+        padding-top: calc(30vh + 40vh + 220px);
+      }
+      
       h1 {
         font-size: 2rem;
       }
       
       h2 {
-        font-size: 2rem;
-      }
-      
-      .food-image.right-image {
-        max-height: 45vh;
+        font-size: 1.8rem;
       }
     }
   </style>
