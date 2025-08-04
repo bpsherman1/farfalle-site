@@ -200,6 +200,20 @@
       display: block;
     }
 
+    /* Sauce Link Styles */
+    .sauce-link {
+      display: block;
+      margin-top: 30px; /* 30px space above the link */
+      font-size: 1.3rem;
+      color: #8b5a2b;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .sauce-link:hover {
+      color: #c72a2a;
+    }
+
     /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
@@ -248,6 +262,10 @@
         padding: 15px;
         margin: 15px auto; /* Reduced margins */
       }
+
+      .sauce-link {
+        margin-top: 20px; /* Slightly reduced space on mobile */
+      }
     }
 
     @media (max-width: 480px) {
@@ -266,6 +284,10 @@
       
       h2 {
         font-size: 1.8rem;
+      }
+
+      .sauce-link {
+        font-size: 1.1rem;
       }
     }
   </style>
@@ -291,6 +313,7 @@
       <div class="recipe-content">
         <h1>Sauces</h1>
         <p>Discover our collection of flavorful sauces, from classic recipes to modern creations that will elevate any dish.</p>
+        <a href="https://delightful-torrone-b62464.netlify.app" class="sauce-link">delightful-torrone-b62464.netlify.app</a>
       </div>
       <img src="images2/RS.png" alt="Red Sauce" class="food-image right-image">
     </div>
