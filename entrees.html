@@ -54,7 +54,7 @@
       height: 100%;
       position: absolute;
       left: 0;
-      transition: transform 0.8s ease-in-out;
+      transition: transform 0.5s ease;
     }
     
     .slide {
@@ -77,18 +77,37 @@
       text-align: center;
       padding: 0 40px;
       max-width: 800px;
-      margin: 20px auto 0;
-      position: relative;
-      z-index: 2;
+      margin: 0 auto;
     }
     
-    /* Fixed Menu Styles */
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Menu Styles */
     #menu-container {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 100; /* Higher than everything else */
+      z-index: 2;
       padding-bottom: 20px;
+    }
+
+    #home-link {
+      display: block;
+      text-decoration: none;
     }
 
     #menu-icon {
@@ -99,23 +118,37 @@
       transition: filter 0.2s ease;
     }
 
+    #home-link:hover #menu-icon {
+      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+    }
+
     #dropdown-menu {
       display: none;
       position: absolute;
       top: 100%;
       right: 0;
-      background-color: rgba(248, 248, 242, 0.9);
-      border-radius: 4px;
-      z-index: 101;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      z-index: 3;
     }
-
+  
     #dropdown-menu a {
       display: block;
-      padding: 10px 20px;
+      padding: 10px 0;
       color: #333;
       text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
       font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
       font-weight: 500;
+    }
+
+    #dropdown-menu a:hover {
+      background-color: transparent;
+      color: #c72a2a;
     }
 
     #menu-container:hover #dropdown-menu {
@@ -127,7 +160,7 @@
       .section {
         height: auto;
         min-height: 100vh;
-        padding: 80px 20px 60px;
+        padding: 60px 20px;
       }
       
       .slideshow-container {
@@ -136,6 +169,24 @@
       
       .slide-image {
         max-width: 80%;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .slideshow-container {
+        height: 40vh;
       }
     }
   </style>
@@ -154,7 +205,7 @@
     </div>
   </div>
 
-  <!-- Slideshow Section -->
+  <!-- First Section with Slideshow -->
   <div class="section" id="section1">
     <div class="slideshow-container" id="entreesSlideshow">
       <div class="slideshow-track">
@@ -167,93 +218,56 @@
         <div class="slide">
           <img src="images2/CP.png" alt="Chicken Parmesan" class="slide-image">
         </div>
-        <!-- Clone first image for seamless loop -->
-        <div class="slide">
-          <img src="images2/MBR.png" alt="Meatball Roll" class="slide-image">
-        </div>
       </div>
     </div>
     <div class="recipe-content">
       <h1>Entrees</h1>
-      <p>Discover our rotating selection of delicious entree options.</p>
+      <p>Discover our rotating selection of delicious entree options, featuring both classic and contemporary dishes.</p>
     </div>
   </div>
 
-  <!-- Other Sections -->
+  <!-- Second Section -->
   <div class="section" id="section2">
     <div class="recipe-content">
       <h2>Featured Entrees</h2>
-      <p>Our chefs prepare each entree with care.</p>
+      <p>Our chefs prepare each entree with care, using only the freshest ingredients and traditional techniques.</p>
     </div>
   </div>
 
+  <!-- Third Section -->
   <div class="section" id="section3">
     <div class="recipe-content">
       <h2>Weekly Specials</h2>
-      <p>Seasonal specials showcasing the best flavors.</p>
+      <p>Check back regularly for our seasonal specials and limited-time offerings that showcase the best flavors of each season.</p>
     </div>
   </div>
 
   <script>
+    // Slideshow functionality
     document.addEventListener('DOMContentLoaded', function() {
       const track = document.querySelector('.slideshow-track');
-      const slides = document.querySelectorAll('.slide');
-      const slideCount = slides.length;
-      let currentIndex = 0;
-      let slideWidth = 0;
-      let isTransitioning = false;
-
-      // Initialize slideshow
-      function initSlideshow() {
-        slideWidth = slides[0].getBoundingClientRect().width;
-        
-        // Position slides horizontally
-        slides.forEach((slide, index) => {
-          slide.style.left = `${slideWidth * index}px`;
-        });
-        
-        // Start auto-advance
-        setInterval(advanceSlide, 3000);
-      }
-
-      // Handle slide transition
-      function advanceSlide() {
-        if (isTransitioning) return;
-        
-        isTransitioning = true;
-        currentIndex++;
-        
-        // Smooth transition to next slide
-        track.style.transition = 'transform 0.8s ease-in-out';
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-        
-        // Check if we need to reset position for infinite loop
-        if (currentIndex === slideCount - 1) {
-          setTimeout(() => {
-            track.style.transition = 'none';
-            currentIndex = 0;
-            track.style.transform = 'translateX(0)';
-            setTimeout(() => {
-              track.style.transition = 'transform 0.8s ease-in-out';
-              isTransitioning = false;
-            }, 20);
-          }, 800);
-        } else {
-          setTimeout(() => {
-            isTransitioning = false;
-          }, 800);
-        }
-      }
-
-      // Handle window resize
-      window.addEventListener('resize', function() {
-        slideWidth = slides[0].getBoundingClientRect().width;
-        track.style.transition = 'none';
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      
+      // Arrange slides next to one another
+      slides.forEach((slide, index) => {
+        slide.style.left = slideWidth * index + 'px';
       });
+      
+      // Auto-advance slides every 3 seconds
+      let currentIndex = 0;
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+      }, 3000);
+    });
 
-      // Start the slideshow
-      initSlideshow();
+    // Debug script to verify image paths
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = document.querySelectorAll('.slide-image');
+      images.forEach(img => {
+        console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
+      });
     });
   </script>
 </body>
