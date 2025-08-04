@@ -3,33 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meat Recipes | The Food Gallery</title>
+  <title>Sauces | The Food Gallery</title>
   <style>
-    /* ADDED BACKGROUND COLORS */
+    /* Base Styles */
     body {
-      background-color: #f9f5f0; /* Warm off-white background */
+      background-color: #f9f5f0;
       margin: 0;
       min-height: 100vh;
       font-family: 'Georgia', serif;
+      color: #5c4d3c;
     }
     
+    /* Section Styles */
     .section {
-      background-color: #f8f8f2; /* Slightly different shade */
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      padding: 20px;
+      box-sizing: border-box;
     }
     
     #section1 {
-      background-color: #f0e6d2; /* Warm beige */
+      background-color: #f0e6d2;
     }
     
     #section2 {
-      background-color: #e8e0c9; /* Slightly darker beige */
+      background-color: #e8e0c9;
+    }
+    
+    #section3 {
+      background-color: #e0d9c1;
     }
 
-    /* EXISTING MENU STYLES */
+    /* Image Layout */
+    .image-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 20px;
+    }
+    
+    .food-image {
+      height: 70vh;
+      width: auto;
+      max-width: 40%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+    
+    .left-image {
+      margin-left: -50px;
+    }
+    
+    .right-image {
+      margin-right: -50px;
+    }
+    
+    .recipe-content {
+      flex: 0 1 600px;
+      text-align: center;
+      padding: 0 40px;
+    }
+    
+    /* Text Styles */
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Menu Styles */
     #menu-container {
       position: fixed;
       top: 20px;
@@ -65,22 +123,19 @@
       box-shadow: none;
       z-index: 3;
     }
-
-     #dropdown-menu a {
-  display: block;
-  padding: 10px 0;
-  color: #333;
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: 1.2rem;
-  text-align: right;
-  transition: color 0.2s ease;
-  font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif; /* Added this line */
-  font-weight: 500; /* Adjust if needed */
-}
-
- @import url('https://fonts.googleapis.com/css2?family=Futura&display=swap');
-
+  
+    #dropdown-menu a {
+      display: block;
+      padding: 10px 0;
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
+      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+      font-weight: 500;
+    }
 
     #dropdown-menu a:hover {
       background-color: transparent;
@@ -90,16 +145,51 @@
     #menu-container:hover #dropdown-menu {
       display: block;
     }
-    
-    /* Additional content styling */
-    .section-content {
-      text-align: center;
-      padding: 2rem;
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .section {
+        height: auto;
+        min-height: 100vh;
+        padding: 60px 20px;
+      }
+      
+      .image-container {
+        flex-direction: column;
+        gap: 30px;
+        max-width: 100%;
+      }
+      
+      .food-image {
+        height: auto;
+        max-height: 40vh;
+        max-width: 80%;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .recipe-content {
+        flex: 1;
+        padding: 0 20px;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
     }
-    
-    h1 {
-      color: #5c4d3c; /* Earthy brown for headings */
-      font-size: 3rem;
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .food-image {
+        max-height: 30vh;
+      }
     }
   </style>
 </head>
@@ -117,16 +207,46 @@
     </div>
   </div>
 
-  <!-- Page-specific content -->
+  <!-- First Section with Images and Text -->
   <div class="section" id="section1">
-    <div class="section-content">
-      <h1>Sauce</h1>
-      <!-- Add your meat recipes content here -->
+    <div class="image-container">
+      <img src="images2/pesto2.png" alt="Pesto Sauce" class="food-image left-image" 
+           onerror="console.error('Failed to load pesto2.png')">
+      <div class="recipe-content">
+        <h1>Sauces</h1>
+        <p>Discover our collection of flavorful sauces, from classic recipes to modern creations that will elevate any dish.</p>
+      </div>
+      <img src="images2/RS.png" alt="Red Sauce" class="food-image right-image"
+           onerror="console.error('Failed to load RS.png')">
+    </div>
+  </div>
+
+  <!-- Second Section - Pesto Sauce -->
+  <div class="section" id="section2">
+    <div class="recipe-content">
+      <h2>Fresh Basil Pesto</h2>
+      <p>Our vibrant green pesto is made with fresh basil, pine nuts, parmesan, and the finest olive oil.</p>
+      <p>Ingredients: Fresh basil, pine nuts, garlic, parmesan, olive oil, lemon juice</p>
+    </div>
+  </div>
+
+  <!-- Third Section - Red Sauce -->
+  <div class="section" id="section3">
+    <div class="recipe-content">
+      <h2>Homemade Red Sauce</h2>
+      <p>A rich, slow-simmered tomato sauce with herbs and spices - the perfect base for pasta dishes.</p>
+      <p>Ingredients: San Marzano tomatoes, garlic, onions, olive oil, basil, oregano</p>
     </div>
   </div>
 
   <script>
-    // Your existing P5 script here
+    // Debug script to verify image paths
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = document.querySelectorAll('.food-image');
+      images.forEach(img => {
+        console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
+      });
+    });
   </script>
 </body>
 </html>
