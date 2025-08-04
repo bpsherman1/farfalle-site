@@ -79,16 +79,17 @@
     }
     
     h2 {
-      font-size: 3rem; /* Larger header size */
+      font-size: 3.5rem; /* Larger header size */
       margin-bottom: 1.5rem;
+      text-transform: uppercase;
     }
     
     .pesto-header {
-      color: #4a8f29; /* Green color for pesto */
+      color: #3a7a22; /* Darker green color for pesto */
     }
     
     .redsauce-header {
-      color: #c72a2a; /* Red color for red sauce */
+      color: #d62c2c; /* Vibrant red color for red sauce */
     }
     
     h3 {
@@ -156,6 +157,10 @@
       top: 20px;
       right: 20px;
       z-index: 1000;
+    }
+
+    #home-link {
+      display: block;
     }
 
     #menu-icon {
@@ -228,7 +233,7 @@
       }
       
       h2 {
-        font-size: 2.2rem;
+        font-size: 2.5rem;
       }
       
       .ingredients, .instructions {
@@ -247,7 +252,7 @@
       }
       
       h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
       
       .food-image.right-image {
@@ -259,7 +264,9 @@
 <body>
   <!-- Fixed Menu -->
   <div id="menu-container">
-    <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
+    <a href="/" id="home-link">
+      <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
+    </a>
     <div id="dropdown-menu">
       <a href="meat.html">Meat</a>
       <a href="entrees.html">Entrees</a>
@@ -338,20 +345,5 @@
       </div>
     </div>
   </div>
-
-  <script>
-    // Handle menu hover
-    document.getElementById('menu-icon').addEventListener('click', function() {
-      const menu = document.getElementById('dropdown-menu');
-      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    });
-    
-    // Close menu when clicking elsewhere
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('#menu-container')) {
-        document.getElementById('dropdown-menu').style.display = 'none';
-      }
-    });
-  </script>
 </body>
 </html>
