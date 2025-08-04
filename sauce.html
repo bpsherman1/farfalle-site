@@ -62,8 +62,7 @@
     
     .right-image {
       margin-right: -50px;
-      position: relative;
-      top: 20px; /* Move right image down 20px on desktop */
+      transform: translateY(20px); /* Move RS.png down 20px on desktop */
     }
     
     .recipe-content {
@@ -89,7 +88,7 @@
       margin: 0 auto 1.5rem;
     }
 
-    /* Menu Styles */
+    /* Menu Styles - Fixed */
     #menu-container {
       position: fixed;
       top: 20px;
@@ -98,36 +97,79 @@
       padding-bottom: 20px;
     }
 
+    #home-link {
+      display: block;
+      text-decoration: none;
+    }
+
+    #menu-icon {
+      width: 40px; /* Fixed size */
+      height: 40px; /* Fixed size */
+      cursor: pointer;
+      display: block;
+      transition: filter 0.2s ease;
+    }
+
+    #home-link:hover #menu-icon {
+      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+    }
+
+    #dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: rgba(248, 248, 242, 0.9);
+      border-radius: 4px;
+      z-index: 3;
+      padding: 10px;
+    }
+  
+    #dropdown-menu a {
+      display: block;
+      padding: 8px 20px;
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.1rem;
+      text-align: right;
+      transition: color 0.2s ease;
+      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+      font-weight: 500;
+    }
+
+    #dropdown-menu a:hover {
+      color: #c72a2a;
+    }
+
+    #menu-container:hover #dropdown-menu {
+      display: block;
+    }
+
     /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
         height: auto;
         min-height: 100vh;
-        padding: 60px 20px;
+        padding: 80px 20px 60px;
       }
       
       .image-container {
         flex-direction: column;
         gap: 30px;
-        max-width: 100%;
       }
       
       .food-image {
         height: auto;
+        max-height: 40vh;
         max-width: 90%;
-        margin-left: 0;
-        margin-right: 0;
+        margin: 0 !important;
+        transform: none !important;
       }
       
-      /* Make bottom image (RS.png) larger on mobile */
+      /* Make RS.png larger on mobile */
       .food-image.right-image {
         max-height: 50vh;
-        width: auto;
-      }
-      
-      /* Reset the desktop positioning on mobile */
-      .right-image {
-        top: 0;
       }
       
       .recipe-content {
@@ -149,15 +191,14 @@
         font-size: 1.8rem;
       }
       
-      /* Make bottom image even larger on very small screens */
       .food-image.right-image {
-        max-height: 60vh;
+        max-height: 55vh;
       }
     }
   </style>
 </head>
 <body>
-  <!-- MENU HTML -->
+  <!-- Fixed Menu -->
   <div id="menu-container">
     <a href="/" id="home-link">
       <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
