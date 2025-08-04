@@ -204,59 +204,69 @@
     /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
-        padding: 100px 20px 60px;
+        padding: 80px 20px 20px; /* Reduced padding */
+        min-height: auto;
       }
       
-      .image-container {
+      #section1 .image-container {
         flex-direction: column;
-        gap: 30px;
+        gap: 0; /* Remove gap between stacked items */
+      }
+      
+      #section1 .recipe-content {
+        order: 2;
+        margin: 10px 0; /* Reduced margin around text */
+        padding: 0;
       }
       
       .food-image {
         height: auto;
-        max-height: 40vh;
         max-width: 90%;
-        margin: 0 !important;
-        transform: none !important;
+        margin: 0 auto !important;
       }
       
-      .food-image.right-image {
+      #section1 .food-image.left-image {
+        order: 1;
+        max-height: 40vh;
+      }
+      
+      #section1 .food-image.right-image {
+        order: 3;
         max-height: 50vh;
-      }
-      
-      .recipe-content {
-        padding: 0 20px;
+        margin-top: 10px !important; /* Minimal space above RS image */
       }
       
       h1 {
         font-size: 2.5rem;
+        margin-bottom: 0.5rem; /* Tighter spacing */
       }
       
-      h2 {
-        font-size: 2.5rem;
+      p {
+        margin-bottom: 0.5rem; /* Tighter spacing */
       }
       
       .ingredients, .instructions {
         padding: 15px;
-      }
-      
-      #menu-icon {
-        width: 35px;
-        height: 35px;
+        margin: 15px auto; /* Reduced margins */
       }
     }
 
     @media (max-width: 480px) {
+      #section1 .food-image.right-image {
+        max-height: 55vh;
+        margin-top: 5px !important; /* Even tighter spacing */
+      }
+      
+      .section {
+        padding: 70px 15px 15px; /* Tighter overall padding */
+      }
+      
       h1 {
         font-size: 2rem;
       }
       
       h2 {
-        font-size: 2rem;
-      }
-      
-      .food-image.right-image {
-        max-height: 45vh;
+        font-size: 1.8rem;
       }
     }
   </style>
