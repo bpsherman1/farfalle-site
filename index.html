@@ -134,22 +134,20 @@
     /* Desktop pizza size */
 .pizza-foreground {
   position: absolute;
-  height: 130vh; /* Almost full viewport height */
-  width: auto; /* Maintain aspect ratio */
-  left: 0; /* Stick to the left edge */
-  bottom: 0; /* Slight offset from bottom */
+  height: 90vh; /* Reduced from 130vh */
+  width: auto;
+  left: 0;
+  bottom: 0; /* Or adjust if needed (e.g., bottom: -10% to show more) */
   z-index: 2;
-  transition: transform 0.3s ease;
-  max-height: 130vh; /* Prevent touching edges */
+  max-height: 100vh; /* Ensures it never exceeds screen height */
 }
 
-/* Adjust for mobile */
 @media (max-width: 768px) {
   .pizza-foreground {
     height: auto;
-    width: 80vw; /* Wider on mobile */
+    width: 80vw;
     left: 0;
-    bottom: 10%;
+    bottom: 10%; /* Better mobile positioning */
   }
 }
       .section-content {
