@@ -134,12 +134,13 @@
     /* Desktop pizza size */
 .pizza-foreground {
   position: absolute;
-  height: 90vh; /* Reduced from 130vh */
+  height: 90vh;
   width: auto;
   left: 0;
-  bottom: -50%; /* Or adjust if needed (e.g., bottom: -10% to show more) */
+  top: 50%; /* Changed from bottom to top positioning */
+  transform: translateY(0%); /* Adjust this to move up/down */
   z-index: 2;
-  max-height: 100vh; /* Ensures it never exceeds screen height */
+  max-height: 100vh;
 }
 
 @media (max-width: 768px) {
@@ -147,7 +148,8 @@
     height: auto;
     width: 80vw;
     left: 0;
-    bottom: 10%; /* Better mobile positioning */
+    top: 60%; /* Adjust for mobile */
+    transform: translateY(0%);
   }
 }
       .section-content {
