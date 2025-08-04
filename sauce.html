@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sauces | The Food Gallery</title>
-  <!-- Font Imports -->
-  <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@700&family=DM+Serif+Display&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+  <!-- Font Import -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
     /* Base Styles */
     body {
@@ -74,42 +74,34 @@
       padding: 0 40px;
     }
     
-    /* Text Styles */
+    /* Text Styles - Playfair Display Bold */
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+    
     h1 {
       font-size: 3.5rem;
       margin-bottom: 1.5rem;
-      font-family: 'Cormorant Garamond', serif;
     }
     
-    /* PESTO Header - Alegreya SC */
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+    
     .pesto-header {
-      font-family: 'Alegreya SC', serif;
       color: #3a7a22;
-      font-size: 3.5rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
     }
     
-    /* MARINARA Header - Cormorant Garamond (more elegant than DM Serif) */
     .marinara-header {
-      font-family: 'Cormorant Garamond', serif;
       color: #c72a2a;
-      font-size: 3.5rem;
-      font-weight: 600;
-      font-style: italic;
-      letter-spacing: 0.5px;
-      margin-bottom: 2rem;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
     
     h3 {
       font-size: 1.8rem;
       margin: 2rem 0 1rem;
       color: #a67c52;
-      font-family: 'Cormorant Garamond', serif;
     }
     
     p {
@@ -215,47 +207,43 @@
       display: block;
     }
 
-    /* Mobile Styles */
+    /* Mobile Fixes - Reduced Spacing */
     @media (max-width: 768px) {
       .section {
-        padding: 100px 20px 60px;
+        padding: 80px 20px 40px; /* Reduced padding */
       }
       
       .image-container {
         flex-direction: column;
-        gap: 30px;
+        gap: 20px; /* Reduced gap */
       }
       
       .food-image {
         height: auto;
-        max-height: 40vh;
+        max-height: 35vh; /* Slightly smaller images */
         max-width: 90%;
         margin: 0 !important;
         transform: none !important;
       }
       
-      .food-image.right-image {
-        max-height: 50vh;
-      }
-      
       .recipe-content {
-        padding: 0 20px;
+        padding: 0;
+        margin-top: 20px; /* Added margin */
       }
       
       h1 {
         font-size: 2.5rem;
+        margin-bottom: 1rem;
       }
       
       h2 {
-        font-size: 2.5rem;
-      }
-      
-      .pesto-header, .marinara-header {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
       }
       
       .ingredients, .instructions {
         padding: 15px;
+        margin: 15px auto; /* Reduced margin */
       }
       
       #menu-icon {
@@ -265,20 +253,20 @@
     }
 
     @media (max-width: 480px) {
+      .section {
+        padding: 70px 15px 30px; /* Even tighter padding */
+      }
+      
       h1 {
         font-size: 2rem;
       }
       
       h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
       
-      .pesto-header, .marinara-header {
-        font-size: 2rem;
-      }
-      
-      .food-image.right-image {
-        max-height: 45vh;
+      .food-image {
+        max-height: 30vh; /* Smaller images on very small screens */
       }
     }
   </style>
@@ -297,7 +285,7 @@
     </div>
   </div>
 
-  <!-- First Section with Images and Text -->
+  <!-- First Section with Images and Text - Fixed Spacing -->
   <div class="section" id="section1">
     <div class="image-container">
       <img src="images2/pesto2.png" alt="Pesto Sauce" class="food-image left-image">
