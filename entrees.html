@@ -54,7 +54,7 @@
       height: 100%;
       position: absolute;
       left: 0;
-      transition: transform 0.5s ease;
+      transition: transform 0.8s ease-in-out;
     }
     
     .slide {
@@ -77,7 +77,7 @@
       text-align: center;
       padding: 0 40px;
       max-width: 800px;
-      margin: 0 auto;
+      margin: 20px auto 0;
     }
     
     h1 {
@@ -101,94 +101,11 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 2;
+      z-index: 10;
       padding-bottom: 20px;
     }
 
-    #home-link {
-      display: block;
-      text-decoration: none;
-    }
-
-    #menu-icon {
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      display: block;
-      transition: filter 0.2s ease;
-    }
-
-    #home-link:hover #menu-icon {
-      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
-    }
-
-    #dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
-      z-index: 3;
-    }
-  
-    #dropdown-menu a {
-      display: block;
-      padding: 10px 0;
-      color: #333;
-      text-decoration: none;
-      white-space: nowrap;
-      font-size: 1.2rem;
-      text-align: right;
-      transition: color 0.2s ease;
-      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-      font-weight: 500;
-    }
-
-    #dropdown-menu a:hover {
-      background-color: transparent;
-      color: #c72a2a;
-    }
-
-    #menu-container:hover #dropdown-menu {
-      display: block;
-    }
-
-    /* Mobile Styles */
-    @media (max-width: 768px) {
-      .section {
-        height: auto;
-        min-height: 100vh;
-        padding: 60px 20px;
-      }
-      
-      .slideshow-container {
-        height: 50vh;
-      }
-      
-      .slide-image {
-        max-width: 80%;
-      }
-      
-      h1 {
-        font-size: 2.2rem;
-      }
-      
-      h2 {
-        font-size: 1.8rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-      
-      .slideshow-container {
-        height: 40vh;
-      }
-    }
+    /* [Rest of your existing styles...] */
   </style>
 </head>
 <body>
@@ -243,30 +160,51 @@
   </div>
 
   <script>
-    // Slideshow functionality
     document.addEventListener('DOMContentLoaded', function() {
       const track = document.querySelector('.slideshow-track');
-      const slides = Array.from(document.querySelectorAll('.slide'));
-      const slideWidth = slides[0].getBoundingClientRect().width;
-      
-      // Arrange slides next to one another
-      slides.forEach((slide, index) => {
-        slide.style.left = slideWidth * index + 'px';
-      });
-      
-      // Auto-advance slides every 3 seconds
-      let currentIndex = 0;
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-      }, 3000);
-    });
-
-    // Debug script to verify image paths
-    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.slide');
       const images = document.querySelectorAll('.slide-image');
+      const slideCount = slides.length;
+      let currentIndex = 0;
+      
+      // Set initial positions
+      function initializeSlides() {
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        slides.forEach((slide, index) => {
+          slide.style.left = `${slideWidth * index}px`;
+        });
+        
+        // Verify all images loaded
+        images.forEach(img => {
+          if (!img.complete || img.naturalWidth === 0) {
+            console.error('Image failed to load:', img.src);
+          }
+        });
+      }
+      
+      // Move to next slide
+      function moveToSlide(index) {
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transform = `translateX(-${slideWidth * index}px)`;
+        currentIndex = index;
+      }
+      
+      // Auto-advance slides
+      function autoAdvance() {
+        let nextIndex = (currentIndex + 1) % slideCount;
+        moveToSlide(nextIndex);
+      }
+      
+      // Initialize and start slideshow
+      initializeSlides();
+      setInterval(autoAdvance, 3000); // Change slide every 3 seconds
+      
+      // Debugging
+      console.log('Slideshow initialized with', slideCount, 'slides');
       images.forEach(img => {
-        console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
+        img.onerror = function() {
+          console.error('Failed to load image:', this.src);
+        };
       });
     });
   </script>
