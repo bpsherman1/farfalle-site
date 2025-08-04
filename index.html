@@ -260,7 +260,7 @@
   </div>
 
   <!-- P5 SCRIPT -->
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
   <script>
     let foodImages = [];
     let icons = [];
@@ -271,6 +271,10 @@
     let scrollTimeout;
     let lastScrollTop = 0;
     let direction = 1;
+    
+    // NEW: Sketch performance variables
+    let sketchRunning = true;
+    let firstSectionHeight = window.innerHeight;
 
     function preload() {
         foodImages.push(loadImage('assets/farfalle.png'));
@@ -310,6 +314,9 @@
     }
    
     function draw() {
+        // NEW: Skip rendering if not in first section
+        if (!sketchRunning) return;
+
         background('#f8f8f2');
 
         let topColor = color(0);
@@ -379,12 +386,20 @@
     }
 
     function windowResized() {
+        // NEW: Update first section height on resize
+        firstSectionHeight = window.innerHeight;
         baseSpeed = isMobile() ? 2.5 : 1.0;
         resizeCanvas(windowWidth, windowHeight);
     }
 
     window.addEventListener('scroll', () => {
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // NEW: Toggle sketch running state
+        sketchRunning = scrollTop < firstSectionHeight * 0.9;
+        if (!sketchRunning) {
+            clear(); // Clear canvas when not running
+        }
 
         if (scrollTop > lastScrollTop) {
             direction = 1;
@@ -393,7 +408,6 @@
         }
 
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-
         speedMultiplier = 4.0;
 
         clearTimeout(scrollTimeout);
