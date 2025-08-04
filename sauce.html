@@ -79,9 +79,16 @@
     }
     
     h2 {
-      font-size: 2.5rem;
+      font-size: 3rem; /* Larger header size */
       margin-bottom: 1.5rem;
-      color: #8b5a2b;
+    }
+    
+    .pesto-header {
+      color: #4a8f29; /* Green color for pesto */
+    }
+    
+    .redsauce-header {
+      color: #c72a2a; /* Red color for red sauce */
     }
     
     h3 {
@@ -143,13 +150,50 @@
       left: 0;
     }
 
-    /* Menu Styles */
+    /* Fixed Menu Styles */
     #menu-container {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 2;
-      padding-bottom: 20px;
+      z-index: 1000;
+    }
+
+    #menu-icon {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: filter 0.2s ease;
+    }
+
+    #dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: rgba(248, 248, 242, 0.95);
+      border-radius: 4px;
+      padding: 10px 0;
+      min-width: 150px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    #dropdown-menu a {
+      display: block;
+      padding: 8px 20px;
+      color: #333;
+      text-decoration: none;
+      font-size: 1.1rem;
+      text-align: right;
+      transition: color 0.2s ease;
+      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+    }
+
+    #dropdown-menu a:hover {
+      color: #c72a2a;
+    }
+
+    #menu-container:hover #dropdown-menu {
+      display: block;
     }
 
     /* Mobile Styles */
@@ -180,25 +224,42 @@
       }
       
       h1 {
+        font-size: 2.5rem;
+      }
+      
+      h2 {
         font-size: 2.2rem;
+      }
+      
+      .ingredients, .instructions {
+        padding: 15px;
+      }
+      
+      #menu-icon {
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
       }
       
       h2 {
         font-size: 1.8rem;
       }
       
-      .ingredients, .instructions {
-        padding: 15px;
+      .food-image.right-image {
+        max-height: 45vh;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Menu -->
+  <!-- Fixed Menu -->
   <div id="menu-container">
-    <a href="/" id="home-link">
-      <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
-    </a>
+    <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
     <div id="dropdown-menu">
       <a href="meat.html">Meat</a>
       <a href="entrees.html">Entrees</a>
@@ -222,7 +283,7 @@
   <!-- Second Section - Pesto Sauce -->
   <div class="section" id="section2">
     <div class="recipe-content">
-      <h2>Fresh Basil Pesto</h2>
+      <h2 class="pesto-header">PESTO</h2>
       
       <div class="ingredients">
         <h3>Ingredients</h3>
@@ -254,7 +315,7 @@
   <!-- Third Section - Red Sauce -->
   <div class="section" id="section3">
     <div class="recipe-content">
-      <h2>Homemade Red Sauce</h2>
+      <h2 class="redsauce-header">RED SAUCE</h2>
       
       <div class="ingredients">
         <h3>Ingredients</h3>
@@ -277,5 +338,20 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Handle menu hover
+    document.getElementById('menu-icon').addEventListener('click', function() {
+      const menu = document.getElementById('dropdown-menu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    });
+    
+    // Close menu when clicking elsewhere
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#menu-container')) {
+        document.getElementById('dropdown-menu').style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
