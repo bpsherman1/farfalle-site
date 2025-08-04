@@ -37,42 +37,43 @@
       background-color: #e0d9c1;
     }
 
-    /* Image Layout - Desktop */
+    /* Image Layout */
     .image-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      max-width: 1400px; /* Increased from 1200px */
+      max-width: 1400px;
       margin: 0 auto;
-      gap: 20px; /* Reduced gap between elements */
+      gap: 20px;
     }
     
     .food-image {
-      height: 70vh; /* Changed from max-height to fixed height */
+      height: 70vh;
       width: auto;
-      max-width: 40%; /* Increased from 35% */
+      max-width: 40%;
       object-fit: contain;
       transition: transform 0.3s ease;
+      border: 1px solid transparent; /* Debug border - can remove */
     }
     
     .left-image {
-      margin-left: -50px; /* Pushes left image closer to edge */
+      margin-left: -50px;
     }
     
     .right-image {
-      margin-right: -50px; /* Pushes right image closer to edge */
+      margin-right: -50px;
     }
     
     .recipe-content {
-      flex: 0 1 600px; /* Gives text content more fixed width */
+      flex: 0 1 600px;
       text-align: center;
       padding: 0 40px;
     }
     
     /* Text Styles */
     h1 {
-      font-size: 3.5rem; /* Slightly larger */
+      font-size: 3.5rem;
       margin-bottom: 1.5rem;
     }
     
@@ -82,12 +83,12 @@
     }
     
     p {
-      font-size: 1.3rem; /* Slightly larger */
+      font-size: 1.3rem;
       line-height: 1.6;
       margin: 0 auto 1.5rem;
     }
 
-    /* Menu Styles (unchanged) */
+    /* Menu Styles */
     #menu-container {
       position: fixed;
       top: 20px;
@@ -146,7 +147,7 @@
       display: block;
     }
 
-    /* Mobile Styles (unchanged) */
+    /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
         height: auto;
@@ -210,12 +211,14 @@
   <!-- First Section with Images and Text -->
   <div class="section" id="section1">
     <div class="image-container">
-      <img src="/images2/MB.png" alt="Meatball Recipe" class="food-image left-image">
+      <!-- Added error handling and fixed path -->
+      <img src="images2/MB.png" alt="Meatball Recipe" class="food-image left-image" 
+           onerror="console.error('Failed to load MB.png')">
       <div class="recipe-content">
         <h1>Meat Recipes</h1>
         <p>Discover our collection of hearty meat dishes, featuring classic recipes with modern twists that will satisfy any carnivorous craving.</p>
       </div>
-      <img src="/images2/cutlet.png" alt="Cutlet Recipe" class="food-image right-image">
+      <img src="images2/c.png" alt="Cutlet Recipe" class="food-image right-image">
     </div>
   </div>
 
@@ -236,5 +239,15 @@
       <p>Ingredients: Chicken breast, flour, eggs, breadcrumbs, spices</p>
     </div>
   </div>
+
+  <script>
+    // Debug script to verify image paths
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = document.querySelectorAll('.food-image');
+      images.forEach(img => {
+        console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
+      });
+    });
+  </script>
 </body>
 </html>
