@@ -132,16 +132,17 @@
     }
     
     /* Desktop pizza size */
-    .pizza-foreground {
-      position: absolute;
-      height: 80vh; /* 80% of viewport height */
-      width: auto; /* Maintain aspect ratio */
-      left: 5%;
-      bottom: 10%;
-      z-index: 2;
-      transition: transform 0.3s ease;
-      max-height: 90vh; /* Prevent being taller than screen */
-    }
+   .pizza-foreground {
+  position: fixed;
+  height: 80vh;
+  width: auto;
+  left: 5%;
+  bottom: 10%;
+  z-index: 10; /* Higher z-index to appear above everything */
+  transition: transform 0.3s ease;
+  max-height: 90vh;
+  pointer-events: auto; /* Ensure it remains clickable */
+}
     
     /* Mobile pizza size */
     @media (max-width: 768px) {
