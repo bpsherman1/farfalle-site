@@ -18,18 +18,17 @@
     
     /* Section Styles */
     .section {
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-      padding: 40px 20px;
+      padding: 20px;
       box-sizing: border-box;
     }
     
     #section1 {
       background-color: #f0e6d2;
-      flex-direction: column;
     }
     
     #section2 {
@@ -40,29 +39,37 @@
       background-color: #e0d9c1;
     }
 
-    /* Image Layout - Desktop */
+    /* Image Layout */
     .image-container {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       width: 100%;
       max-width: 1400px;
       margin: 0 auto;
-      gap: 40px;
+      gap: 20px;
     }
     
     .food-image {
-      height: 80vh;
+      height: 70vh;
       width: auto;
-      max-width: 45%;
+      max-width: 40%;
       object-fit: contain;
     }
     
+    .left-image {
+      margin-left: -50px;
+    }
+    
+    .right-image {
+      margin-right: -50px;
+      transform: translateY(20px);
+    }
+    
     .recipe-content {
+      flex: 0 1 600px;
       text-align: center;
       padding: 0 40px;
-      max-width: 800px;
-      margin: 0 auto 40px;
     }
     
     /* Text Styles */
@@ -99,133 +106,38 @@
       font-size: 1.3rem;
       margin: 0 auto 1.5rem;
     }
-    
-    .ingredients {
-      background-color: rgba(255,255,255,0.3);
-      padding: 20px;
-      border-radius: 10px;
-      margin: 20px auto;
-      max-width: 600px;
-      text-align: left;
-    }
-    
-    .ingredients ul {
-      padding-left: 20px;
-    }
-    
-    .ingredients li {
-      margin-bottom: 8px;
-      list-style-type: none;
-      position: relative;
-      padding-left: 25px;
-    }
-    
-    .ingredients li:before {
-      content: "•";
-      color: #c72a2a;
-      position: absolute;
-      left: 0;
-      font-size: 1.5em;
-      line-height: 1;
-    }
-    
-    .instructions {
-      text-align: left;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    
-    .instructions p {
-      margin-bottom: 15px;
-      position: relative;
-      padding-left: 30px;
-    }
-    
-    .instructions p:before {
-      content: "➤";
-      color: #8b5a2b;
-      position: absolute;
-      left: 0;
-    }
-
-    /* Menu Styles */
-    #menu-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    #home-link {
-      display: block;
-    }
-
-    #menu-icon {
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      transition: filter 0.2s ease;
-    }
-
-    #dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: rgba(248, 248, 242, 0.95);
-      border-radius: 4px;
-      padding: 10px 0;
-      min-width: 150px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    #dropdown-menu a {
-      display: block;
-      padding: 8px 20px;
-      color: #333;
-      text-decoration: none;
-      font-size: 1.1rem;
-      text-align: right;
-      transition: color 0.2s ease;
-      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-    }
-
-    #dropdown-menu a:hover {
-      color: #c72a2a;
-    }
-
-    #menu-container:hover #dropdown-menu {
-      display: block;
-    }
 
     /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
-        padding: 80px 20px 20px;
-        min-height: auto;
+        height: auto;
+        min-height: 100vh;
+        padding: 80px 20px;
+        flex-direction: column;
       }
       
       .image-container {
         flex-direction: column;
-        gap: 10px;
+        order: 2;
+        gap: 30px;
+      }
+      
+      .recipe-content {
+        order: 1;
+        margin-bottom: 30px;
+        padding: 0;
       }
       
       .food-image {
         height: auto;
+        max-height: 40vh;
+        max-width: 80%;
+        margin: 0 !important;
+        transform: none !important;
+      }
+      
+      .food-image.right-image {
         max-height: 50vh;
-        max-width: 100%;
-        margin: 10px 0 !important;
-      }
-      
-      #section1 .food-image.right-image {
-        order: 1;
-        margin-top: 20px !important;
-        max-height: 60vh;
-      }
-      
-      .recipe-content {
-        padding: 0 20px;
-        margin-bottom: 20px;
       }
       
       h1 {
@@ -235,19 +147,11 @@
       h2 {
         font-size: 2.2rem;
       }
-      
-      .ingredients, .instructions {
-        padding: 15px;
-      }
     }
 
     @media (max-width: 480px) {
-      .food-image {
+      .food-image.right-image {
         max-height: 55vh;
-      }
-      
-      #section1 .food-image.right-image {
-        max-height: 65vh;
       }
       
       h1 {
@@ -274,14 +178,14 @@
     </div>
   </div>
 
-  <!-- First Section with Images and Text -->
+  <!-- First Section - Original Layout -->
   <div class="section" id="section1">
-    <div class="recipe-content">
-      <h1>Sauces</h1>
-      <p>Discover our collection of flavorful sauces, from classic recipes to modern creations that will elevate any dish.</p>
-    </div>
     <div class="image-container">
       <img src="images2/pesto2.png" alt="Pesto Sauce" class="food-image left-image">
+      <div class="recipe-content">
+        <h1>Sauces</h1>
+        <p>Discover our collection of flavorful sauces, from classic recipes to modern creations that will elevate any dish.</p>
+      </div>
       <img src="images2/RS.png" alt="Marinara Sauce" class="food-image right-image">
     </div>
   </div>
