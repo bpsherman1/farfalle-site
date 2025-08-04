@@ -5,6 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meat Recipes | The Food Gallery</title>
   <style>
+    /* ADDED BACKGROUND COLORS */
+    body {
+      background-color: #f9f5f0; /* Warm off-white background */
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Georgia', serif;
+    }
+    
+    .section {
+      background-color: #f8f8f2; /* Slightly different shade */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    #section1 {
+      background-color: #f0e6d2; /* Warm beige */
+    }
+    
+    #section2 {
+      background-color: #e8e0c9; /* Slightly darker beige */
+    }
+
+    /* EXISTING MENU STYLES */
     #menu-container {
       position: fixed;
       top: 20px;
@@ -59,6 +84,17 @@
 
     #menu-container:hover #dropdown-menu {
       display: block;
+    }
+    
+    /* Additional content styling */
+    .section-content {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    h1 {
+      color: #5c4d3c; /* Earthy brown for headings */
+      font-size: 3rem;
     }
   </style>
 </head>
