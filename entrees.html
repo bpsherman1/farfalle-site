@@ -219,10 +219,6 @@
         <div class="slide">
           <img src="images2/CP.png" alt="Chicken Parmesan" class="slide-image">
         </div>
-        <!-- Clone first image for seamless loop -->
-        <div class="slide">
-          <img src="images2/MBR.png" alt="Meatball Roll" class="slide-image">
-        </div>
       </div>
     </div>
     <div class="recipe-content">
@@ -254,17 +250,20 @@
       let currentIndex = 0;
       let slideWidth = 0;
       let isTransitioning = false;
-      let pauseTimer;
-      let slideTimer;
+      let slideInterval;
 
       // Initialize slideshow
       function initSlideshow() {
-        slideWidth = slides[0].getBoundingClientRect().width;
+        slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
         
         // Position slides horizontally
         slides.forEach((slide, index) => {
           slide.style.left = `${slideWidth * index}px`;
         });
+        
+        // Clone first slide and append to end for seamless looping
+        const firstSlide = slides[0].cloneNode(true);
+        track.appendChild(firstSlide);
         
         // Start the slideshow
         startSlideShow();
@@ -282,18 +281,16 @@
         track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
         
         // Check if we need to reset position for infinite loop
-        if (currentIndex === slideCount - 1) {
-          clearTimeout(pauseTimer);
-          pauseTimer = setTimeout(() => {
+        if (currentIndex === slideCount) {
+          setTimeout(() => {
             track.style.transition = 'none';
             currentIndex = 0;
             track.style.transform = 'translateX(0)';
             setTimeout(() => {
               track.style.transition = 'transform 0.8s ease-in-out';
               isTransitioning = false;
-              startSlideShow(); // Restart the cycle
             }, 20);
-          }, 4000); // Pause for 4 seconds at the end
+          }, 800);
         } else {
           setTimeout(() => {
             isTransitioning = false;
@@ -301,21 +298,15 @@
         }
       }
 
-      // Start the slideshow with pauses
+      // Start the slideshow with automatic transitions
       function startSlideShow() {
-        clearTimeout(slideTimer);
-        slideTimer = setTimeout(() => {
-          goToNextSlide();
-          // Continue the cycle after moving
-          if (currentIndex < slideCount - 2) {
-            startSlideShow();
-          }
-        }, 4000); // 4 second pause between slides
+        clearInterval(slideInterval);
+        slideInterval = setInterval(goToNextSlide, 3000); // 3 second interval
       }
 
       // Handle window resize
       window.addEventListener('resize', function() {
-        slideWidth = slides[0].getBoundingClientRect().width;
+        slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
         track.style.transition = 'none';
         track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
       });
