@@ -62,6 +62,8 @@
     
     .right-image {
       margin-right: -50px;
+      position: relative;
+      top: 20px; /* Move right image down 20px on desktop */
     }
     
     .recipe-content {
@@ -96,56 +98,6 @@
       padding-bottom: 20px;
     }
 
-    #home-link {
-      display: block;
-      text-decoration: none;
-    }
-
-    #menu-icon {
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      display: block;
-      transition: filter 0.2s ease;
-    }
-
-    #home-link:hover #menu-icon {
-      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
-    }
-
-    #dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: transparent;
-      border: none;
-      box-shadow: none;
-      z-index: 3;
-    }
-  
-    #dropdown-menu a {
-      display: block;
-      padding: 10px 0;
-      color: #333;
-      text-decoration: none;
-      white-space: nowrap;
-      font-size: 1.2rem;
-      text-align: right;
-      transition: color 0.2s ease;
-      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-      font-weight: 500;
-    }
-
-    #dropdown-menu a:hover {
-      background-color: transparent;
-      color: #c72a2a;
-    }
-
-    #menu-container:hover #dropdown-menu {
-      display: block;
-    }
-
     /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
@@ -162,10 +114,20 @@
       
       .food-image {
         height: auto;
-        max-height: 40vh;
-        max-width: 80%;
+        max-width: 90%;
         margin-left: 0;
         margin-right: 0;
+      }
+      
+      /* Make bottom image (RS.png) larger on mobile */
+      .food-image.right-image {
+        max-height: 50vh;
+        width: auto;
+      }
+      
+      /* Reset the desktop positioning on mobile */
+      .right-image {
+        top: 0;
       }
       
       .recipe-content {
@@ -187,8 +149,9 @@
         font-size: 1.8rem;
       }
       
-      .food-image {
-        max-height: 30vh;
+      /* Make bottom image even larger on very small screens */
+      .food-image.right-image {
+        max-height: 60vh;
       }
     }
   </style>
@@ -210,14 +173,12 @@
   <!-- First Section with Images and Text -->
   <div class="section" id="section1">
     <div class="image-container">
-      <img src="images2/pesto2.png" alt="Pesto Sauce" class="food-image left-image" 
-           onerror="console.error('Failed to load pesto2.png')">
+      <img src="images2/pesto2.png" alt="Pesto Sauce" class="food-image left-image">
       <div class="recipe-content">
         <h1>Sauces</h1>
         <p>Discover our collection of flavorful sauces, from classic recipes to modern creations that will elevate any dish.</p>
       </div>
-      <img src="images2/RS.png" alt="Red Sauce" class="food-image right-image"
-           onerror="console.error('Failed to load RS.png')">
+      <img src="images2/RS.png" alt="Red Sauce" class="food-image right-image">
     </div>
   </div>
 
@@ -226,7 +187,6 @@
     <div class="recipe-content">
       <h2>Fresh Basil Pesto</h2>
       <p>Our vibrant green pesto is made with fresh basil, pine nuts, parmesan, and the finest olive oil.</p>
-      <p>Ingredients: Fresh basil, pine nuts, garlic, parmesan, olive oil, lemon juice</p>
     </div>
   </div>
 
@@ -235,18 +195,7 @@
     <div class="recipe-content">
       <h2>Homemade Red Sauce</h2>
       <p>A rich, slow-simmered tomato sauce with herbs and spices - the perfect base for pasta dishes.</p>
-      <p>Ingredients: San Marzano tomatoes, garlic, onions, olive oil, basil, oregano</p>
     </div>
   </div>
-
-  <script>
-    // Debug script to verify image paths
-    document.addEventListener('DOMContentLoaded', function() {
-      const images = document.querySelectorAll('.food-image');
-      images.forEach(img => {
-        console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
-      });
-    });
-  </script>
 </body>
 </html>
