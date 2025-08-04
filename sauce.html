@@ -1,9 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sauces | The Food Gallery</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
     /* Base Styles */
     body {
@@ -17,12 +17,12 @@
     
     /* Section Styles */
     .section {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
-      padding: 20px;
+      padding: 40px 20px;
       box-sizing: border-box;
     }
     
@@ -54,6 +54,7 @@
       width: auto;
       max-width: 40%;
       object-fit: contain;
+      transition: transform 0.3s ease;
     }
     
     .left-image {
@@ -72,27 +73,23 @@
     }
     
     /* Text Styles */
-    h1, h2 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-    }
-    
     h1 {
       font-size: 3.5rem;
       margin-bottom: 1.5rem;
     }
     
     h2 {
-      font-size: 3rem;
+      font-size: 3.5rem; /* Larger header size */
       margin-bottom: 1.5rem;
+      text-transform: uppercase;
     }
     
     .pesto-header {
-      color: #3a7a22;
+      color: #3a7a22; /* Darker green color for pesto */
     }
     
-    .marinara-header {
-      color: #c72a2a;
+    .redsauce-header {
+      color: #d62c2c; /* Vibrant red color for red sauce */
     }
     
     h3 {
@@ -105,6 +102,54 @@
       font-size: 1.3rem;
       margin: 0 auto 1.5rem;
     }
+    
+    .ingredients {
+      background-color: rgba(255,255,255,0.3);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: left;
+    }
+    
+    .ingredients ul {
+      padding-left: 20px;
+    }
+    
+    .ingredients li {
+      margin-bottom: 8px;
+      list-style-type: none;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .ingredients li:before {
+      content: "•";
+      color: #c72a2a;
+      position: absolute;
+      left: 0;
+      font-size: 1.5em;
+      line-height: 1;
+    }
+    
+    .instructions {
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .instructions p {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .instructions p:before {
+      content: "➤";
+      color: #8b5a2b;
+      position: absolute;
+      left: 0;
+    }
 
     /* Fixed Menu Styles */
     #menu-container {
@@ -116,7 +161,6 @@
 
     #home-link {
       display: block;
-      text-decoration: none;
     }
 
     #menu-icon {
@@ -136,7 +180,6 @@
       padding: 10px 0;
       min-width: 150px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      z-index: 1001;
     }
 
     #dropdown-menu a {
@@ -158,75 +201,68 @@
       display: block;
     }
 
-    /* Mobile Styles - Corrected Layout */
-   @media (max-width: 768px) {
+    /* Mobile Styles */
+    @media (max-width: 768px) {
       .section {
-        height: auto;
-        min-height: 100vh;
-        padding: 80px 20px 20px; /* Reduced bottom padding */
-        flex-direction: column;
+        padding: 100px 20px 60px;
       }
       
-      #section1 .image-container {
+      .image-container {
         flex-direction: column;
-        gap: 10px; /* Reduced gap between items */
-      }
-      
-      #section1 .recipe-content {
-        margin: 10px 0; /* Reduced margin around text */
-        padding: 0;
+        gap: 30px;
       }
       
       .food-image {
         height: auto;
-        max-width: 90%;
-        margin: 0 auto !important;
-      }
-      
-      #section1 .food-image.left-image {
         max-height: 40vh;
-        order: 1;
+        max-width: 90%;
+        margin: 0 !important;
+        transform: none !important;
       }
       
-      #section1 .food-image.right-image {
+      .food-image.right-image {
         max-height: 50vh;
-        order: 3;
-        margin-top: 10px !important; /* Reduced space above RS image */
+      }
+      
+      .recipe-content {
+        padding: 0 20px;
       }
       
       h1 {
         font-size: 2.5rem;
-        margin-bottom: 0.5rem; /* Tighter spacing */
       }
       
-      p {
-        margin-bottom: 0.5rem; /* Tighter spacing */
+      h2 {
+        font-size: 2.5rem;
+      }
+      
+      .ingredients, .instructions {
+        padding: 15px;
+      }
+      
+      #menu-icon {
+        width: 35px;
+        height: 35px;
       }
     }
 
     @media (max-width: 480px) {
-      #section1 .food-image.right-image {
-        max-height: 55vh;
-        margin-top: 5px !important; /* Minimal space above image */
-      }
-      
-      .section {
-        padding: 70px 15px 15px; /* Tighter overall padding */
-      }
-    }
-      
       h1 {
         font-size: 2rem;
       }
       
       h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
+      }
+      
+      .food-image.right-image {
+        max-height: 45vh;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Fixed Menu - Corrected -->
+  <!-- Fixed Menu -->
   <div id="menu-container">
     <a href="/" id="home-link">
       <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
@@ -239,7 +275,7 @@
     </div>
   </div>
 
-  <!-- First Section - Corrected Mobile Order -->
+  <!-- First Section with Images and Text -->
   <div class="section" id="section1">
     <div class="image-container">
       <img src="images2/pesto2.png" alt="Pesto Sauce" class="food-image left-image">
@@ -247,11 +283,12 @@
         <h1>Sauces</h1>
         <p>Discover our collection of flavorful sauces, from classic recipes to modern creations that will elevate any dish.</p>
       </div>
-      <img src="images2/RS.png" alt="Marinara Sauce" class="food-image right-image">
+      <img src="images2/RS.png" alt="Red Sauce" class="food-image right-image">
     </div>
   </div>
-<!-- Second Section - Pesto Sauce -->
- <div class="section" id="section2">
+
+  <!-- Second Section - Pesto Sauce -->
+  <div class="section" id="section2">
     <div class="recipe-content">
       <h2 class="pesto-header">PESTO</h2>
       
@@ -282,10 +319,10 @@
     </div>
   </div>
 
-  <!-- Third Section - Marinara Sauce -->
+  <!-- Third Section - Red Sauce -->
   <div class="section" id="section3">
     <div class="recipe-content">
-      <h2 class="marinara-header">Marinara</h2>
+      <h2 class="redsauce-header">RED SAUCE</h2>
       
       <div class="ingredients">
         <h3>Ingredients</h3>
@@ -308,8 +345,5 @@
       </div>
     </div>
   </div>
-  <!-- [Rest of your sections remain unchanged] -->
-</body>
-</html>
 </body>
 </html>
