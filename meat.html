@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entrees | The Food Gallery</title>
+  <title>Meat Recipes | The Food Gallery</title>
   <style>
     /* Base Styles */
     body {
@@ -12,7 +12,6 @@
       min-height: 100vh;
       font-family: 'Georgia', serif;
       color: #5c4d3c;
-      overflow-x: hidden;
     }
     
     /* Section Styles */
@@ -28,7 +27,6 @@
     
     #section1 {
       background-color: #f0e6d2;
-      flex-direction: column;
     }
     
     #section2 {
@@ -39,49 +37,41 @@
       background-color: #e0d9c1;
     }
 
-    /* Slideshow Container */
-    .slideshow-container {
+    /* Image Layout */
+    .image-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       width: 100%;
       max-width: 1400px;
-      height: 70vh;
-      position: relative;
       margin: 0 auto;
-      overflow: hidden;
+      gap: 20px;
     }
     
-    .slideshow-track {
-      display: flex;
-      height: 100%;
-      position: absolute;
-      left: 0;
-      transition: transform 0.8s ease-in-out;
-    }
-    
-    .slide {
-      min-width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .slide-image {
-      height: 100%;
+    .food-image {
+      height: 70vh;
       width: auto;
       max-width: 40%;
       object-fit: contain;
+      transition: transform 0.3s ease;
+      border: 1px solid transparent; /* Debug border - can remove */
+    }
+    
+    .left-image {
+      margin-left: -50px;
+    }
+    
+    .right-image {
+      margin-right: -50px;
+    }
+    
+    .recipe-content {
+      flex: 0 1 600px;
+      text-align: center;
+      padding: 0 40px;
     }
     
     /* Text Styles */
-    .recipe-content {
-      text-align: center;
-      padding: 0 40px;
-      max-width: 800px;
-      margin: 20px auto 0;
-      position: relative;
-      z-index: 2;
-    }
-    
     h1 {
       font-size: 3.5rem;
       margin-bottom: 1.5rem;
@@ -98,12 +88,12 @@
       margin: 0 auto 1.5rem;
     }
 
-    /* Menu Styles - UNCHANGED */
+    /* Menu Styles */
     #menu-container {
       position: fixed;
       top: 20px;
       right: 20px;
-      z-index: 100;
+      z-index: 2;
       padding-bottom: 20px;
     }
 
@@ -129,14 +119,15 @@
       position: absolute;
       top: 100%;
       right: 0;
-      background-color: rgba(248, 248, 242, 0.9);
-      border-radius: 4px;
-      z-index: 101;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      z-index: 3;
     }
   
     #dropdown-menu a {
       display: block;
-      padding: 10px 20px;
+      padding: 10px 0;
       color: #333;
       text-decoration: none;
       white-space: nowrap;
@@ -161,15 +152,26 @@
       .section {
         height: auto;
         min-height: 100vh;
-        padding: 80px 20px 60px;
+        padding: 60px 20px;
       }
       
-      .slideshow-container {
-        height: 50vh;
+      .image-container {
+        flex-direction: column;
+        gap: 30px;
+        max-width: 100%;
       }
       
-      .slide-image {
+      .food-image {
+        height: auto;
+        max-height: 40vh;
         max-width: 80%;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      
+      .recipe-content {
+        flex: 1;
+        padding: 0 20px;
       }
       
       h1 {
@@ -186,14 +188,14 @@
         font-size: 1.8rem;
       }
       
-      .slideshow-container {
-        height: 40vh;
+      .food-image {
+        max-height: 30vh;
       }
     }
   </style>
 </head>
 <body>
-  <!-- MENU HTML - UNCHANGED -->
+  <!-- MENU HTML -->
   <div id="menu-container">
     <a href="/" id="home-link">
       <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
@@ -206,113 +208,45 @@
     </div>
   </div>
 
-  <!-- First Section with Slideshow -->
+  <!-- First Section with Images and Text -->
   <div class="section" id="section1">
-    <div class="slideshow-container" id="entreesSlideshow">
-      <div class="slideshow-track">
-        <div class="slide">
-          <img src="images2/MBR.png" alt="Meatball Roll" class="slide-image">
-        </div>
-        <div class="slide">
-          <img src="images2/CR.png" alt="Chicken Roll" class="slide-image">
-        </div>
-        <div class="slide">
-          <img src="images2/CP.png" alt="Chicken Parmesan" class="slide-image">
-        </div>
+    <div class="image-container">
+      <!-- Added error handling and fixed path -->
+      <img src="images2/MB.png" alt="Meatball Recipe" class="food-image left-image" 
+           onerror="console.error('Failed to load MB.png')">
+      <div class="recipe-content">
+        <h1>Meat Recipes</h1>
+        <p>Discover our collection of hearty meat dishes, featuring classic recipes with modern twists that will satisfy any carnivorous craving.</p>
       </div>
-    </div>
-    <div class="recipe-content">
-      <h1>Entrees</h1>
-      <p>Discover our rotating selection of delicious entree options.</p>
+      <img src="images2/c.png" alt="Cutlet Recipe" class="food-image right-image">
     </div>
   </div>
 
-  <!-- Other Sections -->
+  <!-- Second Section - Meatballs -->
   <div class="section" id="section2">
     <div class="recipe-content">
-      <h2>Featured Entrees</h2>
-      <p>Our chefs prepare each entree with care.</p>
+      <h2>Grandma's Meatballs</h2>
+      <p>Juicy, tender meatballs simmered in a rich tomato sauce - a family recipe passed down for generations.</p>
+      <p>Ingredients: Ground beef, breadcrumbs, eggs, parmesan, garlic, herbs</p>
     </div>
   </div>
 
+  <!-- Third Section - Cutlets -->
   <div class="section" id="section3">
     <div class="recipe-content">
-      <h2>Weekly Specials</h2>
-      <p>Seasonal specials showcasing the best flavors.</p>
+      <h2>Crispy Chicken Cutlets</h2>
+      <p>Perfectly golden and crunchy on the outside, tender and juicy on the inside - our signature cutlets never disappoint.</p>
+      <p>Ingredients: Chicken breast, flour, eggs, breadcrumbs, spices</p>
     </div>
   </div>
 
   <script>
+    // Debug script to verify image paths
     document.addEventListener('DOMContentLoaded', function() {
-      const track = document.querySelector('.slideshow-track');
-      const slides = document.querySelectorAll('.slide');
-      const slideCount = slides.length;
-      let currentIndex = 0;
-      let slideWidth = 0;
-      let isTransitioning = false;
-      let slideInterval;
-
-      // Initialize slideshow
-      function initSlideshow() {
-        slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
-        
-        // Position slides horizontally
-        slides.forEach((slide, index) => {
-          slide.style.left = `${slideWidth * index}px`;
-        });
-        
-        // Clone first slide and append to end for seamless looping
-        const firstSlide = slides[0].cloneNode(true);
-        track.appendChild(firstSlide);
-        
-        // Start the slideshow
-        startSlideShow();
-      }
-
-      // Handle slide transition
-      function goToNextSlide() {
-        if (isTransitioning) return;
-        
-        isTransitioning = true;
-        currentIndex++;
-        
-        // Smooth transition to next slide
-        track.style.transition = 'transform 0.8s ease-in-out';
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-        
-        // Check if we need to reset position for infinite loop
-        if (currentIndex === slideCount) {
-          setTimeout(() => {
-            track.style.transition = 'none';
-            currentIndex = 0;
-            track.style.transform = 'translateX(0)';
-            setTimeout(() => {
-              track.style.transition = 'transform 0.8s ease-in-out';
-              isTransitioning = false;
-            }, 20);
-          }, 800);
-        } else {
-          setTimeout(() => {
-            isTransitioning = false;
-          }, 800);
-        }
-      }
-
-      // Start the slideshow with automatic transitions
-      function startSlideShow() {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(goToNextSlide, 3000); // 3 second interval
-      }
-
-      // Handle window resize
-      window.addEventListener('resize', function() {
-        slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
-        track.style.transition = 'none';
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+      const images = document.querySelectorAll('.food-image');
+      images.forEach(img => {
+        console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
       });
-
-      // Start the slideshow
-      initSlideshow();
     });
   </script>
 </body>
