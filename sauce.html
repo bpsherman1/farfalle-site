@@ -54,16 +54,21 @@
       width: auto;
       max-width: 40%;
       object-fit: contain;
-      transition: transform 0.3s ease;
+      transition: transform 1s ease-out, opacity 1s ease-out;
+      opacity: 0;
     }
     
     .left-image {
-      margin-left: -50px;
+      transform: translateX(-100px);
     }
     
     .right-image {
-      margin-right: -50px;
-      transform: translateY(20px);
+      transform: translateX(100px) translateY(20px);
+    }
+    
+    .slide-in {
+      opacity: 1;
+      transform: translateX(0) translateY(0) !important;
     }
     
     .recipe-content {
@@ -234,7 +239,7 @@
         position: absolute;
         top: 40px;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%) translateX(-100px);
         width: 90%;
         max-width: 90%;
         height: auto;
@@ -258,7 +263,7 @@
         position: absolute;
         top: calc(vh + 280px); /* Added 50px to original 220px */
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%) translateX(100px);
         width: 150%;
         max-height: 75vh;
         margin: 0 !important;
@@ -267,6 +272,15 @@
       /* Adjust section spacing below */
       #section2, #section3 {
         padding-top: calc(35vh + 45vh + 300px); /* Added 50px */
+      }
+      
+      /* Mobile slide-in animation */
+      #section1 .food-image.left-image.slide-in {
+        transform: translateX(-50%) !important;
+      }
+      
+      #section1 .food-image.right-image.slide-in {
+        transform: translateX(-50%) !important;
       }
     }
 
@@ -413,5 +427,19 @@
       </div>
     </div>
   </div>
+
+  <script>
+    // Add slide-in animation when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      const leftImage = document.querySelector('.left-image');
+      const rightImage = document.querySelector('.right-image');
+      
+      // Trigger the animation after a short delay to allow the page to render
+      setTimeout(function() {
+        leftImage.classList.add('slide-in');
+        rightImage.classList.add('slide-in');
+      }, 100);
+    });
+  </script>
 </body>
 </html>
