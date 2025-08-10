@@ -266,6 +266,7 @@
 
   <!-- P5 SCRIPT -->
 <!-- P5 SCRIPT - FIXED VERSION -->
+<!-- P5 SCRIPT - WITH FONT FIX AND SCROLL DIRECTION -->
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 <script>
     let foodImages = [];
@@ -273,25 +274,19 @@
     const iconCount = 8;
     let speedMultiplier = 1.0;
     let baseSpeed = 1.0;
-    let scrollTimeout;
-    let lastScrollTime = 0;
-    let direction = 1;
+    let direction = 1; // Start with left-to-right (1 = right, -1 = left)
     let sketchRunning = true;
     let firstSectionHeight = window.innerHeight;
     let lastScrollTop = 0;
     let scrollThrottleTimeout;
+    let lastScrollTime = 0;
 
-    // Preload images with fallbacks
     function preload() {
-        // Try loading images with error handling
-        try {
-            foodImages.push(loadImage('/images/garlic.png'));
-            foodImages.push(loadImage('/images/pom.png'));
-            foodImages.push(loadImage('/images/basil.png'));
-            foodImages.push(loadImage('/images/pizza.png'));
-        } catch (e) {
-            console.log("Error loading images:", e);
-        }
+        // Load your food images
+        foodImages.push(loadImage('/images/garlic.png'));
+        foodImages.push(loadImage('/images/pom.png'));
+        foodImages.push(loadImage('/images/basil.png'));
+        foodImages.push(loadImage('/images/pizza.png'));
     }
 
     function setup() {
@@ -307,23 +302,18 @@
         let canvas = createCanvas(windowWidth, windowHeight);
         canvas.parent('sketch-container');
         textAlign(CENTER, CENTER);
+        textStyle(BOLD);
         
-        // Fallback font if custom font fails
-        textFont('Georgia');
-        
-        // Initialize icons
+        // Initialize icons moving right (left-to-right)
         for (let i = 0; i < iconCount; i++) {
             icons.push({
-                x: i * (width / iconCount) - random(50),
+                x: random(-width, 0), // Start off left side
                 y: random(height),
-                speed: random(0.2, 0.8) * baseSpeed,
+                speed: random(0.5, 1.5) * baseSpeed,
                 imgIndex: floor(random(foodImages.length)),
-                sizeMultiplier: random(0.7, 1.0)
+                sizeMultiplier: random(0.7, 1.3)
             });
         }
-        
-        // Ensure sketch starts running
-        sketchRunning = true;
     }
 
     function isMobile() {
@@ -339,9 +329,8 @@
 
         clear();
         
-        // Text rendering
+        // Text rendering - maintains your original font styling
         fill(0);
-        textStyle(BOLD);
         textSize(isMobile() ? 50 : 80);
         
         if (isMobile()) {
@@ -354,26 +343,26 @@
         // Icon rendering
         for (let icon of icons) {
             let currentImg = foodImages[icon.imgIndex % foodImages.length];
-            let imgWidth = 40 * icon.sizeMultiplier;
+            let imgWidth = 50 * icon.sizeMultiplier;
             let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
             // Main image
             image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
-            // Movement
+            // Movement based on current direction
             icon.x += direction * icon.speed * speedMultiplier;
             
-            if ((direction === 1 && icon.x > width) || 
-                (direction === -1 && icon.x < -imgWidth)) {
-                resetIcon(icon);
+            // Wrap around screen edges
+            if (direction === 1 && icon.x > width) {
+                icon.x = -imgWidth;
+                icon.y = random(height);
+                icon.imgIndex = floor(random(foodImages.length));
+            } else if (direction === -1 && icon.x < -imgWidth) {
+                icon.x = width;
+                icon.y = random(height);
+                icon.imgIndex = floor(random(foodImages.length));
             }
         }
-    }
-
-    function resetIcon(icon) {
-        icon.x = direction === 1 ? -50 : width;
-        icon.y = random(height);
-        icon.imgIndex = floor(random(foodImages.length));
     }
 
     function windowResized() {
@@ -382,23 +371,43 @@
         resizeCanvas(windowWidth, windowHeight);
     }
 
-    // Scroll handler
+    // Scroll handler with direction change
     window.addEventListener('scroll', () => {
         const now = Date.now();
-        if (now - lastScrollTime < 100) return;
+        if (now - lastScrollTime < 50) return; // Throttle scroll events
         lastScrollTime = now;
 
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
+        // Determine scroll direction
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down - reverse to right-to-left
+            if (direction !== -1) {
+                direction = -1;
+                // Reverse all icons' directions
+                icons.forEach(icon => {
+                    icon.speed = random(0.5, 1.5) * baseSpeed;
+                });
+            }
+        } else if (scrollTop < lastScrollTop) {
+            // Scrolling up - normal left-to-right
+            if (direction !== 1) {
+                direction = 1;
+                // Reverse all icons' directions
+                icons.forEach(icon => {
+                    icon.speed = random(0.5, 1.5) * baseSpeed;
+                });
+            }
+        }
+
         sketchRunning = scrollTop < firstSectionHeight * 0.9;
         lastScrollTop = scrollTop;
 
-        direction = scrollTop > lastScrollTop ? 1 : -1;
-        speedMultiplier = 3.0;
-
+        // Speed up during scroll
+        speedMultiplier = 2.5;
         clearTimeout(scrollThrottleTimeout);
         scrollThrottleTimeout = setTimeout(() => {
             speedMultiplier = 1.0;
-        }, 150);
+        }, 200);
     }, { passive: true });
 </script>
