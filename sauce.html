@@ -435,10 +435,8 @@
       </div>
     </div>
   </div>
-
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Trigger animations after page loads
     setTimeout(function() {
       const leftImage = document.querySelector('.left-image');
       const rightImage = document.querySelector('.right-image');
@@ -448,18 +446,7 @@
       rightImage.classList.add('slide-in');
       recipeContent.classList.add('text-loaded');
     }, 100);
-    
-    // Debug script to verify image paths
-    const images = document.querySelectorAll('.food-image');
-    images.forEach(img => {
-      img.onload = function() {
-        console.log('Image loaded successfully:', img.alt);
-      };
-      img.onerror = function() {
-        console.error('Failed to load image:', img.alt);
-      };
-    });
   });
-</script>
+</script>cript>
 </body>
 </html>
