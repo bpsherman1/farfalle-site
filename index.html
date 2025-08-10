@@ -264,11 +264,7 @@
     </a>
   </div>
 
-  <!-- P5 SCRIPT -->
-<!-- P5 SCRIPT - FIXED VERSION -->
-<!-- P5 SCRIPT - WITH FONT FIX AND SCROLL DIRECTION -->
-<!-- P5 SCRIPT - WITH ORIGINAL FONT -->
-<!-- P5 SCRIPT - FINAL WORKING VERSION -->
+ <!-- P5 SCRIPT - WITH PRE-POPULATED MOVING IMAGES -->
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 <script>
     let foodImages = [];
@@ -277,7 +273,7 @@
     let customFont;
     let speedMultiplier = 1.0;
     let baseSpeed = 1.0;
-    let direction = 1; // Start with left-to-right (1 = right, -1 = left)
+    let direction = 1; // Left-to-right by default
     let sketchRunning = true;
     let firstSectionHeight = window.innerHeight;
     let lastScrollTop = 0;
@@ -285,10 +281,7 @@
     let lastScrollTime = 0;
 
     function preload() {
-        // Load your original font
         customFont = loadFont('fonts/the.otf');
-        
-        // Load food images
         foodImages.push(loadImage('/images/garlic.png'));
         foodImages.push(loadImage('/images/pom.png'));
         foodImages.push(loadImage('/images/basil.png'));
@@ -296,7 +289,6 @@
     }
 
     function setup() {
-        // Mobile adjustments
         if (isMobile()) {
             frameRate(30);
             baseSpeed = 1.5;
@@ -308,17 +300,17 @@
         let canvas = createCanvas(windowWidth, windowHeight);
         canvas.parent('sketch-container');
         textAlign(CENTER, CENTER);
-        textFont(customFont); // Apply your custom font
+        textFont(customFont);
         textStyle(BOLD);
         
-        // Initialize icons moving left-to-right
+        // Initialize icons spread across the entire canvas
         for (let i = 0; i < iconCount; i++) {
             icons.push({
-                x: random(-width, 0), // Start off left side
+                x: random(-width, width * 1.5), // Spread across and beyond canvas
                 y: random(height),
                 speed: random(0.5, 1.5) * baseSpeed,
                 imgIndex: floor(random(foodImages.length)),
-                sizeMultiplier: random(1, 5)
+                sizeMultiplier: random(2.0, 3.0)
             });
         }
     }
@@ -333,7 +325,7 @@
 
         clear();
         
-        // Text rendering with your original font
+        // Text rendering
         fill(0);
         textSize(isMobile() ? 50 : 80);
         
@@ -344,29 +336,31 @@
             text("The Food Gallery", width / 2, height / 2);
         }
 
-        // Icon rendering
+        // Render icons
         for (let icon of icons) {
             let currentImg = foodImages[icon.imgIndex];
-            let imgWidth = 50 * icon.sizeMultiplier;
+            let imgWidth = 80 * icon.sizeMultiplier;
             let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
-            // Main image
             image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
-            // Movement based on current direction
             icon.x += direction * icon.speed * speedMultiplier;
             
-            // Wrap around screen edges
             if (direction === 1 && icon.x > width) {
+                resetIcon(icon);
                 icon.x = -imgWidth;
-                icon.y = random(height);
-                icon.imgIndex = floor(random(foodImages.length));
             } else if (direction === -1 && icon.x < -imgWidth) {
+                resetIcon(icon);
                 icon.x = width;
-                icon.y = random(height);
-                icon.imgIndex = floor(random(foodImages.length));
             }
         }
+    }
+
+    function resetIcon(icon) {
+        icon.y = random(height);
+        icon.imgIndex = floor(random(foodImages.length));
+        icon.sizeMultiplier = random(2.0, 3.0);
+        icon.speed = random(0.5, 1.5) * baseSpeed;
     }
 
     function windowResized() {
@@ -375,39 +369,22 @@
         resizeCanvas(windowWidth, windowHeight);
     }
 
-    // Scroll handler with proper direction change
     window.addEventListener('scroll', () => {
         const now = Date.now();
-        if (now - lastScrollTime < 50) return; // Throttle scroll events
+        if (now - lastScrollTime < 50) return;
         lastScrollTime = now;
 
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Determine scroll direction and reverse animation accordingly
-        if (scrollTop > lastScrollTop) {
-            // Scrolling down - reverse to right-to-left
-            if (direction !== -1) {
-                direction = -1;
-                // Reverse all icons' directions
-                icons.forEach(icon => {
-                    icon.speed = random(0.5, 1.5) * baseSpeed;
-                });
-            }
-        } else if (scrollTop < lastScrollTop) {
-            // Scrolling up - normal left-to-right
-            if (direction !== 1) {
-                direction = 1;
-                // Reverse all icons' directions
-                icons.forEach(icon => {
-                    icon.speed = random(0.5, 1.5) * baseSpeed;
-                });
-            }
+        if (scrollTop > lastScrollTop && direction !== -1) {
+            direction = -1;
+        } else if (scrollTop < lastScrollTop && direction !== 1) {
+            direction = 1;
         }
 
         sketchRunning = scrollTop < firstSectionHeight * 0.9;
         lastScrollTop = scrollTop;
 
-        // Speed up during scroll
         speedMultiplier = 3.0;
         clearTimeout(scrollThrottleTimeout);
         scrollThrottleTimeout = setTimeout(() => {
