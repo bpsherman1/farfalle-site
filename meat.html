@@ -37,36 +37,32 @@
       background-color: #e0d9c1;
     }
 
-    /* Image Layout */
+    /* Image Layout - UPDATED */
     .image-container {
       display: flex;
-      justify-content: space-between;
+      justify-content: center; /* Changed from space-between */
       align-items: center;
       width: 100%;
       max-width: 1400px;
       margin: 0 auto;
-      gap: 20px;
+      gap: 40px; /* Added gap control */
     }
     
     .food-image {
-      height: 70vh;
+      height: 50vh; /* Reduced from 70vh */
       width: auto;
-      max-width: 40%;
+      max-width: 30%; /* Reduced from 40% */
       object-fit: contain;
       transition: transform 0.3s ease;
-      border: 1px solid transparent; /* Debug border - can remove */
     }
     
-    .left-image {
-      margin-left: -50px;
-    }
-    
-    .right-image {
-      margin-right: -50px;
+    /* Removed the left/right image margins */
+    .left-image, .right-image {
+      margin: 0;
     }
     
     .recipe-content {
-      flex: 0 1 600px;
+      flex: 0 1 500px; /* Reduced from 600px */
       text-align: center;
       padding: 0 40px;
     }
@@ -78,12 +74,12 @@
     }
     h6 {
       font-size: 1rem;
-  font-weight: 40; /* Normal weight */
-  font-family: 'Georgia', serif; /* Match your body font */
-  color: #5c4d3c; /* Match your text color */
-  line-height: 1.5;
-  margin: 0.5rem 0 1.5rem;
-  font-style: italic; /* Optional: if you want the italic style */
+      font-weight: 400; /* Fixed from 40 */
+      font-family: 'Georgia', serif;
+      color: #5c4d3c;
+      line-height: 1.5;
+      margin: 0.5rem 0 1.5rem;
+      font-style: italic;
     }
     
     h2 {
@@ -156,7 +152,7 @@
       display: block;
     }
 
-    /* Mobile Styles */
+    /* Mobile Styles - Updated */
     @media (max-width: 768px) {
       .section {
         height: auto;
@@ -167,15 +163,12 @@
       .image-container {
         flex-direction: column;
         gap: 30px;
-        max-width: 100%;
       }
       
       .food-image {
         height: auto;
-        max-height: 40vh;
+        max-height: 30vh; /* Reduced from 40vh */
         max-width: 80%;
-        margin-left: 0;
-        margin-right: 0;
       }
       
       .recipe-content {
@@ -198,7 +191,7 @@
       }
       
       .food-image {
-        max-height: 30vh;
+        max-height: 25vh; /* Reduced from 30vh */
       }
     }
   </style>
@@ -220,7 +213,6 @@
   <!-- First Section with Images and Text -->
   <div class="section" id="section1">
     <div class="image-container">
-      <!-- Added error handling and fixed path -->
       <img src="images2/MB.png" alt="Meatball Recipe" class="food-image left-image" 
            onerror="console.error('Failed to load MB.png')">
       <div class="recipe-content">
@@ -250,7 +242,6 @@
   </div>
 
   <script>
-    // Debug script to verify image paths
     document.addEventListener('DOMContentLoaded', function() {
       const images = document.querySelectorAll('.food-image');
       images.forEach(img => {
