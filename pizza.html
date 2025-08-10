@@ -92,6 +92,55 @@
       margin: 0 auto 1.5rem;
     }
 
+    /* Pizza Ingredients & Instructions Styles */
+    .ingredients {
+      background-color: rgba(255,255,255,0.3);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: left;
+    }
+    
+    .ingredients ul {
+      padding-left: 20px;
+    }
+    
+    .ingredients li {
+      margin-bottom: 8px;
+      list-style-type: none;
+      position: relative;
+      padding-left: 25px;
+    }
+    
+    .ingredients li:before {
+      content: "•";
+      color: #c72a2a;
+      position: absolute;
+      left: 0;
+      font-size: 1.5em;
+      line-height: 1;
+    }
+    
+    .instructions {
+      text-align: left;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .instructions p {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .instructions p:before {
+      content: "➤";
+      color: #8b5a2b;
+      position: absolute;
+      left: 0;
+    }
+
     /* Menu Styles */
     #menu-container {
       position: fixed;
@@ -225,8 +274,32 @@
   <div class="section" id="section2">
     <div class="recipe-content">
       <h2>Our Signature Pizza</h2>
-      <p>Hand-tossed dough, homemade sauce, and premium toppings create our perfect pizza.</p>
-      <p>Available with classic or whole wheat dough, and a variety of toppings to choose from.</p>
+      
+      <div class="ingredients">
+        <h3>Ingredients</h3>
+        <ul>
+          <li>Pizza Dough</li>
+          <li>Fresh Mozzarella</li>
+          <li>Olive Oil</li>
+          <li>Tomato Sauce</li>
+          <li>Basil</li>
+          <li>Salt</li>
+          <li>Pepper</li>
+        </ul>
+      </div>
+      
+      <div class="instructions">
+        <h3>Instructions</h3>
+        <p>3 Hours before cooking take your dough out of the fridge</p>
+        <p>Place it in a big bowl after coating the bottom in olive oil</p>
+        <p>Place a towel or plastic wrap on top and let it rise for 3 hours</p>
+        <p>When ready heat oven to its hottest setting or preheat your pizza oven</p>
+        <p>Take your dough (cut to size) and roll it out to form a pizza</p>
+        <p>Spread olive oil over the dough</p>
+        <p>Take marinara sauce and gently pour and spread to about an inch of the edge of the dough to form a crust</p>
+        <p>Evenly spread out mozzarella cheese</p>
+        <p>Throw into oven and cook for 8-12 minutes</p>
+      </div>
     </div>
   </div>
 
