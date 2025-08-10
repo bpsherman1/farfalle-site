@@ -28,3 +28,12 @@ body {
   height: 100%;
   overflow: hidden;
 }
+.h6 {
+  font-size: 1.2rem;
+  font-weight: 400; /* Normal weight */
+  font-family: 'Georgia', serif; /* Match your body font */
+  color: #5c4d3c; /* Match your text color */
+  line-height: 1.5;
+  margin: 0.5rem 0 1.5rem;
+  font-style: italic; /* Optional: if you want the italic style */
+}
