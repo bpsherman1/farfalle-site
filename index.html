@@ -273,7 +273,7 @@
     let customFont;
     let speedMultiplier = 1.0;
     let baseSpeed = 1.0;
-    let direction = 1; // Left-to-right by default
+    let direction = 1;
     let sketchRunning = true;
     let firstSectionHeight = window.innerHeight;
     let lastScrollTop = 0;
@@ -303,14 +303,14 @@
         textFont(customFont);
         textStyle(BOLD);
         
-        // Initialize icons spread across the entire canvas
+        // Initialize icons with device-specific sizing
         for (let i = 0; i < iconCount; i++) {
             icons.push({
-                x: random(-width, width * 1.5), // Spread across and beyond canvas
+                x: random(-width, width * 1.5),
                 y: random(height),
                 speed: random(0.5, 1.5) * baseSpeed,
                 imgIndex: floor(random(foodImages.length)),
-                sizeMultiplier: random(2.0, 3.0)
+                sizeMultiplier: isMobile() ? random(1.0, 1.8) : random(1.5, 3.0) // Adjusted ranges
             });
         }
     }
@@ -336,22 +336,21 @@
             text("The Food Gallery", width / 2, height / 2);
         }
 
-        // Render icons
+        // Render icons with device-specific base sizes
         for (let icon of icons) {
             let currentImg = foodImages[icon.imgIndex];
-            let imgWidth = 80 * icon.sizeMultiplier;
+            let baseSize = isMobile() ? 50 : 60; // Smaller base on mobile
+            let imgWidth = baseSize * icon.sizeMultiplier;
             let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
             image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
             icon.x += direction * icon.speed * speedMultiplier;
             
-            if (direction === 1 && icon.x > width) {
+            if ((direction === 1 && icon.x > width) || 
+                (direction === -1 && icon.x < -imgWidth)) {
                 resetIcon(icon);
-                icon.x = -imgWidth;
-            } else if (direction === -1 && icon.x < -imgWidth) {
-                resetIcon(icon);
-                icon.x = width;
+                icon.x = direction === 1 ? -imgWidth : width;
             }
         }
     }
@@ -359,7 +358,7 @@
     function resetIcon(icon) {
         icon.y = random(height);
         icon.imgIndex = floor(random(foodImages.length));
-        icon.sizeMultiplier = random(2.0, 3.0);
+        icon.sizeMultiplier = isMobile() ? random(1.0, 1.8) : random(1.5, 3.0);
         icon.speed = random(0.5, 1.5) * baseSpeed;
     }
 
