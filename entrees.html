@@ -70,13 +70,12 @@
       width: auto;
       max-width: 40%;
       object-fit: contain;
-      opacity: 0; /* Start invisible */
-      transition: opacity 1s ease-in-out;
     }
 
-    /* First slide visible by default */
+    /* Initial fade-in for first image only */
     .slide:first-child .slide-image {
-      opacity: 1;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
     }
     
     /* Text Styles */
@@ -87,7 +86,7 @@
       margin: 20px auto 0;
       position: relative;
       z-index: 2;
-      opacity: 0; /* Start invisible */
+      opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
     
@@ -243,7 +242,7 @@
     </div>
     <div class="recipe-content">
       <h1>Entrees</h1>
-      <h6>Here are some of my go to meals mixing all of the meats, and sauces that I have made. </h6>
+      <h6>Here are some of my go to meals mixing all of the meats, and sauces that I have made.</h6>
     </div>
   </div>
 
@@ -264,7 +263,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Fade in first image and text
+      // Fade in first image and text on page load
       setTimeout(function() {
         const firstImage = document.querySelector('.slide-image');
         const recipeContent = document.querySelector('.recipe-content');
@@ -273,7 +272,7 @@
         recipeContent.style.opacity = '1';
       }, 100);
 
-      // Slideshow functionality
+      // Slideshow functionality (no fading between slides)
       const track = document.querySelector('.slideshow-track');
       const slides = document.querySelectorAll('.slide');
       const slideCount = slides.length;
@@ -301,10 +300,6 @@
         isTransitioning = true;
         currentIndex++;
         
-        // Fade out current image
-        const currentImage = document.querySelector(`.slide:nth-child(${currentIndex % slideCount + 1}) .slide-image`);
-        currentImage.style.opacity = '0';
-        
         track.style.transition = 'transform 0.8s ease-in-out';
         track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
         
@@ -320,9 +315,6 @@
           }, 800);
         } else {
           setTimeout(() => {
-            // Fade in next image
-            const nextImage = document.querySelector(`.slide:nth-child(${currentIndex % slideCount + 1}) .slide-image`);
-            nextImage.style.opacity = '1';
             isTransitioning = false;
           }, 800);
         }
