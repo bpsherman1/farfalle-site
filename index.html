@@ -268,6 +268,7 @@
 <!-- P5 SCRIPT - FIXED VERSION -->
 <!-- P5 SCRIPT - WITH FONT FIX AND SCROLL DIRECTION -->
 <!-- P5 SCRIPT - WITH ORIGINAL FONT -->
+<!-- P5 SCRIPT - FINAL WORKING VERSION -->
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 <script>
     let foodImages = [];
@@ -276,11 +277,12 @@
     let customFont;
     let speedMultiplier = 1.0;
     let baseSpeed = 1.0;
-    let direction = -1; // Original right-to-left movement
+    let direction = 1; // Start with left-to-right (1 = right, -1 = left)
     let sketchRunning = true;
     let firstSectionHeight = window.innerHeight;
     let lastScrollTop = 0;
     let scrollThrottleTimeout;
+    let lastScrollTime = 0;
 
     function preload() {
         // Load your original font
@@ -309,10 +311,10 @@
         textFont(customFont); // Apply your custom font
         textStyle(BOLD);
         
-        // Initialize icons (original right-to-left movement)
+        // Initialize icons moving left-to-right
         for (let i = 0; i < iconCount; i++) {
             icons.push({
-                x: random(width, width + 100), // Start off right side
+                x: random(-width, 0), // Start off left side
                 y: random(height),
                 speed: random(0.5, 1.5) * baseSpeed,
                 imgIndex: floor(random(foodImages.length)),
@@ -351,16 +353,16 @@
             // Main image
             image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
-            // Movement (original right-to-left)
+            // Movement based on current direction
             icon.x += direction * icon.speed * speedMultiplier;
             
             // Wrap around screen edges
-            if (direction === -1 && icon.x < -imgWidth) {
-                icon.x = width;
+            if (direction === 1 && icon.x > width) {
+                icon.x = -imgWidth;
                 icon.y = random(height);
                 icon.imgIndex = floor(random(foodImages.length));
-            } else if (direction === 1 && icon.x > width) {
-                icon.x = -imgWidth;
+            } else if (direction === -1 && icon.x < -imgWidth) {
+                icon.x = width;
                 icon.y = random(height);
                 icon.imgIndex = floor(random(foodImages.length));
             }
@@ -373,28 +375,43 @@
         resizeCanvas(windowWidth, windowHeight);
     }
 
-    // Scroll handler with direction change
+    // Scroll handler with proper direction change
     window.addEventListener('scroll', () => {
         const now = Date.now();
-        if (now - lastScrollTime < 100) return;
+        if (now - lastScrollTime < 50) return; // Throttle scroll events
         lastScrollTime = now;
 
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Reverse direction when scrolling
-        if (scrollTop > lastScrollTop && direction !== 1) {
-            direction = 1; // Switch to left-to-right
-        } else if (scrollTop < lastScrollTop && direction !== -1) {
-            direction = -1; // Switch to right-to-left
+        // Determine scroll direction and reverse animation accordingly
+        if (scrollTop > lastScrollTop) {
+            // Scrolling down - reverse to right-to-left
+            if (direction !== -1) {
+                direction = -1;
+                // Reverse all icons' directions
+                icons.forEach(icon => {
+                    icon.speed = random(0.5, 1.5) * baseSpeed;
+                });
+            }
+        } else if (scrollTop < lastScrollTop) {
+            // Scrolling up - normal left-to-right
+            if (direction !== 1) {
+                direction = 1;
+                // Reverse all icons' directions
+                icons.forEach(icon => {
+                    icon.speed = random(0.5, 1.5) * baseSpeed;
+                });
+            }
         }
 
         sketchRunning = scrollTop < firstSectionHeight * 0.9;
         lastScrollTop = scrollTop;
 
+        // Speed up during scroll
         speedMultiplier = 3.0;
         clearTimeout(scrollThrottleTimeout);
         scrollThrottleTimeout = setTimeout(() => {
             speedMultiplier = 1.0;
-        }, 150);
+        }, 200);
     }, { passive: true });
 </script>
