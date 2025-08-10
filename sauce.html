@@ -342,15 +342,20 @@
         top: calc(25vh + 20px);
       }
       
-    #section1 .food-image.right-image {
-    top: calc(30vh + 185px); /* Adjusted to give more space */
-    max-height: none; /* Remove max-height restriction */
-    height: 25vh; /* Set fixed height (adjust as needed) */
-    width: auto; /* Let width adjust proportionally */
-    max-width: 90vw; /* Prevent overflow */
+   #section1 .food-image.right-image {
+    top: calc(30vh + 185px);
+    max-height: none;
+    height: 25vh;
+    width: auto;
+    max-width: 90vw;
     left: 50%;
-    transform: translateX(-50%); /* Center properly */
+    transform: translateX(50%) translateX(100px); /* Start off-screen to the right */
   }
+  
+  #section1 .food-image.right-image.slide-in {
+    transform: translateX(-50%) !important; /* Slide to center */
+  }
+}
       
       #section2, #section3 {
         padding-top: calc(30vh + 40vh + 220px);
