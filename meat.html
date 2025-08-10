@@ -40,33 +40,50 @@
     /* Image Layout - UPDATED */
     .image-container {
       display: flex;
-      justify-content: center; /* Changed from space-between */
+      justify-content: center;
       align-items: center;
       width: 100%;
       max-width: 1400px;
       margin: 0 auto;
-      gap: 40px; /* Added gap control */
+      gap: 40px;
     }
     
     .food-image {
-      height: 50vh; /* Reduced from 70vh */
+      height: 50vh;
       width: auto;
-      max-width: 30%; /* Reduced from 40% */
+      max-width: 30%;
       object-fit: contain;
-      transition: transform 0.3s ease;
+      transition: transform 1s ease-out, opacity 1s ease;
     }
     
-    /* Removed the left/right image margins */
-    .left-image, .right-image {
-      margin: 0;
+    /* Animation Styles */
+    .left-image {
+      transform: translateX(-200px);
+      opacity: 0;
+    }
+    
+    .right-image {
+      transform: translateX(200px);
+      opacity: 0;
     }
     
     .recipe-content {
-      flex: 0 1 500px; /* Reduced from 600px */
+      flex: 0 1 500px;
       text-align: center;
       padding: 0 40px;
+      opacity: 0;
+      transition: opacity 1.5s ease 0.3s;
     }
     
+    .slide-in {
+      transform: translateX(0) !important;
+      opacity: 1 !important;
+    }
+    
+    .fade-in {
+      opacity: 1 !important;
+    }
+
     /* Text Styles */
     h1 {
       font-size: 3.5rem;
@@ -74,7 +91,7 @@
     }
     h6 {
       font-size: 1rem;
-      font-weight: 400; /* Fixed from 40 */
+      font-weight: 400;
       font-family: 'Georgia', serif;
       color: #5c4d3c;
       line-height: 1.5;
@@ -167,13 +184,16 @@
       
       .food-image {
         height: auto;
-        max-height: 30vh; /* Reduced from 40vh */
+        max-height: 30vh;
         max-width: 80%;
+        transform: none !important;
+        opacity: 1 !important;
       }
       
       .recipe-content {
         flex: 1;
         padding: 0 20px;
+        opacity: 1;
       }
       
       h1 {
@@ -191,7 +211,7 @@
       }
       
       .food-image {
-        max-height: 25vh; /* Reduced from 30vh */
+        max-height: 25vh;
       }
     }
   </style>
@@ -243,9 +263,26 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Trigger animations after page loads
+      setTimeout(function() {
+        const leftImage = document.querySelector('.left-image');
+        const rightImage = document.querySelector('.right-image');
+        const recipeContent = document.querySelector('.recipe-content');
+        
+        leftImage.classList.add('slide-in');
+        rightImage.classList.add('slide-in');
+        recipeContent.classList.add('fade-in');
+      }, 100);
+      
+      // Debug script to verify image paths
       const images = document.querySelectorAll('.food-image');
       images.forEach(img => {
-        console.log(img.alt, 'src:', img.src, 'exists:', img.complete && img.naturalWidth !== 0);
+        img.onload = function() {
+          console.log(img.alt, 'loaded successfully');
+        };
+        img.onerror = function() {
+          console.error('Failed to load image:', img.alt);
+        };
       });
     });
   </script>
