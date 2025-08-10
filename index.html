@@ -269,31 +269,42 @@
 <script>
     let foodImages = [];
     let icons = [];
-    const iconCount = 15;
+    const iconCount = 8; // Reduced from 15 for mobile
     let customFont;
     let speedMultiplier = 1.0;
     let baseSpeed = 1.0;
     let scrollTimeout;
-    let lastScrollTop = 0;
+    let lastScrollTime = 0;
     let direction = 1;
-    
-    // NEW: Sketch performance variables
     let sketchRunning = true;
     let firstSectionHeight = window.innerHeight;
+    let lastScrollTop = 0;
+    let scrollThrottleTimeout;
 
+    // Preload optimized images
     function preload() {
-        foodImages.push(loadImage('assets/farfalle.png'));
-        foodImages.push(loadImage('/images/garlic.png'));
-        foodImages.push(loadImage('/images/pom.png'));
-        foodImages.push(loadImage('/images/basil.png'));
-        foodImages.push(loadImage('/images/pizza.png'));
+        // Use smaller versions for mobile
+        if (isMobile()) {
+            foodImages.push(loadImage('assets/farfalle-small.png'));
+            foodImages.push(loadImage('/images/garlic-small.png'));
+            foodImages.push(loadImage('/images/pom-small.png'));
+            foodImages.push(loadImage('/images/basil-small.png'));
+            foodImages.push(loadImage('/images/pizza-small.png'));
+        } else {
+            foodImages.push(loadImage('assets/farfalle.png'));
+            foodImages.push(loadImage('/images/garlic.png'));
+            foodImages.push(loadImage('/images/pom.png'));
+            foodImages.push(loadImage('/images/basil.png'));
+            foodImages.push(loadImage('/images/pizza.png'));
+        }
         customFont = loadFont('fonts/the.otf');
     }
 
     function setup() {
+        // Lower frame rate for mobile
         if (isMobile()) {
-            frameRate(45);
-            baseSpeed = 2.0;
+            frameRate(30); // Reduced from 45
+            baseSpeed = 1.5; // Reduced from 2.0
         } else {
             frameRate(60);
             baseSpeed = 1.0;
@@ -304,24 +315,17 @@
         textAlign(CENTER, CENTER);
         textFont(customFont);
         
+        // Simplified icon initialization
         for (let i = 0; i < iconCount; i++) {
-            let x = i * (width / iconCount) - random(50);
-            let y = random(height);
-            let speed = random(0.2, 1.0) * baseSpeed;
-            let imgIndex = floor(random(foodImages.length));
-            
-            // Add random size multiplier (between 0.7 and 1.3 of original size)
-            let sizeMultiplier = random(0.7, 1.3);
-            
-            icons.push({ 
-                x, 
-                y, 
-                speed, 
-                imgIndex,
-                sizeMultiplier
+            icons.push({
+                x: i * (width / iconCount) - random(50),
+                y: random(height),
+                speed: random(0.2, 0.8) * baseSpeed, // Reduced max speed
+                imgIndex: floor(random(foodImages.length)),
+                sizeMultiplier: random(0.7, 1.0) // Reduced max size
             });
         }
-    } // THIS WAS THE MISSING BRACE
+    }
 
     function isMobile() {
         return window.matchMedia("(max-width: 768px)").matches || 
@@ -331,105 +335,81 @@
     function draw() {
         if (!sketchRunning) return;
 
-        background('#f8f8f2');
-
-        let topColor = color(0);
-        let bottomColor = color('#c72a2a');
-        let fadeAmt = constrain(mouseY / height, 0, 1);
-        let fadedColor = lerpColor(topColor, bottomColor, fadeAmt);
-
-        fill(fadedColor);
+        clear(); // Use clear() instead of background() for performance
+        
+        // Simplified text rendering
+        fill(0);
         textFont(customFont);
         textStyle(BOLD);
+        textSize(isMobile() ? 50 : 80);
         
         if (isMobile()) {
-            textSize(50);
             text("The Food", width / 2, height / 2 - 40);
             text("Gallery", width / 2, height / 2 + 40);
         } else {
-            textSize(80);
             text("The Food Gallery", width / 2, height / 2);
         }
 
+        // Optimized icon rendering
         for (let icon of icons) {
             let currentImg = foodImages[icon.imgIndex];
-            let baseWidth = 50;
-            let baseHeight = (currentImg.height / currentImg.width) * baseWidth;
-            
-            // Apply size multiplier
-            let imgWidth = baseWidth * icon.sizeMultiplier;
-            let imgHeight = baseHeight * icon.sizeMultiplier;
+            let imgWidth = 40 * icon.sizeMultiplier; // Fixed base size
+            let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
-            let shadowMaxOffset = 120;
-            let shadowMinOffset = 5;
-            let shadowOffset = map(icon.x, 0, width, shadowMaxOffset, shadowMinOffset);
-            shadowOffset = constrain(shadowOffset, shadowMinOffset, shadowMaxOffset);
+            // Simplified shadow effect
+            if (!isMobile()) {
+                push();
+                tint(0, 50);
+                image(currentImg, icon.x - 30, icon.y, imgWidth, imgHeight);
+                pop();
+            }
 
-            let maxScaleX = 2.0;
-            let minScaleX = 1.0;
-            let scaleX = map(icon.x, 0, width, maxScaleX, minScaleX);
-            scaleX = constrain(scaleX, minScaleX, maxScaleX);
-
-            let shadowAlphaMin = 30;
-            let shadowAlphaMax = 100;
-            let shadowAlpha = map(icon.x, 0, width, shadowAlphaMin, shadowAlphaMax);
-            shadowAlpha = constrain(shadowAlpha, shadowAlphaMin, shadowAlphaMax);
-
-            // Shadow image
-            push();
-            tint(0, shadowAlpha);
-            translate(icon.x - shadowOffset - (imgWidth * (scaleX - 1)) / 2, icon.y);
-            scale(scaleX, 1);
-            image(currentImg, 0, 0, imgWidth, imgHeight);
-            pop();
-
-            // Actual image
+            // Main image
             noTint();
             image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
-            icon.x += direction * icon.speed * speedMultiplier * baseSpeed;
-
-            if (direction === 1 && icon.x > width) {
-                icon.x = -imgWidth;
-                icon.y = random(height);
-                icon.speed = random(0.2, 1.0);
-                icon.imgIndex = floor(random(foodImages.length));
-                icon.sizeMultiplier = random(0.7, 1.3);
-            } else if (direction === -1 && icon.x < -imgWidth) {
-                icon.x = width;
-                icon.y = random(height);
-                icon.speed = random(0.2, 1.0);
-                icon.imgIndex = floor(random(foodImages.length));
-                icon.sizeMultiplier = random(0.7, 1.3);
+            // Movement logic
+            icon.x += direction * icon.speed * speedMultiplier;
+            
+            if ((direction === 1 && icon.x > width) || 
+                (direction === -1 && icon.x < -imgWidth)) {
+                resetIcon(icon);
             }
         }
     }
 
+    function resetIcon(icon) {
+        icon.x = direction === 1 ? -50 : width;
+        icon.y = random(height);
+        // No need to reset other properties unless you want variation
+    }
+
     function windowResized() {
         firstSectionHeight = window.innerHeight;
-        baseSpeed = isMobile() ? 2.5 : 1.0;
+        baseSpeed = isMobile() ? 1.5 : 1.0;
         resizeCanvas(windowWidth, windowHeight);
     }
 
+    // Throttled scroll handler
     window.addEventListener('scroll', () => {
+        const now = Date.now();
+        if (now - lastScrollTime < 100) return; // Throttle to 10fps
+        lastScrollTime = now;
+
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        sketchRunning = scrollTop < firstSectionHeight * 0.9;
-        if (!sketchRunning) {
-            clear();
+        // Only check sketch running state every 100px scroll
+        if (Math.abs(scrollTop - lastScrollTop) > 100 || scrollTop < 100) {
+            sketchRunning = scrollTop < firstSectionHeight * 0.9;
+            lastScrollTop = scrollTop;
         }
 
-        if (scrollTop > lastScrollTop) {
-            direction = 1;
-        } else if (scrollTop < lastScrollTop) {
-            direction = -1;
-        }
+        // Simplified direction detection
+        direction = scrollTop > lastScrollTop ? 1 : -1;
+        speedMultiplier = 3.0; // Reduced from 4.0
 
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        speedMultiplier = 4.0;
-
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
+        clearTimeout(scrollThrottleTimeout);
+        scrollThrottleTimeout = setTimeout(() => {
             speedMultiplier = 1.0;
         }, 150);
     }, { passive: true });
