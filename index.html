@@ -265,12 +265,12 @@
   </div>
 
   <!-- P5 SCRIPT -->
+<!-- P5 SCRIPT - FIXED VERSION -->
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 <script>
     let foodImages = [];
     let icons = [];
-    const iconCount = 8; // Reduced from 15 for mobile
-    let customFont;
+    const iconCount = 8;
     let speedMultiplier = 1.0;
     let baseSpeed = 1.0;
     let scrollTimeout;
@@ -281,30 +281,24 @@
     let lastScrollTop = 0;
     let scrollThrottleTimeout;
 
-    // Preload optimized images
+    // Preload images with fallbacks
     function preload() {
-        // Use smaller versions for mobile
-        if (isMobile()) {
-            foodImages.push(loadImage('assets/farfalle-small.png'));
-            foodImages.push(loadImage('/images/garlic-small.png'));
-            foodImages.push(loadImage('/images/pom-small.png'));
-            foodImages.push(loadImage('/images/basil-small.png'));
-            foodImages.push(loadImage('/images/pizza-small.png'));
-        } else {
-            foodImages.push(loadImage('assets/farfalle.png'));
+        // Try loading images with error handling
+        try {
             foodImages.push(loadImage('/images/garlic.png'));
             foodImages.push(loadImage('/images/pom.png'));
             foodImages.push(loadImage('/images/basil.png'));
             foodImages.push(loadImage('/images/pizza.png'));
+        } catch (e) {
+            console.log("Error loading images:", e);
         }
-        customFont = loadFont('fonts/the.otf');
     }
 
     function setup() {
-        // Lower frame rate for mobile
+        // Mobile adjustments
         if (isMobile()) {
-            frameRate(30); // Reduced from 45
-            baseSpeed = 1.5; // Reduced from 2.0
+            frameRate(30);
+            baseSpeed = 1.5;
         } else {
             frameRate(60);
             baseSpeed = 1.0;
@@ -313,18 +307,23 @@
         let canvas = createCanvas(windowWidth, windowHeight);
         canvas.parent('sketch-container');
         textAlign(CENTER, CENTER);
-        textFont(customFont);
         
-        // Simplified icon initialization
+        // Fallback font if custom font fails
+        textFont('Georgia');
+        
+        // Initialize icons
         for (let i = 0; i < iconCount; i++) {
             icons.push({
                 x: i * (width / iconCount) - random(50),
                 y: random(height),
-                speed: random(0.2, 0.8) * baseSpeed, // Reduced max speed
+                speed: random(0.2, 0.8) * baseSpeed,
                 imgIndex: floor(random(foodImages.length)),
-                sizeMultiplier: random(0.7, 1.0) // Reduced max size
+                sizeMultiplier: random(0.7, 1.0)
             });
         }
+        
+        // Ensure sketch starts running
+        sketchRunning = true;
     }
 
     function isMobile() {
@@ -333,13 +332,15 @@
     }
    
     function draw() {
-        if (!sketchRunning) return;
+        if (!sketchRunning || foodImages.length === 0) {
+            background('#f8f8f2');
+            return;
+        }
 
-        clear(); // Use clear() instead of background() for performance
+        clear();
         
-        // Simplified text rendering
+        // Text rendering
         fill(0);
-        textFont(customFont);
         textStyle(BOLD);
         textSize(isMobile() ? 50 : 80);
         
@@ -350,25 +351,16 @@
             text("The Food Gallery", width / 2, height / 2);
         }
 
-        // Optimized icon rendering
+        // Icon rendering
         for (let icon of icons) {
-            let currentImg = foodImages[icon.imgIndex];
-            let imgWidth = 40 * icon.sizeMultiplier; // Fixed base size
+            let currentImg = foodImages[icon.imgIndex % foodImages.length];
+            let imgWidth = 40 * icon.sizeMultiplier;
             let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
-            // Simplified shadow effect
-            if (!isMobile()) {
-                push();
-                tint(0, 50);
-                image(currentImg, icon.x - 30, icon.y, imgWidth, imgHeight);
-                pop();
-            }
-
             // Main image
-            noTint();
             image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
-            // Movement logic
+            // Movement
             icon.x += direction * icon.speed * speedMultiplier;
             
             if ((direction === 1 && icon.x > width) || 
@@ -381,7 +373,7 @@
     function resetIcon(icon) {
         icon.x = direction === 1 ? -50 : width;
         icon.y = random(height);
-        // No need to reset other properties unless you want variation
+        icon.imgIndex = floor(random(foodImages.length));
     }
 
     function windowResized() {
@@ -390,23 +382,19 @@
         resizeCanvas(windowWidth, windowHeight);
     }
 
-    // Throttled scroll handler
+    // Scroll handler
     window.addEventListener('scroll', () => {
         const now = Date.now();
-        if (now - lastScrollTime < 100) return; // Throttle to 10fps
+        if (now - lastScrollTime < 100) return;
         lastScrollTime = now;
 
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Only check sketch running state every 100px scroll
-        if (Math.abs(scrollTop - lastScrollTop) > 100 || scrollTop < 100) {
-            sketchRunning = scrollTop < firstSectionHeight * 0.9;
-            lastScrollTop = scrollTop;
-        }
+        sketchRunning = scrollTop < firstSectionHeight * 0.9;
+        lastScrollTop = scrollTop;
 
-        // Simplified direction detection
         direction = scrollTop > lastScrollTop ? 1 : -1;
-        speedMultiplier = 3.0; // Reduced from 4.0
+        speedMultiplier = 3.0;
 
         clearTimeout(scrollThrottleTimeout);
         scrollThrottleTimeout = setTimeout(() => {
