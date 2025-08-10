@@ -30,7 +30,7 @@ body {
 }
 .h6 {
   font-size: 1.2rem;
-  font-weight: 400; /* Normal weight */
+  font-weight: 40; /* Normal weight */
   font-family: 'Georgia', serif; /* Match your body font */
   color: #5c4d3c; /* Match your text color */
   line-height: 1.5;
