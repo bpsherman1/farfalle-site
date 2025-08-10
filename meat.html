@@ -37,7 +37,7 @@
       background-color: #e0d9c1;
     }
 
-    /* Image Layout - UPDATED */
+    /* Image Layout */
     .image-container {
       display: flex;
       justify-content: center;
@@ -169,7 +169,7 @@
       display: block;
     }
 
-    /* Mobile Styles - Updated */
+    /* Mobile Styles - Updated for animations */
     @media (max-width: 768px) {
       .section {
         height: auto;
@@ -186,14 +186,29 @@
         height: auto;
         max-height: 30vh;
         max-width: 80%;
-        transform: none !important;
+        /* Mobile-specific transform values */
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      
+      .left-image {
+        transform: translateY(100px) translateX(-50px);
+      }
+      
+      .right-image {
+        transform: translateY(100px) translateX(50px);
+      }
+      
+      .slide-in {
+        transform: translateY(0) translateX(0) !important;
         opacity: 1 !important;
       }
       
       .recipe-content {
         flex: 1;
         padding: 0 20px;
-        opacity: 1;
+        /* Keep fade animation on mobile */
+        opacity: 0;
       }
       
       h1 {
@@ -212,6 +227,16 @@
       
       .food-image {
         max-height: 25vh;
+        /* More pronounced slide on small phones */
+        transform: translateY(150px);
+      }
+      
+      .left-image {
+        transform: translateY(150px) translateX(-30px);
+      }
+      
+      .right-image {
+        transform: translateY(150px) translateX(30px);
       }
     }
   </style>
