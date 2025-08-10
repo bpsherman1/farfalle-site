@@ -48,8 +48,8 @@
       margin: 0 auto;
     }
 
-    /* Animation Styles */
-    .food-image {
+    /* Animation Styles - Only for Section 1 */
+    #section1 .food-image {
       height: 70vh;
       width: auto;
       max-width: 40%;
@@ -57,17 +57,17 @@
       transition: transform 1s ease-out, opacity 1s ease;
     }
 
-    .left-image {
+    #section1 .left-image {
       transform: translateX(-100px);
       opacity: 0;
     }
 
-    .right-image {
+    #section1 .right-image {
       transform: translateX(100px);
       opacity: 0;
     }
 
-    .recipe-content {
+    #section1 .recipe-content {
       flex: 0 1 600px;
       text-align: center;
       padding: 0 40px;
@@ -75,13 +75,22 @@
       transition: opacity 1s ease 0.5s;
     }
 
-    .slide-in {
+    #section1 .slide-in {
       transform: translateX(0) !important;
       opacity: 1 !important;
     }
 
-    .text-loaded {
+    #section1 .text-loaded {
       opacity: 1;
+    }
+    
+    /* Recipe Content for Sections 2 and 3 (no animation) */
+    #section2 .recipe-content,
+    #section3 .recipe-content {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 1; /* Always visible */
     }
     
     /* Text Styles */
@@ -405,9 +414,9 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       setTimeout(function() {
-        const leftImage = document.querySelector('.left-image');
-        const rightImage = document.querySelector('.right-image');
-        const recipeContent = document.querySelector('.recipe-content');
+        const leftImage = document.querySelector('#section1 .left-image');
+        const rightImage = document.querySelector('#section1 .right-image');
+        const recipeContent = document.querySelector('#section1 .recipe-content');
         
         leftImage.classList.add('slide-in');
         rightImage.classList.add('slide-in');
