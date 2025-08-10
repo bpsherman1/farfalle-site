@@ -267,22 +267,26 @@
   <!-- P5 SCRIPT -->
 <!-- P5 SCRIPT - FIXED VERSION -->
 <!-- P5 SCRIPT - WITH FONT FIX AND SCROLL DIRECTION -->
+<!-- P5 SCRIPT - WITH ORIGINAL FONT -->
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 <script>
     let foodImages = [];
     let icons = [];
     const iconCount = 8;
+    let customFont;
     let speedMultiplier = 1.0;
     let baseSpeed = 1.0;
-    let direction = 1; // Start with left-to-right (1 = right, -1 = left)
+    let direction = -1; // Original right-to-left movement
     let sketchRunning = true;
     let firstSectionHeight = window.innerHeight;
     let lastScrollTop = 0;
     let scrollThrottleTimeout;
-    let lastScrollTime = 0;
 
     function preload() {
-        // Load your food images
+        // Load your original font
+        customFont = loadFont('fonts/the.otf');
+        
+        // Load food images
         foodImages.push(loadImage('/images/garlic.png'));
         foodImages.push(loadImage('/images/pom.png'));
         foodImages.push(loadImage('/images/basil.png'));
@@ -302,12 +306,13 @@
         let canvas = createCanvas(windowWidth, windowHeight);
         canvas.parent('sketch-container');
         textAlign(CENTER, CENTER);
+        textFont(customFont); // Apply your custom font
         textStyle(BOLD);
         
-        // Initialize icons moving right (left-to-right)
+        // Initialize icons (original right-to-left movement)
         for (let i = 0; i < iconCount; i++) {
             icons.push({
-                x: random(-width, 0), // Start off left side
+                x: random(width, width + 100), // Start off right side
                 y: random(height),
                 speed: random(0.5, 1.5) * baseSpeed,
                 imgIndex: floor(random(foodImages.length)),
@@ -322,14 +327,11 @@
     }
    
     function draw() {
-        if (!sketchRunning || foodImages.length === 0) {
-            background('#f8f8f2');
-            return;
-        }
+        if (!sketchRunning) return;
 
         clear();
         
-        // Text rendering - maintains your original font styling
+        // Text rendering with your original font
         fill(0);
         textSize(isMobile() ? 50 : 80);
         
@@ -342,23 +344,23 @@
 
         // Icon rendering
         for (let icon of icons) {
-            let currentImg = foodImages[icon.imgIndex % foodImages.length];
+            let currentImg = foodImages[icon.imgIndex];
             let imgWidth = 50 * icon.sizeMultiplier;
             let imgHeight = (currentImg.height / currentImg.width) * imgWidth;
 
             // Main image
             image(currentImg, icon.x, icon.y, imgWidth, imgHeight);
 
-            // Movement based on current direction
+            // Movement (original right-to-left)
             icon.x += direction * icon.speed * speedMultiplier;
             
             // Wrap around screen edges
-            if (direction === 1 && icon.x > width) {
-                icon.x = -imgWidth;
+            if (direction === -1 && icon.x < -imgWidth) {
+                icon.x = width;
                 icon.y = random(height);
                 icon.imgIndex = floor(random(foodImages.length));
-            } else if (direction === -1 && icon.x < -imgWidth) {
-                icon.x = width;
+            } else if (direction === 1 && icon.x > width) {
+                icon.x = -imgWidth;
                 icon.y = random(height);
                 icon.imgIndex = floor(random(foodImages.length));
             }
@@ -374,40 +376,25 @@
     // Scroll handler with direction change
     window.addEventListener('scroll', () => {
         const now = Date.now();
-        if (now - lastScrollTime < 50) return; // Throttle scroll events
+        if (now - lastScrollTime < 100) return;
         lastScrollTime = now;
 
         let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Determine scroll direction
-        if (scrollTop > lastScrollTop) {
-            // Scrolling down - reverse to right-to-left
-            if (direction !== -1) {
-                direction = -1;
-                // Reverse all icons' directions
-                icons.forEach(icon => {
-                    icon.speed = random(0.5, 1.5) * baseSpeed;
-                });
-            }
-        } else if (scrollTop < lastScrollTop) {
-            // Scrolling up - normal left-to-right
-            if (direction !== 1) {
-                direction = 1;
-                // Reverse all icons' directions
-                icons.forEach(icon => {
-                    icon.speed = random(0.5, 1.5) * baseSpeed;
-                });
-            }
+        // Reverse direction when scrolling
+        if (scrollTop > lastScrollTop && direction !== 1) {
+            direction = 1; // Switch to left-to-right
+        } else if (scrollTop < lastScrollTop && direction !== -1) {
+            direction = -1; // Switch to right-to-left
         }
 
         sketchRunning = scrollTop < firstSectionHeight * 0.9;
         lastScrollTop = scrollTop;
 
-        // Speed up during scroll
-        speedMultiplier = 2.5;
+        speedMultiplier = 3.0;
         clearTimeout(scrollThrottleTimeout);
         scrollThrottleTimeout = setTimeout(() => {
             speedMultiplier = 1.0;
-        }, 200);
+        }, 150);
     }, { passive: true });
 </script>
