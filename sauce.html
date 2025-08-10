@@ -435,18 +435,30 @@
     </div>
   </div>
 
-  <script>
-    // Add slide-in animation when page loads
-    document.addEventListener('DOMContentLoaded', function() {
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Trigger animations after page loads
+    setTimeout(function() {
       const leftImage = document.querySelector('.left-image');
       const rightImage = document.querySelector('.right-image');
+      const recipeContent = document.querySelector('.recipe-content');
       
-      // Trigger the animation after a short delay to allow the page to render
-      setTimeout(function() {
-        leftImage.classList.add('slide-in');
-        rightImage.classList.add('slide-in');
-      }, 100);
+      leftImage.classList.add('slide-in');
+      rightImage.classList.add('slide-in');
+      recipeContent.classList.add('text-loaded');
+    }, 100);
+    
+    // Debug script to verify image paths
+    const images = document.querySelectorAll('.food-image');
+    images.forEach(img => {
+      img.onload = function() {
+        console.log('Image loaded successfully:', img.alt);
+      };
+      img.onerror = function() {
+        console.error('Failed to load image:', img.alt);
+      };
     });
-  </script>
+  });
+</script>
 </body>
 </html>
