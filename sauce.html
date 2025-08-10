@@ -38,43 +38,51 @@
       background-color: #e0d9c1;
     }
 
-    /* Image Layout */
-   /* Animation Styles */
-/* Animation Styles */
-.food-image {
-  height: 70vh;
-  width: auto;
-  max-width: 40%;
-  object-fit: contain;
-  transition: transform 1s ease-out, opacity 1s ease;
-}
+    /* First Section Layout */
+    #section1 .image-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
 
-.left-image {
-  transform: translateX(-100px); /* Start slightly left */
-  opacity: 0;
-}
+    /* Animation Styles */
+    .food-image {
+      height: 70vh;
+      width: auto;
+      max-width: 40%;
+      object-fit: contain;
+      transition: transform 1s ease-out, opacity 1s ease;
+    }
 
-.right-image {
-  transform: translateX(100px); /* Start slightly right */
-  opacity: 0;
-}
+    .left-image {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
 
-.recipe-content {
-  flex: 0 1 600px;
-  text-align: center;
-  padding: 0 40px;
-  opacity: 0; /* Start invisible */
-  transition: opacity 1s ease 0.5s; /* Delay the text fade */
-}
+    .right-image {
+      transform: translateX(100px);
+      opacity: 0;
+    }
 
-.slide-in {
-  transform: translateX(0) !important; /* Slide to center */
-  opacity: 1 !important;
-}
+    .recipe-content {
+      flex: 0 1 600px;
+      text-align: center;
+      padding: 0 40px;
+      opacity: 0;
+      transition: opacity 1s ease 0.5s;
+    }
 
-.text-loaded {
-  opacity: 1;
-}
+    .slide-in {
+      transform: translateX(0) !important;
+      opacity: 1 !important;
+    }
+
+    .text-loaded {
+      opacity: 1;
+    }
     
     /* Text Styles */
     h1 {
@@ -83,17 +91,17 @@
     }
     
     h2 {
-      font-size: 3.5rem; /* Larger header size */
+      font-size: 3.5rem;
       margin-bottom: 1.5rem;
       text-transform: uppercase;
     }
     
     .pesto-header {
-      color: #3a7a22; /* Darker green color for pesto */
+      color: #3a7a22;
     }
     
     .redsauce-header {
-      color: #d62c2c; /* Vibrant red color for red sauce */
+      color: #d62c2c;
     }
     
     h3 {
@@ -155,77 +163,63 @@
       left: 0;
     }
 
-/* Menu Styles */
-#menu-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 2;
-  padding-bottom: 20px;
-}
-
-#home-link {
-  display: block;
-  text-decoration: none;
-}
-
-#menu-icon {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: block;
-  transition: filter 0.2s ease;
-}
-
-#home-link:hover #menu-icon {
-  filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
-}
-
-#dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: transparent; /* Transparent background */
-  border: none; /* No border */
-  box-shadow: none; /* No shadow */
-  z-index: 3;
-}
-
-#dropdown-menu a {
-  display: block;
-  padding: 10px 0; /* Adjusted padding */
-  color: #333;
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: 1.2rem; /* Matches pizza.html */
-  text-align: right;
-  transition: color 0.2s ease;
-  font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-  font-weight: 500; /* Added for consistency */
-}
-
-#dropdown-menu a:hover {
-  background-color: transparent; /* No hover background */
-  color: #c72a2a; /* Hover color matches pizza.html */
-}
-
-#menu-container:hover #dropdown-menu {
-  display: block;
-}
-
-    /* Sauce Link Styles */
-    .sauce-link {
-      display: block;
-      margin-top: 30px; /* 30px space above the link */
-      font-size: 1.3rem;
-      color: #8b5a2b;
-      text-decoration: none;
-      transition: color 0.2s ease;
+    /* Menu Styles */
+    #menu-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+      padding-bottom: 20px;
     }
 
-    .sauce-link:hover {
+    #home-link {
+      display: block;
+      text-decoration: none;
+    }
+
+    #menu-icon {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: block;
+      transition: filter 0.2s ease;
+    }
+
+    #home-link:hover #menu-icon {
+      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+    }
+
+    #dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      z-index: 3;
+    }
+
+    #dropdown-menu a {
+      display: block;
+      padding: 10px 0;
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
+      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+      font-weight: 500;
+    }
+
+    #dropdown-menu a:hover {
+      background-color: transparent;
       color: #c72a2a;
+    }
+
+    #menu-container:hover #dropdown-menu {
+      display: block;
     }
 
     /* Mobile Styles */
@@ -237,12 +231,10 @@
         display: block;
       }
       
-      /* Remove flex container */
       #section1 .image-container {
         display: block;
       }
       
-      /* Position pesto image at top */
       #section1 .food-image.left-image {
         position: absolute;
         top: 40px;
@@ -255,7 +247,6 @@
         margin: 0 !important;
       }
       
-      /* Position text in middle */
       #section1 .recipe-content {
         position: absolute;
         top: calc(20vh + 80px);
@@ -266,10 +257,9 @@
         margin: 0;
       }
       
-      /* Position RS image below text */
-       #section1 .food-image.right-image {
+      #section1 .food-image.right-image {
         position: absolute;
-        top: calc(vh + 280px); /* Added 50px to original 220px */
+        top: calc(30vh + 280px);
         left: 50%;
         transform: translateX(-50%) translateX(100px);
         width: 150%;
@@ -277,12 +267,10 @@
         margin: 0 !important;
       }
       
-      /* Adjust section spacing below */
       #section2, #section3 {
-        padding-top: calc(35vh + 45vh + 300px); /* Added 50px */
+        padding-top: calc(35vh + 45vh + 300px);
       }
       
-      /* Mobile slide-in animation */
       #section1 .food-image.left-image.slide-in {
         transform: translateX(-50%) !important;
       }
@@ -290,29 +278,9 @@
       #section1 .food-image.right-image.slide-in {
         transform: translateX(-50%) !important;
       }
-    }
-
-    @media (max-width: 480px) {
-      /* [Previous small phone styles remain the same until RS image] */
       
-      #section1 .food-image.right-image {
-        top: calc(0vh + 295px); /* Added 50px to original 200px */
-        max-height: 70vh;
-      }
-      
-      #section2, #section3 {
-        padding-top: calc(30vh + 40vh + 270px); /* Added 50px */
-      }
-    }
-      
-      /* Adjust text sizes */
       h1 {
         font-size: 2.2rem;
-        margin-bottom: 0.8rem;
-      }
-      
-      p {
-        margin-bottom: 0.8rem;
       }
       
       h2 {
@@ -321,7 +289,6 @@
     }
 
     @media (max-width: 480px) {
-      /* Tighter spacing for small phones */
       #section1 .food-image.left-image {
         top: 70px;
         max-height: 30vh;
@@ -371,7 +338,6 @@
       <div class="recipe-content">
         <h1>Sauces</h1>
         <p>Discover our collection of flavorful sauces, from classic recipes to modern creations that will elevate any dish.</p>
-       
       </div>
       <img src="images2/RS.png" alt="Red Sauce" class="food-image right-image">
     </div>
@@ -435,18 +401,19 @@
       </div>
     </div>
   </div>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-      const leftImage = document.querySelector('.left-image');
-      const rightImage = document.querySelector('.right-image');
-      const recipeContent = document.querySelector('.recipe-content');
-      
-      leftImage.classList.add('slide-in');
-      rightImage.classList.add('slide-in');
-      recipeContent.classList.add('text-loaded');
-    }, 100);
-  });
-</script>cript>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        const leftImage = document.querySelector('.left-image');
+        const rightImage = document.querySelector('.right-image');
+        const recipeContent = document.querySelector('.recipe-content');
+        
+        leftImage.classList.add('slide-in');
+        rightImage.classList.add('slide-in');
+        recipeContent.classList.add('text-loaded');
+      }, 100);
+    });
+  </script>
 </body>
 </html>
