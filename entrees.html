@@ -70,6 +70,13 @@
       width: auto;
       max-width: 40%;
       object-fit: contain;
+      opacity: 0; /* Start invisible */
+      transition: opacity 1s ease-in-out;
+    }
+
+    /* First slide visible by default */
+    .slide:first-child .slide-image {
+      opacity: 1;
     }
     
     /* Text Styles */
@@ -80,6 +87,8 @@
       margin: 20px auto 0;
       position: relative;
       z-index: 2;
+      opacity: 0; /* Start invisible */
+      transition: opacity 1.5s ease-in-out;
     }
     
     h1 {
@@ -89,13 +98,14 @@
 
     h6 {
       font-size: 1rem;
-  font-weight: 40; /* Normal weight */
-  font-family: 'Georgia', serif; /* Match your body font */
-  color: #5c4d3c; /* Match your text color */
-  line-height: 1.5;
-  margin: 0.5rem 0 1.5rem;
-  font-style: italic; /* Optional: if you want the italic style */
+      font-weight: 400;
+      font-family: 'Georgia', serif;
+      color: #5c4d3c;
+      line-height: 1.5;
+      margin: 0.5rem 0 1.5rem;
+      font-style: italic;
     }
+    
     h2 {
       font-size: 2.5rem;
       margin-bottom: 1.5rem;
@@ -107,65 +117,64 @@
       margin: 0 auto 1.5rem;
     }
 
-    /* Menu Styles - UNCHANGED */
     /* Menu Styles */
-#menu-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 2;
-  padding-bottom: 20px;
-}
+    #menu-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+      padding-bottom: 20px;
+    }
 
-#home-link {
-  display: block;
-  text-decoration: none;
-}
+    #home-link {
+      display: block;
+      text-decoration: none;
+    }
 
-#menu-icon {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: block;
-  transition: filter 0.2s ease;
-}
+    #menu-icon {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: block;
+      transition: filter 0.2s ease;
+    }
 
-#home-link:hover #menu-icon {
-  filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
-}
+    #home-link:hover #menu-icon {
+      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+    }
 
-#dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: transparent; /* Transparent background */
-  border: none; /* No border */
-  box-shadow: none; /* No shadow */
-  z-index: 3;
-}
+    #dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      z-index: 3;
+    }
 
-#dropdown-menu a {
-  display: block;
-  padding: 10px 0; /* Adjusted padding */
-  color: #333;
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: 1.2rem; /* Matches pizza.html */
-  text-align: right;
-  transition: color 0.2s ease;
-  font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-  font-weight: 500; /* Added for consistency */
-}
+    #dropdown-menu a {
+      display: block;
+      padding: 10px 0;
+      color: #333;
+      text-decoration: none;
+      white-space: nowrap;
+      font-size: 1.2rem;
+      text-align: right;
+      transition: color 0.2s ease;
+      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+      font-weight: 500;
+    }
 
-#dropdown-menu a:hover {
-  background-color: transparent; /* No hover background */
-  color: #c72a2a; /* Hover color matches pizza.html */
-}
+    #dropdown-menu a:hover {
+      background-color: transparent;
+      color: #c72a2a;
+    }
 
-#menu-container:hover #dropdown-menu {
-  display: block;
-}
+    #menu-container:hover #dropdown-menu {
+      display: block;
+    }
 
     /* Mobile Styles */
     @media (max-width: 768px) {
@@ -204,7 +213,7 @@
   </style>
 </head>
 <body>
-  <!-- MENU HTML - UNCHANGED -->
+  <!-- MENU HTML -->
   <div id="menu-container">
     <a href="/" id="home-link">
       <img id="menu-icon" src="/images/menu-icon.png" alt="Menu">
@@ -255,6 +264,16 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Fade in first image and text
+      setTimeout(function() {
+        const firstImage = document.querySelector('.slide-image');
+        const recipeContent = document.querySelector('.recipe-content');
+        
+        firstImage.style.opacity = '1';
+        recipeContent.style.opacity = '1';
+      }, 100);
+
+      // Slideshow functionality
       const track = document.querySelector('.slideshow-track');
       const slides = document.querySelectorAll('.slide');
       const slideCount = slides.length;
@@ -263,35 +282,32 @@
       let isTransitioning = false;
       let slideInterval;
 
-      // Initialize slideshow
       function initSlideshow() {
         slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
         
-        // Position slides horizontally
         slides.forEach((slide, index) => {
           slide.style.left = `${slideWidth * index}px`;
         });
         
-        // Clone first slide and append to end for seamless looping
         const firstSlide = slides[0].cloneNode(true);
         track.appendChild(firstSlide);
         
-        // Start the slideshow
         startSlideShow();
       }
 
-      // Handle slide transition
       function goToNextSlide() {
         if (isTransitioning) return;
         
         isTransitioning = true;
         currentIndex++;
         
-        // Smooth transition to next slide
+        // Fade out current image
+        const currentImage = document.querySelector(`.slide:nth-child(${currentIndex % slideCount + 1}) .slide-image`);
+        currentImage.style.opacity = '0';
+        
         track.style.transition = 'transform 0.8s ease-in-out';
         track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
         
-        // Check if we need to reset position for infinite loop
         if (currentIndex === slideCount) {
           setTimeout(() => {
             track.style.transition = 'none';
@@ -304,25 +320,25 @@
           }, 800);
         } else {
           setTimeout(() => {
+            // Fade in next image
+            const nextImage = document.querySelector(`.slide:nth-child(${currentIndex % slideCount + 1}) .slide-image`);
+            nextImage.style.opacity = '1';
             isTransitioning = false;
           }, 800);
         }
       }
 
-      // Start the slideshow with automatic transitions
       function startSlideShow() {
         clearInterval(slideInterval);
-        slideInterval = setInterval(goToNextSlide, 3000); // 3 second interval
+        slideInterval = setInterval(goToNextSlide, 3000);
       }
 
-      // Handle window resize
       window.addEventListener('resize', function() {
         slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
         track.style.transition = 'none';
         track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
       });
 
-      // Start the slideshow
       initSlideshow();
     });
   </script>
