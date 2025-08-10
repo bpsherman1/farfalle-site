@@ -99,62 +99,64 @@
     }
 
     /* Menu Styles - UNCHANGED */
-    #menu-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-      padding-bottom: 20px;
-    }
+    /* Menu Styles */
+#menu-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  padding-bottom: 20px;
+}
 
-    #home-link {
-      display: block;
-      text-decoration: none;
-    }
+#home-link {
+  display: block;
+  text-decoration: none;
+}
 
-    #menu-icon {
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      display: block;
-      transition: filter 0.2s ease;
-    }
+#menu-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: block;
+  transition: filter 0.2s ease;
+}
 
-    #home-link:hover #menu-icon {
-      filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
-    }
+#home-link:hover #menu-icon {
+  filter: brightness(0) saturate(100%) invert(84%) sepia(32%) saturate(1194%) hue-rotate(327deg) brightness(101%) contrast(91%);
+}
 
-    #dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: rgba(248, 248, 242, 0.9);
-      border-radius: 4px;
-      z-index: 101;
-    }
-  
-    #dropdown-menu a {
-      display: block;
-      padding: 10px 20px;
-      color: #333;
-      text-decoration: none;
-      white-space: nowrap;
-      font-size: 1.2rem;
-      text-align: right;
-      transition: color 0.2s ease;
-      font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
-      font-weight: 500;
-    }
+#dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: transparent; /* Transparent background */
+  border: none; /* No border */
+  box-shadow: none; /* No shadow */
+  z-index: 3;
+}
 
-    #dropdown-menu a:hover {
-      background-color: transparent;
-      color: #c72a2a;
-    }
+#dropdown-menu a {
+  display: block;
+  padding: 10px 0; /* Adjusted padding */
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+  font-size: 1.2rem; /* Matches pizza.html */
+  text-align: right;
+  transition: color 0.2s ease;
+  font-family: 'Futura', 'Trebuchet MS', Arial, sans-serif;
+  font-weight: 500; /* Added for consistency */
+}
 
-    #menu-container:hover #dropdown-menu {
-      display: block;
-    }
+#dropdown-menu a:hover {
+  background-color: transparent; /* No hover background */
+  color: #c72a2a; /* Hover color matches pizza.html */
+}
+
+#menu-container:hover #dropdown-menu {
+  display: block;
+}
 
     /* Mobile Styles */
     @media (max-width: 768px) {
