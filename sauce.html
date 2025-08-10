@@ -39,43 +39,41 @@
     }
 
     /* Image Layout */
-    .image-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      max-width: 1400px;
-      margin: 0 auto;
-      gap: 20px;
-    }
-    
-    .food-image {
-      height: 70vh;
-      width: auto;
-      max-width: 40%;
-      object-fit: contain;
-      transition: transform 1s ease-out, opacity 1s ease-out;
-      opacity: 0;
-    }
-    
-    .left-image {
-      transform: translateX(-100px);
-    }
-    
-    .right-image {
-      transform: translateX(100px) translateY(20px);
-    }
-    
-    .slide-in {
-      opacity: 1;
-      transform: translateX(0) translateY(0) !important;
-    }
-    
-    .recipe-content {
-      flex: 0 1 600px;
-      text-align: center;
-      padding: 0 40px;
-    }
+   /* Animation Styles */
+.food-image {
+  height: 70vh;
+  width: auto;
+  max-width: 40%;
+  object-fit: contain;
+  transition: transform 1s ease-out, opacity 1s ease;
+}
+
+.left-image {
+  transform: translateX(-100vw); /* Start off-screen left */
+  opacity: 0;
+}
+
+.right-image {
+  transform: translateX(100vw); /* Start off-screen right */
+  opacity: 0;
+}
+
+.recipe-content {
+  flex: 0 1 600px;
+  text-align: center;
+  padding: 0 40px;
+  opacity: 0; /* Start invisible */
+  transition: opacity 1s ease 0.5s; /* Delay the text fade */
+}
+
+.slide-in {
+  transform: translateX(0) !important; /* Slide to normal position */
+  opacity: 1 !important;
+}
+
+.text-loaded {
+  opacity: 1;
+}
     
     /* Text Styles */
     h1 {
