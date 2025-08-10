@@ -342,11 +342,15 @@
         top: calc(25vh + 20px);
       }
       
-      #section1 .food-image.right-image {
-        top: calc(30vh + 150px);
-        max-height: 35vh;
-        width: 170%;
-      }
+    #section1 .food-image.right-image {
+    top: calc(30vh + 100px); /* Adjusted to give more space */
+    max-height: none; /* Remove max-height restriction */
+    height: 45vh; /* Set fixed height (adjust as needed) */
+    width: auto; /* Let width adjust proportionally */
+    max-width: 90vw; /* Prevent overflow */
+    left: 50%;
+    transform: translateX(-50%); /* Center properly */
+  }
       
       #section2, #section3 {
         padding-top: calc(30vh + 40vh + 220px);
