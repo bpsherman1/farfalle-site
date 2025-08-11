@@ -287,46 +287,47 @@
       }
     }
 
-    @media (max-width: 480px) {
+   @media (max-width: 480px) {
+  #section1 {
+    height: 100vh; /* Keep at 100vh */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align to top */
+    padding-top: 20px; /* Add some top padding */
+  }
 
-      
-       #section1 {
-       
-       height: 120vh;
-      background-color: #f0e6d2;
-      position: sticky;
-      top: -70;
-    }
-    
-    #section2 {
-       height: 180vh;
-      background-color: #e8e0c9;
-    }
-    
-    #section3 {
-       height: 170vh;
-      background-color: #e0d9c1;
-    }
-      #section1 .left-image {
-         top: calc(0vh + 5px);
-        max-height: 20vh;
-        transform: translateY(100px) translateX(-30px);
-      }
-      
-      #section1 .right-image {
-        top: calc(30vh + 170px);
-        max-height: 20vh;
-        transform: translateY(115px) translateX(60px);
-      }
-      
-      #section1 .recipe-content {
-        top: calc(25vh + 5px);
-      }
-      
-      .ingredients li, .instructions p {
-        font-size: 1rem;
-      }
-    }
+  .image-container {
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+  }
+
+  /* Adjust image positioning */
+  .food-image {
+    position: relative !important; /* Override absolute */
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    max-height: 25vh;
+    width: 80%;
+    margin: 10px auto;
+  }
+
+  /* Specific adjustments */
+  .left-image {
+    transform: translateY(0) translateX(-30px) !important;
+  }
+
+  .right-image {
+    transform: translateY(0) translateX(30px) !important;
+    margin-top: 20px;
+  }
+
+  .recipe-content {
+    top: auto;
+    margin-top: 20px;
+    order: -1; /* Move text above images */
+  }
   </style>
 </head>
 <body>
