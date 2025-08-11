@@ -28,20 +28,17 @@
     
     #section1 {
       background-color: #f0e6d2;
+      position: sticky;
+      top: 0;
     }
     
     #section2 {
       background-color: #e8e0c9;
+      min-height: 100vh;
+      height: auto;
+      padding: 60px 20px;
     }
     
-    #section3 {
-      background-color: #e0d9c1;
-    }
-#section1 {
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-}
     /* Image Layout */
     .image-container {
       display: flex;
@@ -57,14 +54,14 @@
       width: auto;
       max-width: 60%;
       object-fit: contain;
-      transform: translateX(-100vw); /* Start off-screen left */
-      opacity: 0; /* Start invisible */
+      transform: translateX(-100vw);
+      opacity: 0;
       transition: transform 1s ease-out, opacity 1s ease;
     }
     
     .food-image.loaded {
-      transform: translateX(0); /* Slide to normal position */
-      opacity: 1; /* Fade in */
+      transform: translateX(0);
+      opacity: 1;
     }
     
     .recipe-content {
@@ -72,8 +69,8 @@
       text-align: center;
       width: 80%;
       padding: 0 40px;
-      opacity: 0; /* Start invisible */
-      transition: opacity 1s ease 0.5s; /* Delay the text fade */
+      opacity: 0;
+      transition: opacity 1s ease 0.5s;
     }
     
     .recipe-content.loaded {
@@ -86,14 +83,19 @@
       margin-bottom: 1.5rem;
     }
     
-  h6 {
+    h6 {
       font-size: 1rem;
-  font-weight: 40; /* Normal weight */
-  font-family: 'Georgia', serif; /* Match your body font */
-  color: #5c4d3c; /* Match your text color */
-  line-height: 1.5;
-  margin: 0.5rem 0 1.5rem;
-  font-style: italic; /* Optional: if you want the italic style */
+      font-weight: 400;
+      font-family: 'Georgia', serif;
+      color: #5c4d3c;
+      line-height: 1.5;
+      margin: 0.5rem 0 1.5rem;
+      font-style: italic;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
     }
     
     p {
@@ -210,7 +212,7 @@
       display: block;
     }
 
-    /* Mobile Styles - Larger Pizza */
+    /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
         height: auto;
@@ -222,15 +224,11 @@
         flex-direction: column;
         gap: 30px;
       }
-      #section1 {
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-}
+      
       .food-image {
         height: auto;
-        max-height: 50vh; /* Larger than before */
-        max-width: 80%; /* Full width on mobile */
+        max-height: 50vh;
+        max-width: 80%;
         width: auto;
       }
       
@@ -240,7 +238,7 @@
       }
       
       h1 {
-        font-size: 2.5rem; /* Slightly larger */
+        font-size: 2.5rem;
       }
       
       h2 {
@@ -252,16 +250,14 @@
       h1 {
         font-size: 2.5rem;
       }
-      #section1 {
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-}
-      h6 { font-size: .75rem;
-           line-height: 1.8;
+      
+      h6 { 
+        font-size: .75rem;
+        line-height: 1.8;
       }
+      
       .food-image {
-        max-height: 60vh; /* Even larger on very small screens */
+        max-height: 60vh;
       }
     }
   </style>
@@ -291,7 +287,7 @@
     </div>
   </div>
 
-  <!-- Second Section - Pizza Info -->
+  <!-- Second Section with All Pizza Content -->
   <div class="section" id="section2">
     <div class="recipe-content">
       <h2>Our Signature Pizza</h2>
@@ -324,27 +320,18 @@
     </div>
   </div>
 
-  <!-- Third Section - Specials -->
-  <div class="section" id="section3">
-    <div class="recipe-content">
-      <h2>Weekly Pizza Specials</h2>
-      <p>Try our rotating selection of specialty pizzas featuring seasonal ingredients.</p>
-      <p>Ask about our current special when you order!</p>
-    </div>
-  </div>
-
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // Trigger animations after page loads
       setTimeout(function() {
         const pizzaImage = document.querySelector('.food-image');
-        const recipeContent = document.querySelector('.recipe-content');
+        const recipeContent = document.querySelectorAll('.recipe-content');
         
         pizzaImage.classList.add('loaded');
-        recipeContent.classList.add('loaded');
+        recipeContent.forEach(content => {
+          content.classList.add('loaded');
+        });
       }, 100);
       
-      // Debug script to verify image paths
       const img = document.querySelector('.food-image');
       img.onload = function() {
         console.log('Pizza image loaded successfully');
