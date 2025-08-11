@@ -235,25 +235,23 @@
     }
 
     /* Mobile Styles */
-    @media (max-width: 768px) {
-      .section {
-        height: auto;
-        min-height: 110vh;
-        padding: 60px 20px;
-      }
-      
-      .image-container {
-        flex-direction: column;
-        gap: 20px;
-      }
-      
-      .food-image {
-        height: auto;
-        max-height: 30vh;
-        max-width: 80%;
-        transform: translateY(100px);
-        opacity: 0;
-      }
+   @media (max-width: 480px) {
+  #section1 {
+    height: calc(100vh - 20px); /* Reduce height to pull content up */
+    padding-top: 5vh; /* Adjust this value to fine-tune position */
+    justify-content: flex-start;
+  }
+
+  .image-container {
+    margin-top: -20px; /* Pulls everything up */
+    transform: translateY(-20px); /* Alternative method */
+  }
+
+  /* Keep your existing image and content styles */
+  .food-image {
+    max-height: 18vh; /* Slightly reduce if needed */
+  }
+
       
       .left-image {
         transform: translateY(100px) translateX(-50px);
