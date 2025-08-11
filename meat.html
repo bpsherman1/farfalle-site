@@ -172,6 +172,56 @@
     #menu-container:hover #dropdown-menu {
       display: block;
     }
+    @media (max-width: 768px) {
+      .section {
+        height: auto;
+        min-height: 100vh;
+        padding: 60px 20px;
+      }
+      
+      .image-container {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      .food-image {
+        height: auto;
+        max-height: 30vh;
+        max-width: 80%;
+        /* Mobile-specific transform values */
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      
+      .left-image {
+        transform: translateY(100px) translateX(-50px);
+      }
+      
+      .right-image {
+        transform: translateY(100px) translateX(50px);
+      }
+      
+      .slide-in {
+        transform: translateY(0) translateX(0) !important;
+        opacity: 1 !important;
+      }
+      
+      .recipe-content {
+        flex: 1;
+        padding: 0 20px;
+        /* Keep fade animation on mobile */
+        opacity: 0;
+      }
+      
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+
 
 @media (max-width: 480px) {
   /* Move the entire section container up */
