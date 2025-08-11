@@ -25,7 +25,23 @@
       padding: 20px;
       box-sizing: border-box;
     }
-    
+    .slide:first-child .slide-image {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide:first-child .slide-image.loaded {
+  opacity: 1;
+}
+
+#section1 .recipe-content {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+#section1 .recipe-content.loaded {
+  opacity: 1;
+}
     #section1 {
       background-color: #f0e6d2;
       position: sticky;
