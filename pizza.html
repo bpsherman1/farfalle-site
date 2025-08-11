@@ -14,6 +14,21 @@
       color: #5c4d3c;
       overflow-x: hidden;
     }
+
+.recipe-image {
+  max-width: 80%;
+  height: auto;
+  margin: 30px auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .recipe-image {
+    max-width: 100%;
+  }
+}
     
     /* Section Styles */
     .section {
@@ -236,7 +251,9 @@
         flex: 1;
         padding: 0 20px;
       }
-      
+        #section2 {
+    min-height: 140vh; /* Even more on small screens */
+  }
       h1 {
         font-size: 2.5rem;
       }
@@ -250,7 +267,9 @@
       h1 {
         font-size: 2.5rem;
       }
-      
+        #section2 {
+    min-height: 140vh; /* Even more on small screens */
+  }
       h6 { 
         font-size: .75rem;
         line-height: 1.8;
@@ -304,6 +323,8 @@
           <li>Pepper</li>
         </ul>
       </div>
+
+    <img src="images3/pr.png" alt="Pizza Recipe" class="recipe-image">
       
       <div class="instructions">
         <h3>Instructions</h3>
