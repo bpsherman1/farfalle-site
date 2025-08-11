@@ -25,14 +25,11 @@
       padding: 20px;
       box-sizing: border-box;
     }
-    #section1 {
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-}
     
     #section1 {
       background-color: #f0e6d2;
+      position: sticky;
+      top: 0;
       flex-direction: column;
     }
     
@@ -42,6 +39,10 @@
     
     #section3 {
       background-color: #e0d9c1;
+    }
+    
+    #section4 {
+      background-color: #d8d1b9;
     }
 
     /* Slideshow Container */
@@ -77,49 +78,89 @@
       object-fit: contain;
     }
 
-    /* Initial fade-in for first image only */
-    .slide:first-child .slide-image {
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-    
-    /* Text Styles */
+    /* Recipe Content Styles */
     .recipe-content {
       text-align: center;
       padding: 0 40px;
       max-width: 800px;
       margin: 20px auto 0;
       position: relative;
-      top:-50px;
       z-index: 2;
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
     }
     
+    /* Ingredients & Instructions Styles */
+    .recipe-card {
+      background-color: rgba(255,255,255,0.3);
+      padding: 30px;
+      border-radius: 10px;
+      margin: 30px auto;
+      max-width: 600px;
+    }
+    
+    .ingredients {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+    
+    .ingredients h3, .instructions h3 {
+      color: #a67c52;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    .ingredients ul {
+      padding-left: 20px;
+    }
+    
+    .ingredients li {
+      margin-bottom: 8px;
+      list-style-type: none;
+      position: relative;
+      padding-left: 25px;
+      font-size: 1.2rem;
+    }
+    
+    .ingredients li:before {
+      content: "•";
+      color: #c72a2a;
+      position: absolute;
+      left: 0;
+      font-size: 1.5em;
+      line-height: 1;
+    }
+    
+    .instructions p {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+      font-size: 1.2rem;
+      text-align: left;
+    }
+    
+    .instructions p:before {
+      content: "➤";
+      color: #8b5a2b;
+      position: absolute;
+      left: 0;
+    }
+
+    /* Text Styles */
     h1 {
       font-size: 3.5rem;
       margin-bottom: 1.5rem;
     }
 
-    h6 {
-      font-size: 1rem;
-      font-weight: 400;
-      font-family: 'Georgia', serif;
-      color: #5c4d3c;
-      line-height: 1.5;
-      margin: 0.5rem 0 1.5rem;
-      font-style: italic;
-    }
-    
     h2 {
       font-size: 2.5rem;
       margin-bottom: 1.5rem;
     }
     
-    p {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      margin: 0 auto 1.5rem;
+    h6 {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      margin: 0.5rem 0 1.5rem;
+      font-style: italic;
     }
 
     /* Menu Styles */
@@ -192,11 +233,6 @@
       .slideshow-container {
         height: 50vh;
       }
-      #section1 {
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-}
       
       .slide-image {
         max-width: 80%;
@@ -209,24 +245,23 @@
       h2 {
         font-size: 1.8rem;
       }
+      
+      .recipe-card {
+        padding: 20px;
+      }
     }
 
     @media (max-width: 480px) {
       h1 {
         font-size: 1.8rem;
       }
-      .recipe-content {
- 
-      top:10px;
-     
-    }
-      #section1 {
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-}
+      
       .slideshow-container {
         height: 40vh;
+      }
+      
+      .ingredients li, .instructions p {
+        font-size: 1rem;
       }
     }
   </style>
@@ -266,18 +301,90 @@
     </div>
   </div>
 
-  <!-- Other Sections -->
+  <!-- Pesto Pasta Section -->
   <div class="section" id="section2">
     <div class="recipe-content">
-      <h2>Featured Entrees</h2>
-      <p>Our chefs prepare each entree with care.</p>
+      <h2>Pesto Pasta</h2>
+      
+      <div class="recipe-card">
+        <div class="ingredients">
+          <h3>Ingredients</h3>
+          <ul>
+            <li>Pasta</li>
+            <li>Pesto</li>
+            <li>Chicken cutlet</li>
+            <li>Romano cheese</li>
+          </ul>
+        </div>
+        
+        <div class="instructions">
+          <h3>Instructions</h3>
+          <p>Cook pasta according to package directions until al dente</p>
+          <p>While pasta cooks, slice cooked chicken cutlet into strips</p>
+          <p>Drain pasta, reserving 1/2 cup of pasta water</p>
+          <p>Toss hot pasta with pesto, adding pasta water as needed to create sauce</p>
+          <p>Top with chicken strips and freshly grated Romano cheese</p>
+          <p>Serve immediately</p>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Meatball Marinara Section -->
   <div class="section" id="section3">
     <div class="recipe-content">
-      <h2>Weekly Specials</h2>
-      <p>Seasonal specials showcasing the best flavors.</p>
+      <h2>Meatball Marinara</h2>
+      
+      <div class="recipe-card">
+        <div class="ingredients">
+          <h3>Ingredients</h3>
+          <ul>
+            <li>Pasta</li>
+            <li>Marinara sauce</li>
+            <li>Meatballs</li>
+            <li>Reggiano parmigiano</li>
+          </ul>
+        </div>
+        
+        <div class="instructions">
+          <h3>Instructions</h3>
+          <p>Cook pasta in boiling salted water until al dente</p>
+          <p>In separate pan, heat marinara sauce and add cooked meatballs</p>
+          <p>Simmer meatballs in sauce for 10-15 minutes to blend flavors</p>
+          <p>Drain pasta and toss with a small amount of sauce</p>
+          <p>Plate pasta, top with meatballs and extra sauce</p>
+          <p>Finish with freshly grated Reggiano parmigiano</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chicken Parm Section -->
+  <div class="section" id="section4">
+    <div class="recipe-content">
+      <h2>Chicken Parmigiana</h2>
+      
+      <div class="recipe-card">
+        <div class="ingredients">
+          <h3>Ingredients</h3>
+          <ul>
+            <li>Mozzarella cheese</li>
+            <li>Marinara sauce</li>
+            <li>Chicken cutlet</li>
+            <li>Reggiano parmigiano</li>
+          </ul>
+        </div>
+        
+        <div class="instructions">
+          <h3>Instructions</h3>
+          <p>Preheat oven to 375°F (190°C)</p>
+          <p>Place cooked chicken cutlets in baking dish</p>
+          <p>Top each cutlet with marinara sauce and sliced mozzarella</p>
+          <p>Bake for 10-15 minutes until cheese is melted and bubbly</p>
+          <p>Remove from oven and sprinkle with Reggiano parmigiano</p>
+          <p>Serve with pasta or crusty bread</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -286,13 +393,31 @@
       // Fade in first image and text on page load
       setTimeout(function() {
         const firstImage = document.querySelector('.slide-image');
-        const recipeContent = document.querySelector('.recipe-content');
+        const recipeContent = document.querySelector('#section1 .recipe-content');
         
         firstImage.style.opacity = '1';
         recipeContent.style.opacity = '1';
       }, 100);
 
-      // Slideshow functionality (no fading between slides)
+      // Fade in other sections as they come into view
+      const sections = document.querySelectorAll('.section');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const content = entry.target.querySelector('.recipe-content');
+            if (content) {
+              content.style.opacity = '1';
+            }
+          }
+        });
+      }, {threshold: 0.1});
+      
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+
+      // Slideshow functionality
       const track = document.querySelector('.slideshow-track');
       const slides = document.querySelectorAll('.slide');
       const slideCount = slides.length;
