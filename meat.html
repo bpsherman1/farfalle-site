@@ -24,13 +24,11 @@
       padding: 20px;
       box-sizing: border-box;
     }
-    #section1 {
-  background-color: #f0e6d2;
-  position: sticky;
-  top: -20;
-}
+    
     #section1 {
       background-color: #f0e6d2;
+      position: sticky;
+      top: 0;
     }
     
     #section2 {
@@ -88,11 +86,76 @@
       opacity: 1 !important;
     }
 
+    /* Recipe Card Styles */
+    .recipe-card {
+      background-color: rgba(255,255,255,0.3);
+      padding: 30px;
+      border-radius: 10px;
+      margin: 30px auto;
+      max-width: 600px;
+    }
+    
+    .ingredients {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+    
+    .ingredients h3, .instructions h3 {
+      color: #a67c52;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    
+    .ingredients ul {
+      padding-left: 20px;
+    }
+    
+    .ingredients li {
+      margin-bottom: 8px;
+      list-style-type: none;
+      position: relative;
+      padding-left: 25px;
+      font-size: 1.2rem;
+    }
+    
+    .ingredients li:before {
+      content: "•";
+      color: #c72a2a;
+      position: absolute;
+      left: 0;
+      font-size: 1.5em;
+      line-height: 1;
+    }
+    
+    .instructions {
+      text-align: left;
+    }
+    
+    .instructions p {
+      margin-bottom: 15px;
+      position: relative;
+      padding-left: 30px;
+      font-size: 1.2rem;
+    }
+    
+    .instructions p:before {
+      content: "➤";
+      color: #8b5a2b;
+      position: absolute;
+      left: 0;
+    }
+
     /* Text Styles */
     h1 {
       font-size: 3.5rem;
       margin-bottom: 1.5rem;
     }
+    
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
     h6 {
       font-size: 1rem;
       font-weight: 400;
@@ -101,11 +164,6 @@
       line-height: 1.5;
       margin: 0.5rem 0 1.5rem;
       font-style: italic;
-    }
-    
-    h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5rem;
     }
     
     p {
@@ -172,6 +230,8 @@
     #menu-container:hover #dropdown-menu {
       display: block;
     }
+
+    /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
         height: auto;
@@ -188,7 +248,6 @@
         height: auto;
         max-height: 30vh;
         max-width: 80%;
-        /* Mobile-specific transform values */
         transform: translateY(100px);
         opacity: 0;
       }
@@ -209,7 +268,6 @@
       .recipe-content {
         flex: 1;
         padding: 0 20px;
-        /* Keep fade animation on mobile */
         opacity: 0;
       }
       
@@ -220,34 +278,37 @@
       h2 {
         font-size: 1.8rem;
       }
+      
+      .recipe-card {
+        padding: 20px;
+      }
     }
 
-
-@media (max-width: 480px) {
-  /* Move the entire section container up */
-  #section1 {
-    top: -15px; /* Adjusts sticky positioning */
-  }
-
-  /* Move left image up without changing size */
-  #section1 .left-image {
-    top: 5px; /* Was 50px, now 35px (15px up) */
-    max-height: 20vh; /* Keep original size */
-    transform: translateY(115px) translateX(-30px); /* Adjusted from 130px */
-  }
-
-  /* Move right image up without changing size */
-  #section1 .right-image {
-    top: calc(30vh + 170px); /* Was 185px, now 170px (15px up) */
-    max-height: 20vh; /* Keep original size */
-    transform: translateY(115px) translateX(60px); /* Adjusted from 130px */
-  }
-
-  /* Move text up */
-  #section1 .recipe-content {
-    top: calc(25vh + 5px); /* Was 20px, now 5px (15px up) */
-  }
-}
+    @media (max-width: 480px) {
+      #section1 {
+        top: -15px;
+      }
+      
+      #section1 .left-image {
+        top: 5px;
+        max-height: 20vh;
+        transform: translateY(115px) translateX(-30px);
+      }
+      
+      #section1 .right-image {
+        top: calc(30vh + 170px);
+        max-height: 20vh;
+        transform: translateY(115px) translateX(60px);
+      }
+      
+      #section1 .recipe-content {
+        top: calc(25vh + 5px);
+      }
+      
+      .ingredients li, .instructions p {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -281,8 +342,34 @@
   <div class="section" id="section2">
     <div class="recipe-content">
       <h2>Grandma's Meatballs</h2>
-      <p>Juicy, tender meatballs simmered in a rich tomato sauce - a family recipe passed down for generations.</p>
-      <p>Ingredients: Ground beef, breadcrumbs, eggs, parmesan, garlic, herbs</p>
+      
+      <div class="recipe-card">
+        <div class="ingredients">
+          <h3>Ingredients</h3>
+          <ul>
+            <li>1 lb beef/pork</li>
+            <li>1/2 cup breadcrumbs</li>
+            <li>1/2 cup romano/parmesan cheese</li>
+            <li>1 egg</li>
+            <li>1 teaspoon salt</li>
+            <li>1 teaspoon black pepper</li>
+            <li>2 cloves of garlic</li>
+            <li>Onion</li>
+            <li>Oregano</li>
+            <li>Red pepper</li>
+          </ul>
+        </div>
+        
+        <div class="instructions">
+          <h3>Instructions</h3>
+          <p>Place beef/pork in a bowl</p>
+          <p>Add egg, salt, pepper, minced garlic, breadcrumbs, romano cheese, and any other herbs or onion</p>
+          <p>Mix everything together thoroughly</p>
+          <p>Form golf ball sized meatballs</p>
+          <p>Preheat a pan or skillet for a few minutes then add olive oil</p>
+          <p>Cook meatballs on medium heat until they are brown (about 8 minutes)</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -290,8 +377,32 @@
   <div class="section" id="section3">
     <div class="recipe-content">
       <h2>Crispy Chicken Cutlets</h2>
-      <p>Perfectly golden and crunchy on the outside, tender and juicy on the inside - our signature cutlets never disappoint.</p>
-      <p>Ingredients: Chicken breast, flour, eggs, breadcrumbs, spices</p>
+      
+      <div class="recipe-card">
+        <div class="ingredients">
+          <h3>Ingredients</h3>
+          <ul>
+            <li>Chicken breast</li>
+            <li>Flour</li>
+            <li>1 egg</li>
+            <li>Breadcrumbs</li>
+            <li>Pinch of salt</li>
+            <li>Pinch of pepper</li>
+            <li>1 cup romano/parmesan cheese</li>
+          </ul>
+        </div>
+        
+        <div class="instructions">
+          <h3>Instructions</h3>
+          <p>Lay your flour, egg, and breadcrumbs out in separate dishes</p>
+          <p>Take your chicken breasts and cut them very thin</p>
+          <p>Coat both sides of each cutlet in flour</p>
+          <p>Dunk into egg, then into breadcrumbs</p>
+          <p>Heat up olive oil in a skillet or pan</p>
+          <p>Fry cutlets until crispy and golden brown</p>
+          <p>Drain on paper towels before serving</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -301,11 +412,13 @@
       setTimeout(function() {
         const leftImage = document.querySelector('.left-image');
         const rightImage = document.querySelector('.right-image');
-        const recipeContent = document.querySelector('.recipe-content');
+        const recipeContents = document.querySelectorAll('.recipe-content');
         
         leftImage.classList.add('slide-in');
         rightImage.classList.add('slide-in');
-        recipeContent.classList.add('fade-in');
+        recipeContents.forEach(content => {
+          content.classList.add('fade-in');
+        });
       }, 100);
       
       // Debug script to verify image paths
