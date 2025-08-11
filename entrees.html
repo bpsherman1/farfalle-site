@@ -389,18 +389,18 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+     document.addEventListener('DOMContentLoaded', function() {
       // Fade in first image and text on page load
       setTimeout(function() {
         const firstImage = document.querySelector('.slide-image');
-        const recipeContent = document.querySelector('#section1 .recipe-content');
+        const firstContent = document.querySelector('#section1 .recipe-content');
         
-        firstImage.style.opacity = '1';
-        recipeContent.style.opacity = '1';
+        firstImage.classList.add('loaded');
+        firstContent.classList.add('loaded');
       }, 100);
 
       // Fade in other sections as they come into view
-      const sections = document.querySelectorAll('.section');
+      const sections = document.querySelectorAll('.section:not(#section1)');
       
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
