@@ -224,35 +224,27 @@
       }
     }
 
-  @media (max-width: 480px) {
-  h1 {
-    font-size: 1.8rem;
-  }
-  
+ @media (max-width: 480px) {
+  /* Adjust sticky header position */
   #section1 {
-    background-color: #f0e6d2;
-    position: sticky;
-    top: -35px; /* Changed from -20 to -35 (15px higher) */
+    top: -35px; /* Moves entire section up */
   }
-  
-  /* Move entire container up */
-  #section1 .image-container {
-    margin-top: -15px; /* New: Lifts everything */
+
+  /* Move left image up */
+  #section1 .left-image {
+    top: 5%; /* Was -15%, now moved up */
+    transform: translateY(115px) translateX(-30px); /* Reduced from 130px */
   }
-  
-  .food-image {
-    max-height: 20vh;
-    /* Reduced translateY by 15px (from 130px) */
-    transform: translateY(115px); 
+
+  /* Move right image up */
+  #section1 .right-image {
+    top: calc(30vh + 170px); /* Reduced from 185px */
+    transform: translateY(115px) translateX(60px); /* Reduced from 130px */
   }
-  
-  .left-image {
-    transform: translateY(115px) translateX(-30px); /* Adjusted */
-    top: -15%;
-  }
-  
-  .right-image {
-    transform: translateY(115px) translateX(60px); /* Adjusted */
+
+  /* Move text content up */
+  #section1 .recipe-content {
+    top: calc(25vh + 5px); /* Reduced from 20px */
   }
 }
   </style>
