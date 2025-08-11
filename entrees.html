@@ -14,7 +14,20 @@
       color: #5c4d3c;
       overflow-x: hidden;
     }
-    
+     .recipe-image {
+  max-width: 100%;
+  height: auto;
+  margin: 30px auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .recipe-image {
+    max-width: 100%;
+  }
+}
     /* Section Styles */
     .section {
       height: 100vh;
@@ -332,7 +345,7 @@
             <li>Romano cheese</li>
           </ul>
         </div>
-        
+        <img src="./images3/entree1.png" alt="Pizza Recipe" class="recipe-image">
         <div class="instructions">
           <h3>Instructions</h3>
           <p>Cook pasta according to package directions until al dente</p>
@@ -361,7 +374,7 @@
             <li>Reggiano parmigiano</li>
           </ul>
         </div>
-        
+         <img src="./images3/mbpr.png" alt="Pizza Recipe" class="recipe-image">
         <div class="instructions">
           <h3>Instructions</h3>
           <p>Cook pasta in boiling salted water until al dente</p>
@@ -390,7 +403,7 @@
             <li>Reggiano parmigiano</li>
           </ul>
         </div>
-        
+         <img src="./images3/entree3.png" alt="Pizza Recipe" class="recipe-image">
         <div class="instructions">
           <h3>Instructions</h3>
           <p>Preheat oven to 375°F (190°C)</p>
