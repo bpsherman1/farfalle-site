@@ -104,13 +104,16 @@ height:190vh;}
 }
 
 /* Ensure images maintain aspect ratio */
-#section1 .left-image,
-#section1 .right-image {
-  object-fit: contain;
-  flex-grow: 0; /* Prevent growing */
-  flex-shrink: 0; /* Prevent shrinking */
+/* Restore original animation values */
+#section1 .left-image {
+  transform: translateX(-480px); /* Restore original value */
+  opacity: 0;
 }
 
+#section1 .right-image {
+  transform: translateX(480px); /* Restore original value */
+  opacity: 0;
+}
 
 
 #section1 .left-image {
