@@ -70,9 +70,10 @@ height:190vh;}
 }
     /* First Section Layout */
  /* First Section Layout - UPDATED */
+/* Fix for Section 1 Layout */
 #section1 .image-container {
   display: flex;
-  justify-content: space-around; /* Changed from center for better distribution */
+  justify-content: space-between; /* Changed to space-between */
   align-items: center;
   width: 100%;
   max-width: 1400px;
@@ -81,33 +82,33 @@ height:190vh;}
 }
 
 #section1 .food-image {
-  height: 60vh; /* Consistent height */
+  height: 60vh;
+  min-height: 400px; /* Added minimum height */
   width: auto;
-  max-width: 35%; /* Increased from 30% */
-  min-width: 300px; /* Prevent becoming too small */
+  max-width: 35%;
+  min-width: 350px; /* Increased minimum width */
   object-fit: contain;
   transition: transform 1s ease-out, opacity 1s ease;
-  flex-shrink: 1; /* Allow some shrinking but not too much */
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
-/* Fix for recipe content centering */
+/* Center content properly */
 #section1 .recipe-content {
-  flex: 0 1 500px;
+  flex: 0 1 600px; /* Increased flex basis */
   text-align: center;
-  padding: 0 40px;
-  margin: 0 auto; /* Ensure proper centering */
+  padding: 0 60px; /* Adjusted padding */
+  margin: 0 auto;
   opacity: 0;
   transition: opacity 1s ease 0.5s;
   order: 2;
 }
-#section1 .left-image {
-  transform: translateX(-1000px); /* Reduced from -480px */
-  opacity: 0;
-}
 
+/* Ensure images maintain aspect ratio */
+#section1 .left-image,
 #section1 .right-image {
-  transform: translateX(1000px); /* Reduced from 480px */
-  opacity: 0;
+  object-fit: contain;
+  flex-grow: 0; /* Prevent growing */
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 
