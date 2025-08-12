@@ -258,55 +258,99 @@
     }
 
     /* Mobile Styles */
-  @media (max-width: 768px) {
-  /* Widen the content containers */
+ /* Mobile Styles */
+@media (max-width: 768px) {
+  /* Section 1 - Stack images vertically */
+  #section1 {
+    height: auto;
+    min-height: 100vh;
+    display: block;
+    padding: 20px;
+  }
+  
+  #section1 .image-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  #section1 .food-image {
+    max-width: 80% !important;
+    height: auto;
+    max-height: 30vh;
+    margin: 20px auto;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+  
+  #section1 .left-image {
+    transform: translateY(-100px) !important;
+    order: 1;
+  }
+  
+  #section1 .right-image {
+    transform: translateY(100px) !important;
+    order: 3;
+  }
+  
+  #section1 .recipe-content {
+    flex: 1;
+    padding: 0;
+    margin: 20px 0;
+    order: 2;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 90% !important;
+  }
+  
+  /* Sections 2 & 3 - Wider content */
+  #section2, #section3 {
+    padding: 40px 5% !important;
+    min-height: auto;
+  }
+  
   #section2 .recipe-content,
   #section3 .recipe-content {
-    width: 92% !important; /* Increased from 90% */
-    max-width: 640px !important; /* Added maximum width */
-    padding: 20px 4% !important; /* Adjusted side padding */
-  }
-
-  /* Widen the recipe boxes */
-  .ingredients, 
-  .instructions {
-    width: 100% !important; /* Full width of container */
-    max-width: none !important;
-    padding: 20px 5% !important; /* More side padding */
-    box-sizing: border-box;
-  }
-
-  /* Widen the images */
-  .recipe-image {
     width: 100% !important;
-    max-width: 640px !important; /* Matches content width */
-    margin: 25px auto !important;
+    max-width: 100% !important;
+    padding: 0;
   }
-
-  /* Adjust heading sizes */
+  
+  .recipe-image {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  
+  .ingredients, .instructions {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 20px !important;
+  }
+  
   h2 {
-    font-size: 2.8rem !important; /* Slightly larger */
-    margin: 0 auto 1.5rem !important;
-    width: 100%;
-  }
-
-  h3 {
-    font-size: 2rem !important;
+    font-size: 2.5rem !important;
   }
 }
 
 @media (max-width: 480px) {
-  /* Slightly wider on small phones */
-  #section2 .recipe-content,
-  #section3 .recipe-content {
-    width: 94% !important;
-    padding: 15px 3% !important;
+  /* Adjustments for very small screens */
+  #section1 .food-image {
+    max-width: 90% !important;
   }
-
-  /* Larger text on small screens */
+  
+  #section1 .recipe-content {
+    width: 95% !important;
+  }
+  
+  h2 {
+    font-size: 2.2rem !important;
+  }
+  
   p {
-    font-size: 1.4rem !important;
-    line-height: 1.7;
+    font-size: 1.2rem !important;
   }
 }
   </style>
