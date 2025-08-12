@@ -125,13 +125,13 @@ height:190vh;}
     }
     
     /* Recipe Content for Sections 2 and 3 (no animation) */
-    #section2 .recipe-content,
-    #section3 .recipe-content {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      opacity: 1; /* Always visible */
-    }
+  #section2, #section3 {
+  align-items: flex-start; /* Align content to top */
+  padding-top: 40px; /* Reduce top padding */
+  padding-bottom: 60px; /* Keep bottom padding */
+  min-height: auto; /* Let content determine height */
+  height: auto; /* Remove fixed height */
+}
     
     /* Text Styles */
     h1 {
