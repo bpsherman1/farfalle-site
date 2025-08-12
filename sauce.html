@@ -23,8 +23,18 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 #section2, #section3 {
-  align-items: flex-start; /* Align content to top instead of center */
-  padding-top: 40px; /* Reduce top padding */
+  min-height: auto !important; /* Remove forced 100vh */
+  align-items: flex-start !important; /* Align content to top */
+  padding-top: 40px; /* Adjust top padding */
+  padding-bottom: 60px; /* Keep bottom padding */
+}
+
+/* Ensure recipe content takes full width */
+#section2 .recipe-content, 
+#section3 .recipe-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 @media (max-width: 768px) {
   .recipe-image {
