@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,115 +14,111 @@
       color: #5c4d3c;
       line-height: 1.6;
     }
-    .recipe-image {
-  max-width: 638px; /* Match your content width */
-  width: 110%;
-  height: auto;
-  margin: 30px auto;
-  display: block;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-#section2 {
-
-height:190vh;}
-  
-@media (max-width: 768px) {
-  .recipe-image {
-    max-width: 100%;
-  }
-}
-    /* Section Styles */
- 1s ease-out, opacity 1s ease;
-}
-
-/* FIRST SECTION - ORIGINAL WORKING VERSION */
-/* Original Working Section 1 CSS */
-#section1 {
-  height: 100vh;
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#section1 .image-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-#section1 .food-image {
-  height: 60vh;
-  width: auto;
-  max-width: 30%;
-  object-fit: contain;
-  transition: transform 1s ease-out, opacity 1s ease;
-}
-
-#section1 .left-image {
-  transform: translateX(-480px);
-  opacity: 0;
-}
-
-#section1 .right-image {
-  transform: translateX(480px);
-  opacity: 0;
-}
-
-#section1 .recipe-content {
-  flex: 0 1 600px;
-  text-align: center;
-  padding: 0 120px;
-  opacity: 0;
-  transition: opacity 1s ease 0.5s;
-}
-
-#section1 .slide-in {
-  transform: translateX(0) !important;
-  opacity: 1 !important;
-}
-
-#section1 .text-loaded {
-  opacity: 1;
-}
     
-#section2, #section3 {
-  /* Reset all problematic properties */
-  display: block !important;
-  position: relative;
-  padding: 20px !important;
-  min-height: 0 !important;
-  height: auto !important;
-  align-items: start !important;
-  justify-content: start !important;
-  background-attachment: scroll !important;
-}
-
-/* Force content to stick to top */
-#section2 .recipe-content, 
-#section3 .recipe-content {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  transform: translateY(0) !important;
-}
-
-/* Remove all spacing from headers */
-#section2 h2,
-#section3 h2 {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-}
+    .recipe-image {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      margin: 30px auto;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* Section Styles */
+    .section {
+      min-height: 100vh;
+      padding: 60px 90px;
+      box-sizing: border-box;
+      position: relative;
+    }
+    
+    #section1 {
+      background-color: #f0e6d2;
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    
+    #section2 {
+      background-color: #e8e0c9;
+    }
+    
+    #section3 {
+      background-color: #e0d9c1;
+    }
+    
+    /* First Section Layout */
+    #section1 .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: 40px;
+    }
+    
+    #section1 .food-image {
+      height: 60vh;
+      width: auto;
+      max-width: 30%;
+      object-fit: contain;
+      transition: transform 1s ease-out, opacity 1s ease;
+      flex-shrink: 0;
+    }
+    
+    #section1 .left-image {
+      transform: translateX(-480px);
+      opacity: 0;
+      order: 1;
+    }
+    
+    #section1 .right-image {
+      transform: translateX(480px);
+      opacity: 0;
+      order: 3;
+    }
+    
+    #section1 .recipe-content {
+      flex: 0 1 600px;
+      text-align: center;
+      padding: 0 40px;
+      opacity: 0;
+      transition: opacity 1s ease 0.5s;
+      order: 2;
+    }
+    
+    #section1 .slide-in {
+      transform: translateX(0) !important;
+      opacity: 1 !important;
+    }
+    
+    #section1 .text-loaded {
+      opacity: 1;
+    }
+    
+    /* Recipe Content for Sections 2 and 3 */
+    #section2 .recipe-content,
+    #section3 .recipe-content {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
     
     /* Text Styles */
     h1 {
       font-size: 3.5rem;
       margin-bottom: 1rem;
+    }
+    
+    h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin: 2rem 0;
     }
     
     h6 {
@@ -137,17 +132,13 @@ height:190vh;}
     }
     
     .pesto-header {
-      top:-50px;
       color: #3a7a22;
-      align:center;
     }
     
     .redsauce-header {
       color: #d62c2c;
     }
-     h2 {
-     
-        font-size: 3rem; }
+    
     h3 {
       font-size: 1.8rem;
       margin: 2rem 0 1rem;
@@ -159,7 +150,7 @@ height:190vh;}
       margin: 0 auto 1.5rem;
     }
     
-   .ingredients {
+    .ingredients {
       background-color: rgba(255,255,255,0.3);
       padding: 20px;
       border-radius: 10px;
@@ -269,116 +260,45 @@ height:190vh;}
     /* Mobile Styles */
     @media (max-width: 768px) {
       .section {
-        padding: 80px 20px;
+        padding: 40px 20px;
+      }
+      
+      #section1 {
+        height: auto;
         min-height: 100vh;
-        position: relative;
         display: block;
       }
       
       #section1 .image-container {
-        display: block;
+        flex-direction: column;
+        gap: 20px;
       }
       
-      #section1 .food-image.left-image {
-        position: absolute;
-        top: 40px;
-        left: 50%;
-        transform: translateX(-50%) translateX(-100px);
-        width: 70%;
-        max-width: 70%;
+      #section1 .food-image {
+        max-width: 80%;
         height: auto;
-        max-height: 15vh;
-        margin: 0 !important;
+        max-height: 30vh;
+        margin: 20px auto;
       }
       
       #section1 .recipe-content {
-        position: absolute;
-        top: calc(20vh + 80px);
-        left: 50%;
-        transform: translateX(-50%);
-        width: 55%;
+        flex: 1;
         padding: 0;
-        margin: 0;
-      }
-      
-      #section1 .food-image.right-image {
-        position: absolute;
-        top: calc(30vh + 300px);
-        left: 50%;
-        transform: translateX(-50%) translateX(100px);
-        width: 150%;
-        max-height: 75vh;
-        margin: 0 !important;
-      }
-      
-      #section2, #section3 {
-        padding-top: calc(35vh + 45vh + 300px);
-      }
-      
-      #section1 .food-image.left-image.slide-in {
-        transform: translateX(-50%) !important;
-      }
-      
-      #section1 .food-image.right-image.slide-in {
-        transform: translateX(-50%) !important;
-      }
-      #section1 {
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-}
-      h1 {
-        font-size: 3rem;
-      }
-      
-      h2 {
-        align:center;
-        font-size: 5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      #section1 .food-image.left-image {
-        top: 50px;
-        max-height: 20vh;
-      }
-      #section1 {
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-}
-      #section1 .recipe-content {
-        top: calc(25vh + 20px);
-      }
-       h6 {
-        font-size: .75rem;
-      }
-    }
-   #section1 .food-image.right-image {
-    top: calc(30vh + 185px);
-    max-height: none;
-    height: 25vh;
-    width: auto;
-    max-width: 90vw;
-    left: 50%;
-    transform: translateX(50%) translateX(100px); /* Start off-screen to the right */
-  }
-  
-  #section1 .food-image.right-image.slide-in {
-    transform: translateX(-50%) !important; /* Slide to center */
-  }
-}
-      
-      #section2, #section3 {
-        padding-top: calc(30vh + 40vh + 220px);
+        margin: 20px 0;
       }
       
       h1 {
         font-size: 2.5rem;
-        margin-bottom: 0.5rem;
       }
       
-     
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .recipe-image {
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -424,7 +344,7 @@ height:190vh;}
         </ul>
       </div>
 
-<img src="./images3/pesr.png" alt="Pizza Recipe" class="recipe-image">
+      <img src="./images3/pesr.png" alt="Pesto Recipe" class="recipe-image">
       
       <div class="instructions">
         <h3>Instructions</h3>
@@ -458,7 +378,7 @@ height:190vh;}
         </ul>
       </div>
 
-<img src="./images3/Sr.png" alt="Pizza Recipe" class="recipe-image">
+      <img src="./images3/Sr.png" alt="Red Sauce Recipe" class="recipe-image">
       
       <div class="instructions">
         <h3>Instructions</h3>
