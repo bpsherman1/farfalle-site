@@ -258,46 +258,118 @@
     }
 
     /* Mobile Styles */
-    @media (max-width: 768px) {
-      .section {
-        padding: 40px 20px;
-      }
-      
-      #section1 {
-        height: auto;
-        min-height: 100vh;
-        display: block;
-      }
-      
-      #section1 .image-container {
-        flex-direction: column;
-        gap: 20px;
-      }
-      
-      #section1 .food-image {
-        max-width: 80%;
-        height: auto;
-        max-height: 30vh;
-        margin: 20px auto;
-      }
-      
-      #section1 .recipe-content {
-        flex: 1;
-        padding: 0;
-        margin: 20px 0;
-      }
-      
-      h1 {
-        font-size: 2.5rem;
-      }
-      
-      h2 {
-        font-size: 2rem;
-      }
-      
-      .recipe-image {
-        max-width: 100%;
-      }
+   @media (max-width: 768px) {
+  /* Keep your existing mobile styles for section 1 */
+  #section1 {
+    height: auto;
+    min-height: 100vh;
+    display: block;
+    padding-top: 80px;
+  }
+  
+  #section1 .image-container {
+    display: block;
+  }
+  
+  #section1 .food-image.left-image {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateX(-100px);
+    width: 70%;
+    max-width: 70%;
+    height: auto;
+    max-height: 15vh;
+    margin: 0 !important;
+  }
+  
+  #section1 .recipe-content {
+    position: absolute;
+    top: calc(20vh + 80px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #section1 .food-image.right-image {
+    position: absolute;
+    top: calc(30vh + 300px);
+    left: 50%;
+    transform: translateX(-50%) translateX(100px);
+    width: 150%;
+    max-height: 75vh;
+    margin: 0 !important;
+  }
+  
+  /* Restore original section 2/3 mobile layout */
+  #section2, #section3 {
+    padding-top: calc(35vh + 45vh + 300px);
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  /* Keep your original h2 sizing */
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+  
+  /* Restore recipe image sizing */
+  .recipe-image {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  /* Fix animation transforms */
+  #section1 .food-image.left-image.slide-in {
+    transform: translateX(-50%) !important;
+  }
+  
+  #section1 .food-image.right-image.slide-in {
+    transform: translateX(-50%) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Restore your original small phone adjustments */
+  #section1 .food-image.left-image {
+    top: 50px;
+    max-height: 20vh;
+  }
+  
+  #section1 .recipe-content {
+    top: calc(25vh + 20px);
+  }
+  
+  #section2, #section3 {
+    padding-top: calc(30vh + 40vh + 220px);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 2rem;
+  }
+  
+  h6 {
+    font-size: 0.75rem;
+  }
+  
+  #section1 .food-image.right-image {
+    top: calc(30vh + 185px);
+    height: 25vh;
+    max-width: 90vw;
+    transform: translateX(50%) translateX(100px);
+  }
+  
+  #section1 .food-image.right-image.slide-in {
+    transform: translateX(-50%) !important;
+  }
+
     }
   </style>
 </head>
