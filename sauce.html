@@ -72,23 +72,34 @@ height:190vh;}
  /* First Section Layout - UPDATED */
 #section1 .image-container {
   display: flex;
-  justify-content: center; /* Changed from space-between */
+  justify-content: space-around; /* Changed from center for better distribution */
   align-items: center;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  gap: 40px; /* Added gap control */
+  gap: 40px;
 }
 
 #section1 .food-image {
-  height: 60vh;
+  height: 60vh; /* Consistent height */
   width: auto;
-  max-width: 30%; /* Reduced from 40% */
+  max-width: 35%; /* Increased from 30% */
+  min-width: 300px; /* Prevent becoming too small */
   object-fit: contain;
   transition: transform 1s ease-out, opacity 1s ease;
-  flex-shrink: 0; /* Prevents image squishing */
+  flex-shrink: 1; /* Allow some shrinking but not too much */
 }
 
+/* Fix for recipe content centering */
+#section1 .recipe-content {
+  flex: 0 1 500px;
+  text-align: center;
+  padding: 0 40px;
+  margin: 0 auto; /* Ensure proper centering */
+  opacity: 0;
+  transition: opacity 1s ease 0.5s;
+  order: 2;
+}
 #section1 .left-image {
   transform: translateX(-1000px); /* Reduced from -480px */
   opacity: 0;
@@ -99,14 +110,7 @@ height:190vh;}
   opacity: 0;
 }
 
-#section1 .recipe-content {
-  flex: 0 1 500px; /* Reduced from 600px */
-  text-align: center;
-  padding: 0 40px; /* Reduced from 120px */
-  opacity: 0;
-  transition: opacity 1s ease 0.5s;
-  order: 2; /* Ensures text stays in middle */
-}
+
 
 #section1 .left-image {
   order: 1; /* Left image first */
@@ -116,13 +120,7 @@ height:190vh;}
   order: 3; /* Right image last */
 }
 
-    #section1 .recipe-content {
-      flex: 0 1 600px;
-      text-align: center;
-      padding: 0 120px;
-      opacity: 0;
-      transition: opacity 1s ease 0.5s;
-    }
+ 
 
     #section1 .slide-in {
       transform: translateX(0) !important;
