@@ -260,86 +260,71 @@
     /* Mobile Styles */
  /* Mobile Styles */
 @media (max-width: 768px) {
-  /* Section 1 Mobile Adjustments */
+  /* Match pizza page's section 2/3 width */
+  #section2, #section3 {
+    padding: 60px 20px !important; /* Same as pizza page */
+  }
+  
+  #section2 .recipe-content,
+  #section3 .recipe-content {
+    width: 90% !important; /* Match pizza page width */
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+  }
+
+  /* Widen content boxes to match */
+  .ingredients, 
+  .instructions {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 20px !important;
+  }
+
+  /* Widen images to match */
+  .recipe-image {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Keep Section 1 exactly as is */
   #section1 {
-    height: auto;
-    min-height: 100vh;
-    display: block;
-    padding: 20px;
+    padding: 20px !important;
   }
-  
   #section1 .image-container {
-    flex-direction: column;
-    gap: 10px; /* Reduced from 20px */
+    flex-direction: column !important;
+    gap: 10px !important;
   }
-  
   #section1 .food-image {
-    max-width: 65% !important; /* Smaller than before (was 80%) */
-    height: auto;
-    max-height: 25vh; /* Reduced from 30vh */
-    margin: 10px auto; /* Reduced from 20px */
+    max-width: 65% !important;
+    max-height: 25vh !important;
+    margin: 10px auto !important;
   }
-  
-  #section1 .left-image {
-    transform: translateY(-50px) !important; /* Less distance to slide */
-    order: 1;
-  }
-  
-  #section1 .right-image {
-    transform: translateY(50px) !important; /* Less distance to slide */
-    order: 3;
-  }
-  
   #section1 .recipe-content {
-    flex: 1;
-    padding: 0;
-    margin: 15px 0; /* Reduced from 20px */
-    order: 2;
     width: 85% !important;
+    margin: 15px 0 !important;
   }
- 
-  /* Keep all other existing mobile styles */
-  /* ... */
 }
 
 @media (max-width: 480px) {
-  /* Fine-tune for small phones */
+  /* Fine-tune for small screens */
+  #section2 .recipe-content,
+  #section3 .recipe-content {
+    width: 92% !important; /* Slightly wider on small phones */
+  }
+  
+  /* Keep your existing small phone adjustments for section 1 */
   #section1 .food-image {
     max-width: 70% !important;
     max-height: 22vh !important;
   }
-  
-  #section1 .recipe-content {
-    margin: 10px 0 !important;
-  }
-   h1 {
-        font-size: 2.5rem;
-      }
-        #section2 {
-    min-height: 140vh; /* Even more on small screens */
-  }
-      h6 { 
-        font-size: .75rem;
-        line-height: 1.8;
-      }
- .recipe-image {
-      max-width: 600px;
-      width: 100%;
-      height: auto;
-      margin: 30px auto;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-  
- #section1 .left-image {
-   margin-top: 50px;
-    transform: translateY(-10px) !important; /* Adjusted from -40px */
+  #section1 .left-image {
+    margin-top: 50px !important;
+    transform: translateY(-10px) !important;
     margin-bottom: -30px !important;
   }
-  
   #section1 .right-image {
-    transform: translateY(10px) !important; /* Adjusted from 40px */
+    transform: translateY(10px) !important;
     margin-top: -10px !important;
   }
 }
