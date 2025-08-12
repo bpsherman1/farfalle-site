@@ -124,23 +124,31 @@ height:190vh;}
       opacity: 1;
     }
     
-    /* Recipe Content for Sections 2 and 3 (no animation) */
 #section2, #section3 {
-  display: block; /* Change from flex to block layout */
+  /* Reset all problematic properties */
+  display: block !important;
   position: relative;
-  padding: 40px 20px; /* Reduced padding */
-  min-height: auto; /* Remove forced viewport height */
-  height: auto; /* Let content determine height */
-  background-attachment: local; /* Prevent weird scrolling effects */
+  padding: 20px !important;
+  min-height: 0 !important;
+  height: auto !important;
+  align-items: start !important;
+  justify-content: start !important;
+  background-attachment: scroll !important;
 }
 
-/* Adjust the recipe content container */
-#section2 .recipe-content,
+/* Force content to stick to top */
+#section2 .recipe-content, 
 #section3 .recipe-content {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding-top: 0; /* Remove any residual padding */
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  transform: translateY(0) !important;
+}
+
+/* Remove all spacing from headers */
+#section2 h2,
+#section3 h2 {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
     
     /* Text Styles */
