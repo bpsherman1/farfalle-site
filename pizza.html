@@ -228,62 +228,43 @@
     }
 
     /* Mobile Styles */
-    /* Mobile Styles */
- /* Mobile Styles */
-@media (max-width: 768px) {
-  /* Section 1 Mobile Adjustments */
-  #section1 {
-    height: auto;
-    min-height: 100vh;
-    display: block;
-    padding: 20px;
+    @media (max-width: 768px) {
+      .section {
+        height: auto;
+        min-height: 100vh;
+        padding: 60px 20px;
+      }
+      
+      .image-container {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      .food-image {
+        height: auto;
+        max-height: 50vh;
+        max-width: 80%;
+        width: auto;
+      }
+      
+      .recipe-content {
+        flex: 1;
+        padding: 0 20px;
+      }
+        #section2 {
+    min-height: 140vh; /* Even more on small screens */
   }
-  
-  #section1 .image-container {
-    flex-direction: column;
-    gap: 10px; /* Reduced from 20px */
-  }
-  
-  #section1 .food-image {
-    max-width: 65% !important; /* Smaller than before (was 80%) */
-    height: auto;
-    max-height: 25vh; /* Reduced from 30vh */
-    margin: 10px auto; /* Reduced from 20px */
-  }
-  
-  #section1 .left-image {
-    transform: translateY(-50px) !important; /* Less distance to slide */
-    order: 1;
-  }
-  
-  #section1 .right-image {
-    transform: translateY(50px) !important; /* Less distance to slide */
-    order: 3;
-  }
-  
-  #section1 .recipe-content {
-    flex: 1;
-    padding: 0;
-    margin: 15px 0; /* Reduced from 20px */
-    order: 2;
-    width: 85% !important;
-  }
- 
-  /* Keep all other existing mobile styles */
-  /* ... */
-}
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+    }
 
-@media (max-width: 480px) {
-  /* Fine-tune for small phones */
-  #section1 .food-image {
-    max-width: 70% !important;
-    max-height: 22vh !important;
-  }
-  
-  #section1 .recipe-content {
-    margin: 10px 0 !important;
-  }
-   h1 {
+    @media (max-width: 480px) {
+      h1 {
         font-size: 2.5rem;
       }
         #section2 {
@@ -293,27 +274,11 @@
         font-size: .75rem;
         line-height: 1.8;
       }
- .recipe-image {
-      max-width: 600px;
-      width: 100%;
-      height: auto;
-      margin: 30px auto;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      
+      .food-image {
+        max-height: 60vh;
+      }
     }
-  
- #section1 .left-image {
-   margin-top: 50px;
-    transform: translateY(-10px) !important; /* Adjusted from -40px */
-    margin-bottom: -30px !important;
-  }
-  
-  #section1 .right-image {
-    transform: translateY(10px) !important; /* Adjusted from 40px */
-    margin-top: -10px !important;
-  }
-}
   </style>
 </head>
 <body>
@@ -399,4 +364,3 @@
   </script>
 </body>
 </html>
-
