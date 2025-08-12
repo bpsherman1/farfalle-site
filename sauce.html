@@ -38,22 +38,24 @@ height:190vh;}
 }
 
 /* FIRST SECTION - ORIGINAL WORKING VERSION */
+/* Original Working Section 1 CSS */
 #section1 {
   height: 100vh;
   background-color: #f0e6d2;
   position: sticky;
   top: 0;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 #section1 .image-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  gap: 40px;
 }
 
 #section1 .food-image {
@@ -62,28 +64,24 @@ height:190vh;}
   max-width: 30%;
   object-fit: contain;
   transition: transform 1s ease-out, opacity 1s ease;
-  flex-shrink: 0;
 }
 
 #section1 .left-image {
-  transform: translateX(-1000px);
+  transform: translateX(-480px);
   opacity: 0;
-  order: 1;
 }
 
 #section1 .right-image {
-  transform: translateX(1000px);
+  transform: translateX(480px);
   opacity: 0;
-  order: 3;
 }
 
 #section1 .recipe-content {
-  flex: 0 1 500px;
+  flex: 0 1 600px;
   text-align: center;
-  padding: 0 40px;
+  padding: 0 120px;
   opacity: 0;
   transition: opacity 1s ease 0.5s;
-  order: 2;
 }
 
 #section1 .slide-in {
