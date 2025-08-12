@@ -73,7 +73,7 @@ height:190vh;}
 /* Fix for Section 1 Layout */
 #section1 .image-container {
   display: flex;
-  justify-content: space-between; /* Changed to space-between */
+  justify-content: center;
   align-items: center;
   width: 100%;
   max-width: 1400px;
@@ -83,57 +83,42 @@ height:190vh;}
 
 #section1 .food-image {
   height: 60vh;
-  min-height: 400px; /* Added minimum height */
   width: auto;
-  max-width: 35%;
-  min-width: 350px; /* Increased minimum width */
+  max-width: 30%;
   object-fit: contain;
   transition: transform 1s ease-out, opacity 1s ease;
-  flex-shrink: 0; /* Prevent shrinking */
+  flex-shrink: 0;
 }
 
-/* Center content properly */
+#section1 .left-image {
+  transform: translateX(-480px);
+  opacity: 0;
+  order: 1;
+}
+
+#section1 .right-image {
+  transform: translateX(480px);
+  opacity: 0;
+  order: 3;
+}
+
 #section1 .recipe-content {
-  flex: 0 1 600px; /* Increased flex basis */
+  flex: 0 1 500px;
   text-align: center;
-  padding: 0 60px; /* Adjusted padding */
-  margin: 0 auto;
+  padding: 0 40px;
   opacity: 0;
   transition: opacity 1s ease 0.5s;
   order: 2;
 }
 
-/* Ensure images maintain aspect ratio */
-/* Restore original animation values */
-#section1 .left-image {
-  transform: translateX(-480px); /* Restore original value */
-  opacity: 0;
+#section1 .slide-in {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
 }
 
-#section1 .right-image {
-  transform: translateX(480px); /* Restore original value */
-  opacity: 0;
+#section1 .text-loaded {
+  opacity: 1;
 }
-
-
-#section1 .left-image {
-  order: 1; /* Left image first */
-}
-
-#section1 .right-image {
-  order: 3; /* Right image last */
-}
-
- 
-
-    #section1 .slide-in {
-      transform: translateX(0) !important;
-      opacity: 1 !important;
-    }
-
-    #section1 .text-loaded {
-      opacity: 1;
-    }
     
 #section2, #section3 {
   /* Reset all problematic properties */
