@@ -34,63 +34,26 @@ height:190vh;}
   }
 }
     /* Section Styles */
-   .section {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  padding: 20px;
-  box-sizing: border-box;
+ 1s ease-out, opacity 1s ease;
 }
 
+/* FIRST SECTION - ORIGINAL WORKING VERSION */
 #section1 {
   height: 100vh;
   background-color: #f0e6d2;
   position: sticky;
   top: 0;
   align-items: center;
-}
-#section2 h2,
-#section3 h2 {
-  text-align: center;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 600px; /* Match your content width */
-}
-#section2, #section3 {
-  height: auto;
-  min-height: 100vh;
-  align-items: flex-start;
-  padding-top: 40px;
-  background-color: #e8e0c9;
-}
-
-#section3 {
-  background-color: #e0d9c1;
-}
-    /* First Section Layout */
- /* First Section Layout - UPDATED */
-/* Fix for Section 1 Layout */
-/* First Section Layout - Fixed Version */
-#section1 {
-  height: 100vh;
-  background-color: #f0e6d2;
-  position: sticky;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
 }
 
 #section1 .image-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  gap: 40px;
 }
 
 #section1 .food-image {
@@ -98,45 +61,38 @@ height:190vh;}
   width: auto;
   max-width: 30%;
   object-fit: contain;
+  transition: transform 1s ease-out, opacity 1s ease;
   flex-shrink: 0;
 }
 
-/* Left Image (Pesto) */
 #section1 .left-image {
-  transform: translateX(-100%);
+  transform: translateX(-1000px);
   opacity: 0;
   order: 1;
-  align-self: center;
 }
 
-/* Right Image (RS) */
 #section1 .right-image {
-  transform: translateX(100%);
+  transform: translateX(1000px);
   opacity: 0;
   order: 3;
-  align-self: center;
 }
 
-/* Center Content */
 #section1 .recipe-content {
-  flex: 0 0 500px;
+  flex: 0 1 500px;
   text-align: center;
   padding: 0 40px;
-  order: 2;
-  margin: 0 auto;
   opacity: 0;
+  transition: opacity 1s ease 0.5s;
+  order: 2;
 }
 
-/* Animation Classes */
 #section1 .slide-in {
   transform: translateX(0) !important;
   opacity: 1 !important;
-  transition: transform 1s ease-out, opacity 1s ease;
 }
 
 #section1 .text-loaded {
   opacity: 1;
-  transition: opacity 1s ease 0.5s;
 }
     
 #section2, #section3 {
