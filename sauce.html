@@ -33,32 +33,33 @@ height:190vh;}
   }
 }
     /* Section Styles */
-    .section {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      padding: 60px 90px;
-      box-sizing: border-box;
-    }
-    #section1 {
+   .section {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#section1 {
+  height: 100vh;
   background-color: #f0e6d2;
   position: sticky;
   top: 0;
+  align-items: center;
 }
-    #section1 {
-      background-color: #f0e6d2;
-    }
-    
-    #section2 {
-      background-color: #e8e0c9;
-    }
-    
-    #section3 {
-      background-color: #e0d9c1;
-    }
 
+#section2, #section3 {
+  height: auto;
+  min-height: 100vh;
+  align-items: flex-start;
+  padding-top: 40px;
+  background-color: #e8e0c9;
+}
+
+#section3 {
+  background-color: #e0d9c1;
+}
     /* First Section Layout */
  /* First Section Layout - UPDATED */
 #section1 .image-container {
