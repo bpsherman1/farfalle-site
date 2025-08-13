@@ -20,7 +20,20 @@
       color: #5c4d3c;
       overflow-x: hidden;
     }
+ #section2 .recipe-content,
+ {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: 
+    opacity 2s ease-in-out, /* Slower fade (2 seconds) */
+    transform 0.6s ease-out; /* Faster movement (0.6 seconds) */
+}
 
+#section2 .recipe-content.fade-in,
+ {
+  opacity: 1;
+  transform: translateY(40px);
+}
 .recipe-image {
   max-width: 100%;
   height: auto;
