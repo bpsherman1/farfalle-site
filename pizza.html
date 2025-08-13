@@ -364,26 +364,35 @@
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
-        const pizzaImage = document.querySelector('.food-image');
-        const recipeContent = document.querySelectorAll('.recipe-content');
-        
-        pizzaImage.classList.add('loaded');
-        recipeContent.forEach(content => {
-          content.classList.add('loaded');
-        });
-      }, 100);
+ <script>
+  // Section 1 animation (existing)
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      const pizzaImage = document.querySelector('.food-image');
+      const recipeContent = document.querySelectorAll('.recipe-content');
       
-      const img = document.querySelector('.food-image');
-      img.onload = function() {
-        console.log('Pizza image loaded successfully');
-      };
-      img.onerror = function() {
-        console.error('Failed to load pizza image');
-      };
-    });
-  </script>
+      pizzaImage.classList.add('loaded');
+      recipeContent.forEach(content => {
+        content.classList.add('loaded');
+      });
+    }, 100);
+
+    // NEW: Fade-in for Section 2
+    const section2Content = document.querySelector('#section2 .recipe-content');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target); // Stop observing after animation
+        }
+      });
+    }, { threshold: 0.1 }); // Trigger when 10% visible
+
+    if (section2Content) {
+      observer.observe(section2Content);
+    }
+  });
+</script>
 </body>
 </html>
