@@ -22,20 +22,48 @@
       color: #5c4d3c;
       line-height: 1.6;
     }
-    #section2 .recipe-content,
-#section3 .recipe-content {
-  opacity: 0;
-  transform: translateY(80px);
-  transition: 
-    opacity 2s ease-in-out, /* Slower fade (2 seconds) */
-    transform 0.6s ease-out; /* Faster movement (0.6 seconds) */
-}
+    
+    /* Font Declarations */
+    @font-face {
+      font-family: 'TheFont';
+      src: url('fonts/the.otf') format('opentype');
+    }
+    
+    @font-face {
+      font-family: 'Sauce';
+      src: url('fonts/sauce.ttf') format('truetype');
+    }
 
-#section2 .recipe-content.fade-in,
-#section3 .recipe-content.fade-in {
-  opacity: 1;
-  transform: translateY(40px);
-}
+    /* Section Animations */
+    #section2 .recipe-content,
+    #section3 .recipe-content {
+      opacity: 0;
+      transform: translateY(80px);
+      transition: 
+        opacity 2s ease-in-out,
+        transform 0.6s ease-out;
+    }
+
+    #section2 .recipe-content.fade-in,
+    #section3 .recipe-content.fade-in {
+      opacity: 1;
+      transform: translateY(40px);
+    }
+
+    /* Text Styles */
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      font-family: 'TheFont', sans-serif; /* Applied new font here */
+    }
+    
+    h2 {
+      font-size: 7rem;
+      text-align: center;
+      margin: 2rem 0;
+      font-family: 'Sauce', sans-serif;
+    }
+    
     .recipe-image {
       max-width: 640px;
       width: 100%;
@@ -129,24 +157,6 @@
       max-width: 800px;
       margin: 0 auto;
     }
-    
-    /* Text Styles */
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-    }
-    
- @font-face {
-  font-family: 'Sauce';  /* Give your font a name */
-  src: url('fonts/sauce.ttf') format('truetype'); /* Path to the font file */
-}
-
-h2 {
-  font-size: 7rem;
-  text-align: center;
-  margin: 2rem 0;
-  font-family: 'Sauce', sans-serif; /* Apply the font */
-}
     
     h6 {
       font-size: 1rem;
@@ -285,83 +295,80 @@ h2 {
     }
 
     /* Mobile Styles */
- /* Mobile Styles */
-  /* Mobile Styles */
- /* Mobile Styles */
-@media (max-width: 768px) {
-  /* Section 1 Mobile Adjustments */
-  #section1 {
-    height: auto;
-    min-height: 100vh;
-    display: block;
-    padding: 20px;
-  }
-  
-  #section1 .image-container {
-    flex-direction: column;
-    gap: 10px; /* Reduced from 20px */
-  }
-  
-  #section1 .food-image {
-    max-width: 65% !important; /* Smaller than before (was 80%) */
-    height: auto;
-    max-height: 25vh; /* Reduced from 30vh */
-    margin: 10px auto; /* Reduced from 20px */
-  }
-  
-  #section1 .left-image {
-    transform: translateY(-50px) !important; /* Less distance to slide */
-    order: 1;
-  }
-  
-  #section1 .right-image {
-    transform: translateY(50px) !important; /* Less distance to slide */
-    order: 3;
-  }
-  
-  #section1 .recipe-content {
-    flex: 1;
-    padding: 0;
-    margin: 15px 0; /* Reduced from 20px */
-    order: 2;
-    width: 85% !important;
-  }
+    @media (max-width: 768px) {
+      /* Section 1 Mobile Adjustments */
+      #section1 {
+        height: auto;
+        min-height: 100vh;
+        display: block;
+        padding: 20px;
+      }
+      
+      #section1 .image-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      #section1 .food-image {
+        max-width: 65% !important;
+        height: auto;
+        max-height: 25vh;
+        margin: 10px auto;
+      }
+      
+      #section1 .left-image {
+        transform: translateY(-50px) !important;
+        order: 1;
+      }
+      
+      #section1 .right-image {
+        transform: translateY(50px) !important;
+        order: 3;
+      }
+      
+      #section1 .recipe-content {
+        flex: 1;
+        padding: 0;
+        margin: 15px 0;
+        order: 2;
+        width: 85% !important;
+      }
 
-  /* Keep all other existing mobile styles */
-  /* ... */
-}
-
-@media (max-width: 480px) {
-  /* Fine-tune for small phones */
-  #section1 .food-image {
-    max-width: 70% !important;
-    max-height: 22vh !important;
-  }
-  
-  #section1 .recipe-content {
-    margin: 10px 0 !important;
-  }
-   h1 {
+      h1 {
         font-size: 2.5rem;
       }
-        #section2 {
-    min-height: 140vh; /* Even more on small screens */
-  }
+      
+      #section2 {
+        min-height: 140vh;
+      }
+      
       h6 { 
         font-size: .75rem;
         line-height: 1.8;
       }
- #section1 .left-image {
-   margin-top: 50px;
-    transform: translateY(-10px) !important; /* Adjusted from -40px */
-    margin-bottom: -30px !important;
-  }
-  
-  #section1 .right-image {
-    transform: translateY(10px) !important; /* Adjusted from 40px */
-    margin-top: -10px !important;
-  }
-}
+    }
+
+    @media (max-width: 480px) {
+      #section1 .food-image {
+        max-width: 70% !important;
+        max-height: 22vh !important;
+      }
+      
+      #section1 .recipe-content {
+        margin: 10px 0 !important;
+      }
+      
+      #section1 .left-image {
+        margin-top: 50px;
+        transform: translateY(-10px) !important;
+        margin-bottom: -30px !important;
+      }
+      
+      #section1 .right-image {
+        transform: translateY(10px) !important;
+        margin-top: -10px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -453,71 +460,36 @@ h2 {
     </div>
   </div>
 
-  
-<style>
-    /* Base Styles */
-    body {
-      background-color: #f9f5f0;
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Georgia', serif;
-      color: #5c4d3c;
-      line-height: 1.6;
-    }
-    
-    /* Font Declarations */
-    @font-face {
-      font-family: 'TheFont';
-      src: url('fonts/the.otf') format('opentype');
-    }
-    
-    @font-face {
-      font-family: 'Sauce';
-      src: url('fonts/sauce.ttf') format('truetype');
-    }
+<script>
+  // Section 1 animation (existing code)
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      const leftImage = document.querySelector('#section1 .left-image');
+      const rightImage = document.querySelector('#section1 .right-image');
+      const recipeContent = document.querySelector('#section1 .recipe-content');
+      
+      leftImage.classList.add('slide-in');
+      rightImage.classList.add('slide-in');
+      recipeContent.classList.add('text-loaded');
+    }, 100);
 
-    /* Section Animations */
-    #section2 .recipe-content,
-    #section3 .recipe-content {
-      opacity: 0;
-      transform: translateY(80px);
-      transition: 
-        opacity 2s ease-in-out,
-        transform 0.6s ease-out;
-    }
+    // Fade-in for Sections 2 and 3 (updated observer)
+    const fadeSections = document.querySelectorAll('#section2, #section3');
 
-    #section2 .recipe-content.fade-in,
-    #section3 .recipe-content.fade-in {
-      opacity: 1;
-      transform: translateY(40px);
-    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const content = entry.target.querySelector('.recipe-content');
+          content.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { 
+      threshold: 0.1
+    });
 
-    /* Text Styles */
-    h1 {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      font-family: 'TheFont', sans-serif; /* Applied new font here */
-    }
-    
-    h2 {
-      font-size: 7rem;
-      text-align: center;
-      margin: 2rem 0;
-      font-family: 'Sauce', sans-serif;
-    }
-    
-    /* Rest of your existing CSS remains exactly the same */
-    .recipe-image {
-      max-width: 640px;
-      width: 100%;
-      height: auto;
-      margin: 30px auto;
-      display: block;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    
-    /* ... continue with all your other existing CSS rules ... */
-</style>
+    fadeSections.forEach(section => observer.observe(section));
+  });
+</script>
 </body>
 </html>
