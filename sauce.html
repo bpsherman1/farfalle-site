@@ -22,7 +22,18 @@
       color: #5c4d3c;
       line-height: 1.6;
     }
-    
+    #section2 .recipe-content,
+#section3 .recipe-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+#section2 .recipe-content.fade-in,
+#section3 .recipe-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
     .recipe-image {
       max-width: 640px;
       width: 100%;
