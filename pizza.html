@@ -20,19 +20,20 @@
       color: #5c4d3c;
       overflow-x: hidden;
     }
- #section2 .recipe-content,
- {
+/* Fade-in animation for Sections 2 & 3 */
+#section2 .recipe-content,
+#section3 .recipe-content {
   opacity: 0;
   transform: translateY(80px);
   transition: 
-    opacity 2s ease-in-out, /* Slower fade (2 seconds) */
-    transform 0.6s ease-out; /* Faster movement (0.6 seconds) */
+    opacity 2s ease-in-out,
+    transform 0.6s ease-out;
 }
 
 #section2 .recipe-content.fade-in,
- {
+#section3 .recipe-content.fade-in {
   opacity: 1;
-  transform: translateY(40px);
+  transform: translateY(0);
 }
 .recipe-image {
   max-width: 100%;
@@ -366,41 +367,37 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Section 1: Immediate animation (sticky header)
+    // Section 1: Immediate animation
     setTimeout(function() {
-      const pizzaImage = document.querySelector('.food-image');
+      const pizzaImage = document.querySelector('#section1 .food-image');
       const section1Content = document.querySelector('#section1 .recipe-content');
       
-      pizzaImage.classList.add('loaded');
-      section1Content.classList.add('loaded'); // Only animate Section 1 immediately
+      if (pizzaImage) pizzaImage.classList.add('loaded');
+      if (section1Content) section1Content.classList.add('loaded');
     }, 100);
 
-    // Section 2: Scroll-triggered fade-in
-    const section2 = document.querySelector('#section2');
+    // Sections 2 & 3: Scroll-triggered fade-in
+    const sectionsToAnimate = document.querySelectorAll('#section2, #section3');
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const content = entry.target.querySelector('.recipe-content');
-          content.classList.add('fade-in');
-          observer.unobserve(entry.target); // Stop observing after animation
+          if (content) content.classList.add('fade-in');
+          observer.unobserve(entry.target);
         }
       });
     }, { 
-      threshold: 0.2, // More natural trigger point than 0.1
-      rootMargin: '0px 0px -50px 0px' // Adjusts trigger point slightly upward
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
     });
 
-    if (section2) {
-      observer.observe(section2);
-    }
-
-    // Debug image loading (optional)
-    const images = document.querySelectorAll('.food-image');
-    images.forEach(img => {
-      img.onload = () => console.log(img.alt, 'loaded successfully');
-      img.onerror = () => console.error('Failed to load:', img.alt);
+    sectionsToAnimate.forEach(section => {
+      if (section) observer.observe(section);
     });
+
+    // Debugging
+    console.log('Sections to animate:', sectionsToAnimate);
   });
 </script>
 </body>
