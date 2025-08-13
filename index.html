@@ -267,6 +267,10 @@
  <!-- P5 SCRIPT - WITH PRE-POPULATED MOVING IMAGES -->
 <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
 <script>
+
+   let section3Image = new Image();
+  section3Image.src = '/images/table.png'; // Preload the image
+  
     let foodImages = [];
     let icons = [];
     const iconCount = 8;
@@ -369,25 +373,35 @@
     }
 
     window.addEventListener('scroll', () => {
-        const now = Date.now();
-        if (now - lastScrollTime < 50) return;
-        lastScrollTime = now;
+      const now = Date.now();
+      if (now - lastScrollTime < 50) return;
+      lastScrollTime = now;
 
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > lastScrollTop && direction !== -1) {
-            direction = -1;
-        } else if (scrollTop < lastScrollTop && direction !== 1) {
-            direction = 1;
-        }
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Hide sketch when scrolling past section 1
+      if (scrollTop > firstSectionHeight * 0.8) {
+          sketchContainer.style.opacity = '0';
+          sketchContainer.style.pointerEvents = 'none';
+          sketchRunning = false;
+      } else {
+          sketchContainer.style.opacity = '1';
+          sketchContainer.style.pointerEvents = 'auto';
+          sketchRunning = true;
+      }
+      
+      if (scrollTop > lastScrollTop && direction !== -1) {
+          direction = -1;
+      } else if (scrollTop < lastScrollTop && direction !== 1) {
+          direction = 1;
+      }
 
-        sketchRunning = scrollTop < firstSectionHeight * 0.9;
-        lastScrollTop = scrollTop;
+      lastScrollTop = scrollTop;
 
-        speedMultiplier = 3.0;
-        clearTimeout(scrollThrottleTimeout);
-        scrollThrottleTimeout = setTimeout(() => {
-            speedMultiplier = 1.0;
-        }, 200);
-    }, { passive: true });
+      speedMultiplier = 3.0;
+      clearTimeout(scrollThrottleTimeout);
+      scrollThrottleTimeout = setTimeout(() => {
+          speedMultiplier = 1.0;
+      }, 200);
+  }, { passive: true });
 </script>
