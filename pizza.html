@@ -364,34 +364,43 @@
     </div>
   </div>
 
- <script>
-  // Section 1 animation (existing)
+<script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Section 1: Immediate animation (sticky header)
     setTimeout(function() {
       const pizzaImage = document.querySelector('.food-image');
-      const recipeContent = document.querySelectorAll('.recipe-content');
+      const section1Content = document.querySelector('#section1 .recipe-content');
       
       pizzaImage.classList.add('loaded');
-      recipeContent.forEach(content => {
-        content.classList.add('loaded');
-      });
+      section1Content.classList.add('loaded'); // Only animate Section 1 immediately
     }, 100);
 
-    // NEW: Fade-in for Section 2
-    const section2Content = document.querySelector('#section2 .recipe-content');
+    // Section 2: Scroll-triggered fade-in
+    const section2 = document.querySelector('#section2');
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
+          const content = entry.target.querySelector('.recipe-content');
+          content.classList.add('fade-in');
           observer.unobserve(entry.target); // Stop observing after animation
         }
       });
-    }, { threshold: 0.1 }); // Trigger when 10% visible
+    }, { 
+      threshold: 0.2, // More natural trigger point than 0.1
+      rootMargin: '0px 0px -50px 0px' // Adjusts trigger point slightly upward
+    });
 
-    if (section2Content) {
-      observer.observe(section2Content);
+    if (section2) {
+      observer.observe(section2);
     }
+
+    // Debug image loading (optional)
+    const images = document.querySelectorAll('.food-image');
+    images.forEach(img => {
+      img.onload = () => console.log(img.alt, 'loaded successfully');
+      img.onerror = () => console.error('Failed to load:', img.alt);
+    });
   });
 </script>
 </body>
