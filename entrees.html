@@ -299,72 +299,73 @@
     }
 
     /* Mobile Styles */
-    @media (max-width: 768px) {
-       .section1 {
+    /* Mobile Styles */
+@media (max-width: 768px) {
+    #section1 {
         height: auto;
         min-height: 100vh;
         padding: 80px 20px 60px;
-      }
-       .section2 {
-        height: 140vh;
-        
+    }
+    #section2 {
+        height: 150vh; /* Increased from 140vh to make it 50vh longer */
         padding: 80px 20px 60px;
-      }
-       .section3 {
-          height: 120vh;
+    }
+    #section3 {
+        height: 150vh; /* Increased from 120vh to make it 50vh longer */
         padding: 80px 20px 60px;
-      }
-      
-      .slideshow-container {
+    }
+    #section4 {
+        height: 150vh; /* Added to ensure section4 is also taller */
+        padding: 80px 20px 60px;
+    }
+    .slideshow-container {
         height: 50vh;
-      }
-      
-      .slide-image {
-        max-width: 80%;
-      }
-      
-      h1 {
-        font-size: 2.2rem;
-      }
-      
-      h2 {
-        font-size: 1.8rem;
-      }
-      
-      .recipe-card {
-        padding: 20px;
-      }
     }
-
-    @media (max-width: 480px) {
-      h1 {
+    .slide-image {
+        max-width: 80%;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    h2 {
         font-size: 1.8rem;
-      }
-        .section {
-      height: 130vh;
-          
-       .section1 {
+    }
+    .recipe-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .section {
+        height: 130vh;
+    }
+    #section1 {
         height: auto;
         min-height: 100vh;
         padding: 80px 20px 60px;
-      }
-       .section2 {
-        height: 140vh;
-        
-        padding: 80px 20px 60px;
-      }
-       .section3 {
-          height: 120vh;
-        padding: 80px 20px 60px;
-      }
-      .slideshow-container {
-        height: 40vh;
-      }
-      
-      .ingredients li, .instructions p {
-        font-size: 1rem;
-      }
     }
+    #section2 {
+        height: 150vh;
+        padding: 80px 20px 60px;
+    }
+    #section3 {
+        height: 150vh;
+        padding: 80px 20px 60px;
+    }
+    #section4 {
+        height: 150vh;
+        padding: 80px 20px 60px;
+    }
+    .slideshow-container {
+        height: 40vh;
+    }
+    .ingredients li, .instructions p {
+        font-size: 1rem;
+    }
+}
   </style>
 </head>
 <body>
