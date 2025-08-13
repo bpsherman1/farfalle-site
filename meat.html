@@ -21,7 +21,20 @@
       font-family: 'Georgia', serif;
       color: #5c4d3c;
     }
+#section2 .recipe-content,
+#section3 .recipe-content {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: 
+    opacity 2s ease-in-out,  /* Slow fade (2 seconds) */
+    transform 0.6s ease-out; /* Fast movement (0.6 seconds) */
+}
 
+#section2 .recipe-content.fade-in,
+#section3 .recipe-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
      .recipe-image {
   max-width: 100%;
        width: 100%;
@@ -456,32 +469,43 @@
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Trigger animations after page loads
-      setTimeout(function() {
-        const leftImage = document.querySelector('.left-image');
-        const rightImage = document.querySelector('.right-image');
-        const recipeContents = document.querySelectorAll('.recipe-content');
-        
-        leftImage.classList.add('slide-in');
-        rightImage.classList.add('slide-in');
-        recipeContents.forEach(content => {
-          content.classList.add('fade-in');
-        });
-      }, 100);
+<script>
+  // Section 1 animation (existing)
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      const leftImage = document.querySelector('.left-image');
+      const rightImage = document.querySelector('.right-image');
+      const recipeContents = document.querySelectorAll('.recipe-content');
       
-      // Debug script to verify image paths
-      const images = document.querySelectorAll('.food-image');
-      images.forEach(img => {
-        img.onload = function() {
-          console.log(img.alt, 'loaded successfully');
-        };
-        img.onerror = function() {
-          console.error('Failed to load image:', img.alt);
-        };
+      leftImage.classList.add('slide-in');
+      rightImage.classList.add('slide-in');
+      recipeContents.forEach(content => {
+        content.classList.add('fade-in');
       });
+    }, 100);
+
+    // NEW: Scroll-triggered fade-in for Sections 2 & 3
+    const sectionsToAnimate = document.querySelectorAll('#section2, #section3');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const content = entry.target.querySelector('.recipe-content');
+          content.classList.add('fade-in');
+          observer.unobserve(entry.target); // Stop observing after animation
+        }
+      });
+    }, { threshold: 0.1 }); // Trigger when 10% visible
+
+    sectionsToAnimate.forEach(section => observer.observe(section));
+
+    // Debug image loading (optional)
+    const images = document.querySelectorAll('.food-image');
+    images.forEach(img => {
+      img.onload = () => console.log(img.alt, 'loaded successfully');
+      img.onerror = () => console.error('Failed to load:', img.alt);
     });
-  </script>
+  });
+</script>
 </body>
 </html>
