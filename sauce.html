@@ -378,38 +378,63 @@
 
   /* Smaller phone adjustments */
   @media (max-width: 480px) {
-     #section1 .food-image {
-        max-width: 70% !important;
-        max-height: 22vh !important;
-      }
-      
-      #section1 .recipe-content {
-        margin: 10px 0 !important;
-      }
-      
-      #section1 .left-image {
-        margin-top: 50px;
-        transform: translateY(-10px) !important;
-        margin-bottom: -30px !important;
-      }
-      
-      #section1 .right-image {
-        transform: translateY(10px) !important;
-        margin-top: -10px !important;
-      }
-    #section2 .recipe-content,
-    #section3 .recipe-content {
-      padding: 0 3% !important;
-    }
-    
-    h2 {
-      font-size: 3rem !important;
-    }
-    
-    .recipe-image {
-      max-width: 95% !important;
-    }
+  /* Section 1 - Keep your existing styles */
+  #section1 .food-image {
+    max-width: 70% !important;
+    max-height: 22vh !important;
   }
+  
+  #section1 .recipe-content {
+    margin: 10px 0 !important;
+  }
+  
+  #section1 .left-image {
+    margin-top: 50px;
+    transform: translateY(-10px) !important;
+    margin-bottom: -30px !important;
+  }
+  
+  #section1 .right-image {
+    transform: translateY(10px) !important;
+    margin-top: -10px !important;
+  }
+
+  /* Fix for Sections 2 & 3 centering */
+  #section2 .recipe-content,
+  #section3 .recipe-content {
+    padding: 0 !important; /* Remove asymmetric padding */
+    margin: 0 auto !important; /* Center the container */
+    width: 94% !important; /* Slightly less than full width */
+  }
+  
+  /* Center all text content */
+  #section2 .recipe-content > *,
+  #section3 .recipe-content > * {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+  
+  /* Specific center fixes */
+  .ingredients,
+  .instructions {
+    width: 100% !important;
+    padding: 20px 5% !important; /* Symmetric padding */
+  }
+  
+  h2 {
+    font-size: 3rem !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  .recipe-image {
+    max-width: 95% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+  }
+}
   </style>
 </head>
 <body>
