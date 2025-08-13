@@ -451,18 +451,37 @@ h2 {
     </div>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
-        const leftImage = document.querySelector('#section1 .left-image');
-        const rightImage = document.querySelector('#section1 .right-image');
-        const recipeContent = document.querySelector('#section1 .recipe-content');
-        
-        leftImage.classList.add('slide-in');
-        rightImage.classList.add('slide-in');
-        recipeContent.classList.add('text-loaded');
-      }, 100);
+  
+<script>
+  // Section 1 animation (existing code)
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      const leftImage = document.querySelector('#section1 .left-image');
+      const rightImage = document.querySelector('#section1 .right-image');
+      const recipeContent = document.querySelector('#section1 .recipe-content');
+      
+      leftImage.classList.add('slide-in');
+      rightImage.classList.add('slide-in');
+      recipeContent.classList.add('text-loaded');
+    }, 100);
+
+    // Fade-in for Sections 2 and 3 (updated observer)
+    const fadeSections = document.querySelectorAll('#section2, #section3');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const content = entry.target.querySelector('.recipe-content');
+          content.classList.add('fade-in');
+          observer.unobserve(entry.target); // Stop observing after animation
+        }
+      });
+    }, { 
+      threshold: 0.1 // Trigger when 10% of the section is visible
     });
-  </script>
+
+    fadeSections.forEach(section => observer.observe(section));
+  });
+</script>
 </body>
 </html>
