@@ -21,6 +21,21 @@
       color: #5c4d3c;
       overflow-x: hidden;
     }
+    /* Fade-in animation for Sections 2 & 3 */
+#section2 .recipe-content,
+#section3 .recipe-content {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: 
+    opacity 2s ease-in-out,
+    transform 0.6s ease-out;
+}
+
+#section2 .recipe-content.fade-in,
+#section3 .recipe-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
      .recipe-image {
   max-width: 80%;
   height: auto;
@@ -421,96 +436,100 @@
     </div>
   </div>
 
-  <script>
-     document.addEventListener('DOMContentLoaded', function() {
-      // Fade in first image and text on page load
-      setTimeout(function() {
-        const firstImage = document.querySelector('.slide-image');
-        const firstContent = document.querySelector('#section1 .recipe-content');
-        
-        firstImage.classList.add('loaded');
-        firstContent.classList.add('loaded');
-      }, 100);
-
-      // Fade in other sections as they come into view
-      const sections = document.querySelectorAll('.section:not(#section1)');
+ <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // SECTION 1: Immediate animation on load
+    setTimeout(function() {
+      const firstImage = document.querySelector('#section1 .slide-image');
+      const firstContent = document.querySelector('#section1 .recipe-content');
       
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const content = entry.target.querySelector('.recipe-content');
-            if (content) {
-              content.style.opacity = '1';
-            }
+      if (firstImage) firstImage.classList.add('loaded');
+      if (firstContent) firstContent.classList.add('loaded');
+    }, 100);
+
+    // SECTIONS 2+: Scroll-triggered fade-in
+    const sections = document.querySelectorAll('.section:not(#section1)');
+    
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const content = entry.target.querySelector('.recipe-content');
+          if (content) {
+            content.classList.add('fade-in');
+            sectionObserver.unobserve(entry.target);
           }
-        });
-      }, {threshold: 0.1});
-      
-      sections.forEach(section => {
-        observer.observe(section);
-      });
-
-      // Slideshow functionality
-      const track = document.querySelector('.slideshow-track');
-      const slides = document.querySelectorAll('.slide');
-      const slideCount = slides.length;
-      let currentIndex = 0;
-      let slideWidth = 0;
-      let isTransitioning = false;
-      let slideInterval;
-
-      function initSlideshow() {
-        slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
-        
-        slides.forEach((slide, index) => {
-          slide.style.left = `${slideWidth * index}px`;
-        });
-        
-        const firstSlide = slides[0].cloneNode(true);
-        track.appendChild(firstSlide);
-        
-        startSlideShow();
-      }
-
-      function goToNextSlide() {
-        if (isTransitioning) return;
-        
-        isTransitioning = true;
-        currentIndex++;
-        
-        track.style.transition = 'transform 0.8s ease-in-out';
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-        
-        if (currentIndex === slideCount) {
-          setTimeout(() => {
-            track.style.transition = 'none';
-            currentIndex = 0;
-            track.style.transform = 'translateX(0)';
-            setTimeout(() => {
-              track.style.transition = 'transform 0.8s ease-in-out';
-              isTransitioning = false;
-            }, 20);
-          }, 800);
-        } else {
-          setTimeout(() => {
-            isTransitioning = false;
-          }, 800);
         }
-      }
-
-      function startSlideShow() {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(goToNextSlide, 3000);
-      }
-
-      window.addEventListener('resize', function() {
-        slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
-        track.style.transition = 'none';
-        track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
       });
-
-      initSlideshow();
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
     });
-  </script>
+
+    sections.forEach(section => {
+      if (section) sectionObserver.observe(section);
+    });
+
+    // SLIDESHOW FUNCTIONALITY (unchanged)
+    const track = document.querySelector('.slideshow-track');
+    const slides = document.querySelectorAll('.slide');
+    const slideCount = slides.length;
+    let currentIndex = 0;
+    let slideWidth = 0;
+    let isTransitioning = false;
+    let slideInterval;
+
+    function initSlideshow() {
+      slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
+      
+      slides.forEach((slide, index) => {
+        slide.style.left = `${slideWidth * index}px`;
+      });
+      
+      const firstSlide = slides[0].cloneNode(true);
+      track.appendChild(firstSlide);
+      
+      startSlideShow();
+    }
+
+    function goToNextSlide() {
+      if (isTransitioning) return;
+      
+      isTransitioning = true;
+      currentIndex++;
+      
+      track.style.transition = 'transform 0.8s ease-in-out';
+      track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+      
+      if (currentIndex === slideCount) {
+        setTimeout(() => {
+          track.style.transition = 'none';
+          currentIndex = 0;
+          track.style.transform = 'translateX(0)';
+          setTimeout(() => {
+            track.style.transition = 'transform 0.8s ease-in-out';
+            isTransitioning = false;
+          }, 20);
+        }, 800);
+      } else {
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 800);
+      }
+    }
+
+    function startSlideShow() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(goToNextSlide, 3000);
+    }
+
+    window.addEventListener('resize', function() {
+      slideWidth = document.querySelector('.slideshow-container').getBoundingClientRect().width;
+      track.style.transition = 'none';
+      track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
+    });
+
+    initSlideshow();
+  });
+</script>
 </body>
 </html>
