@@ -23,8 +23,8 @@
     }
     /* Fade-in animation for Sections 2 & 3 */
 #section2 .recipe-content,
-#section3 .recipe-content, 
-    #section4 .recipe-content{
+#section3 .recipe-content,
+#section4 .recipe-content {
   opacity: 0;
   transform: translateY(80px);
   transition: 
@@ -34,7 +34,7 @@
 
 #section2 .recipe-content.fade-in,
 #section3 .recipe-content.fade-in,
-    #section4 .recipe-content{
+#section4 .recipe-content.fade-in {
   opacity: 1;
   transform: translateY(0);
 }
@@ -449,8 +449,8 @@
       if (firstContent) firstContent.classList.add('loaded');
     }, 100);
 
-    // SECTIONS 2+: Scroll-triggered fade-in
-    const sections = document.querySelectorAll('.section:not(#section1)');
+    // SECTIONS 2, 3 & 4: Scroll-triggered fade-in
+    const sections = document.querySelectorAll('#section2, #section3, #section4');
     
     const sectionObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -471,7 +471,10 @@
       if (section) sectionObserver.observe(section);
     });
 
-    // SLIDESHOW FUNCTIONALITY (unchanged)
+    // Debug: Log which sections are being observed
+    console.log('Observing sections:', sections);
+
+    // SLIDESHOW FUNCTIONALITY (keep this unchanged)
     const track = document.querySelector('.slideshow-track');
     const slides = document.querySelectorAll('.slide');
     const slideCount = slides.length;
