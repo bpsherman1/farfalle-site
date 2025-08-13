@@ -470,21 +470,19 @@
   </div>
 
 <script>
-  // Section 1 animation (existing)
   document.addEventListener('DOMContentLoaded', function() {
+    // Section 1: Immediate animation (sticky header)
     setTimeout(function() {
       const leftImage = document.querySelector('.left-image');
       const rightImage = document.querySelector('.right-image');
-      const recipeContents = document.querySelectorAll('.recipe-content');
+      const section1Content = document.querySelector('#section1 .recipe-content');
       
       leftImage.classList.add('slide-in');
       rightImage.classList.add('slide-in');
-      recipeContents.forEach(content => {
-        content.classList.add('fade-in');
-      });
+      section1Content.classList.add('fade-in'); // Only Section 1!
     }, 100);
 
-    // NEW: Scroll-triggered fade-in for Sections 2 & 3
+    // Sections 2 & 3: Scroll-triggered fade-in
     const sectionsToAnimate = document.querySelectorAll('#section2, #section3');
     
     const observer = new IntersectionObserver((entries) => {
@@ -495,7 +493,9 @@
           observer.unobserve(entry.target); // Stop observing after animation
         }
       });
-    }, { threshold: 0.1 }); // Trigger when 10% visible
+    }, { 
+      threshold: 0.2 // Trigger when 20% of the section is visible
+    });
 
     sectionsToAnimate.forEach(section => observer.observe(section));
 
