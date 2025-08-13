@@ -24,10 +24,11 @@
     }
     
     /* Font Declarations */
-    @font-face {
-      font-family: 'TheFont';
-      src: url('fonts/font2.otf') format('opentype');
-    }
+   @font-face {
+  font-family: 'Seasons';
+  src: url('fonts/font3.otf') format('opentype');
+  font-weight: bold; /* Explicitly declare this as the bold variant */
+}
     
     @font-face {
       font-family: 'Sauce';
@@ -53,9 +54,13 @@
     /* Text Styles */
     h1 {
       font-size: 5rem;
+       font-weight: bold;
       margin-bottom: 1rem;
-      font-family: 'TheFont', sans-serif; /* Applied new font here */
+      font-family: 'Seasons', sans-serif; /* Applied new font here */
       color: #000000;
+        -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
     }
     
     h2 {
