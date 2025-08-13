@@ -454,36 +454,33 @@ h2 {
   </div>
 
   
-<script>
-  // Section 1 animation (existing code)
-  document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-      const leftImage = document.querySelector('#section1 .left-image');
-      const rightImage = document.querySelector('#section1 .right-image');
-      const recipeContent = document.querySelector('#section1 .recipe-content');
-      
-      leftImage.classList.add('slide-in');
-      rightImage.classList.add('slide-in');
-      recipeContent.classList.add('text-loaded');
-    }, 100);
+<style>
+  /* Add this @font-face declaration (above your existing one) */
+  @font-face {
+    font-family: 'TheFont';  /* You can name this whatever you want */
+    src: url('fonts/the.otf') format('opentype');
+  }
 
-    // Fade-in for Sections 2 and 3 (updated observer)
-    const fadeSections = document.querySelectorAll('#section2, #section3');
+  /* Keep your existing Sauce font declaration */
+  @font-face {
+    font-family: 'Sauce';
+    src: url('fonts/sauce.ttf') format('truetype');
+  }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const content = entry.target.querySelector('.recipe-content');
-          content.classList.add('fade-in');
-          observer.unobserve(entry.target); // Stop observing after animation
-        }
-      });
-    }, { 
-      threshold: 0.1 // Trigger when 10% of the section is visible
-    });
+  /* Update your h1 style (around line 117 in your code) */
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-family: 'TheFont', sans-serif; /* Apply the new font */
+  }
 
-    fadeSections.forEach(section => observer.observe(section));
-  });
-</script>
+  /* Your existing h2 style remains unchanged */
+  h2 {
+    font-size: 7rem;
+    text-align: center;
+    margin: 2rem 0;
+    font-family: 'Sauce', sans-serif;
+  }
+</style>
 </body>
 </html>
