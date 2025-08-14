@@ -13,6 +13,41 @@
 
   
   <style>
+    #section1 {
+  z-index: 10; /* Keep above other sections */
+  background-color: #f0e6d2 !important; /* Force background */
+}
+
+#section2, #section3 {
+  position: relative;
+  z-index: 1;
+  background-color: inherit; /* Ensures background is always present */
+}
+
+/* Force specific background colors */
+#section2 { 
+  background-color: #e8e0c9 !important; 
+}
+
+#section3 { 
+  background-color: #e0d9c1 !important; 
+}
+
+/* Smoother fade-in animation */
+#section2 .recipe-content,
+#section3 .recipe-content {
+  opacity: 0;
+  transform: translateY(20px); /* Reduced from 80px */
+  transition: 
+    opacity 0.8s ease-out,
+    transform 0.6s ease-out;
+}
+
+#section2 .recipe-content.fade-in,
+#section3 .recipe-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
     /* Base Styles */
     body {
       background-color: #f9f5f0;
@@ -537,8 +572,13 @@
   </div>
 
 <script>
-  // Section 1 animation (existing code)
   document.addEventListener('DOMContentLoaded', function() {
+    // Immediately make all sections visible (but content still hidden)
+    document.querySelectorAll('#section2, #section3').forEach(section => {
+      section.style.opacity = '1';
+    });
+
+    // Section 1 animation (existing code)
     setTimeout(function() {
       const leftImage = document.querySelector('#section1 .left-image');
       const rightImage = document.querySelector('#section1 .right-image');
@@ -556,19 +596,21 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const content = entry.target.querySelector('.recipe-content');
-          content.classList.add('fade-in');
+          if (content) {
+            content.classList.add('fade-in');
+            // Lock in background color
+            entry.target.style.backgroundColor = window.getComputedStyle(entry.target).backgroundColor;
+          }
           observer.unobserve(entry.target);
         }
       });
     }, { 
-      threshold: 0.1
+      threshold: 0.1, // More sensitive trigger
+      rootMargin: '0px 0px -100px 0px' // Triggers animation earlier
     });
 
     fadeSections.forEach(section => observer.observe(section));
   });
-
-
-  
 </script>
 </body>
 </html>
