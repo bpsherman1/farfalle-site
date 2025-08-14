@@ -19,10 +19,13 @@
 }
 
 /* Replace your existing section animations with this */
+/* Replace your existing animation styles with this */
 #section2, #section3 {
   position: relative;
   z-index: 1;
-  /* Remove any opacity settings from the sections themselves */
+  /* Ensure sections are always visible */
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Keep background colors forced */
@@ -32,17 +35,20 @@
 /* Animation for content only */
 #section2 .recipe-content,
 #section3 .recipe-content {
-  opacity: 0;
-  transform: translateY(20px);
+  /* Start visible but ready to animate */
+  opacity: 1;
+  transform: translateY(0);
+  /* Prepare for animation */
   transition: 
     opacity 0.8s ease-out,
     transform 0.6s ease-out;
 }
 
-#section2 .recipe-content.fade-in,
-#section3 .recipe-content.fade-in {
-  opacity: 1;
-  transform: translateY(0);
+/* Initial state before animation */
+#section2 .recipe-content:not(.fade-in),
+#section3 .recipe-content:not(.fade-in) {
+  opacity: 0;
+  transform: translateY(20px);
 }
     /* Base Styles */
     body {
@@ -569,12 +575,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Immediately make all sections visible (but content still hidden)
-    document.querySelectorAll('#section2, #section3').forEach(section => {
-      section.style.opacity = '1';
-    });
-
-    // Section 1 animation (existing code)
+    // Section 1 animation (keep existing)
     setTimeout(function() {
       const leftImage = document.querySelector('#section1 .left-image');
       const rightImage = document.querySelector('#section1 .right-image');
@@ -585,24 +586,27 @@
       recipeContent.classList.add('text-loaded');
     }, 100);
 
-    // Fade-in for Sections 2 and 3 (updated observer)
-    const fadeSections = document.querySelectorAll('#section2, #section3');
+    // Immediately show all recipe content (but position for animation)
+    document.querySelectorAll('#section2 .recipe-content, #section3 .recipe-content').forEach(content => {
+      content.style.opacity = '1';
+      content.style.transform = 'translateY(20px)';
+    });
 
+    // Animate sections when they come into view
+    const fadeSections = document.querySelectorAll('#section2, #section3');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const content = entry.target.querySelector('.recipe-content');
           if (content) {
             content.classList.add('fade-in');
-            // Lock in background color
-            entry.target.style.backgroundColor = window.getComputedStyle(entry.target).backgroundColor;
           }
           observer.unobserve(entry.target);
         }
       });
     }, { 
-      threshold: 0.1, // More sensitive trigger
-      rootMargin: '0px 0px -100px 0px' // Triggers animation earlier
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
     });
 
     fadeSections.forEach(section => observer.observe(section));
