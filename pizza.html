@@ -11,7 +11,13 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 
   <style>
+#section1, #section2 {
+  background-attachment: fixed; /* Optional: Helps prevent flicker */
+}
 
+/* Force background colors to render instantly */
+#section1 { background-color: #f0e6d2 !important; } /* Sticky header */
+#section2 { background-color: #e8e0c9 !important; }
       @font-face {
   font-family: 'Seasons';
   src: url('fonts/font2.otf') format('opentype');
@@ -391,6 +397,11 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    // Immediately make all sections visible (but content still hidden)
+    document.querySelectorAll('#section2, #section3, #section4').forEach(section => {
+      section.style.opacity = '1';
+    });
+
     // Section 1: Immediate animation
     setTimeout(function() {
       const pizzaImage = document.querySelector('#section1 .food-image');
@@ -400,28 +411,29 @@
       if (section1Content) section1Content.classList.add('loaded');
     }, 100);
 
-    // Sections 2 & 3: Scroll-triggered fade-in
-    const sectionsToAnimate = document.querySelectorAll('#section2, #section3');
+    // Sections 2-4: Scroll-triggered fade-in
+    const sectionsToAnimate = document.querySelectorAll('#section2, #section3, #section4');
     
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const content = entry.target.querySelector('.recipe-content');
-          if (content) content.classList.add('fade-in');
+          if (content) {
+            content.classList.add('fade-in');
+            // Ensure the background stays solid
+            entry.target.style.backgroundColor = window.getComputedStyle(entry.target).backgroundColor;
+          }
           observer.unobserve(entry.target);
         }
       });
     }, { 
-      threshold: 0.2,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.1, // More sensitive trigger
+      rootMargin: '0px 0px -100px 0px' // Triggers animation earlier
     });
 
     sectionsToAnimate.forEach(section => {
       if (section) observer.observe(section);
     });
-
-    // Debugging
-    console.log('Sections to animate:', sectionsToAnimate);
   });
 </script>
 </body>
